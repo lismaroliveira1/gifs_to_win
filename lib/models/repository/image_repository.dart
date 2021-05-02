@@ -11,10 +11,11 @@ class ImageRepository {
   final Client client;
   ImageRepository({@required this.client});
   List<ImageModel> _gifList;
-  Future<List<ImageModel>> getAll({@required int limit}) async {
+  Future<List<ImageModel>> getAll(
+      {@required int limit, @required int offset}) async {
     try {
       String url =
-          "https://api.giphy.com/v1/gifs/trending?api_key=$api_key&limit=$limit&rating=g";
+          "https://api.giphy.com/v1/gifs/trending?api_key=$api_key&limit=$limit&rating=g&offset=$offset";
       final response = await client.get(Uri.parse(url));
       return mapToGifList(response: jsonDecode(response.body));
     } on HttpError {

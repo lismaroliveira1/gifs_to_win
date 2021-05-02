@@ -29,6 +29,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get:
   http:
+  lazy_load_scrollview:
 
 dev_dependencies:
   flutter_test:
