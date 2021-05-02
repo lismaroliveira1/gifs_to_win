@@ -11,6 +11,7 @@ class ImageRepository {
   ImageRepository({@required this.client});
   List<ImageModel> _gifList;
   Future<List<ImageModel>> getAll({@required int limit}) async {
+    print("ok0");
     try {
       String url =
           "https://api.giphy.com/v1/gifs/trending?api_key=xfo6ZXIbu3zAwbUm6BjO2MrIGzolUZKi&limit=50&rating=g";
@@ -22,13 +23,14 @@ class ImageRepository {
   }
 
   List<ImageModel> mapToGifList({@required Map response}) {
+    _gifList = [];
     if (response == null || !response.containsKey('data'))
       throw HttpError.invalidData;
     List<dynamic> gifsMap = response['data'];
     for (LinkedHashMap gif in gifsMap) {
       _gifList.add(ImageModel(
         id: gif['id'],
-        url: gif['url'],
+        url: gif['images']['fixed_height_small']['url'],
         title: gif['title'],
       ));
     }
