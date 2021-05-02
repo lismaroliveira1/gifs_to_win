@@ -4,13 +4,11 @@ import 'dart:convert';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart';
 
-import 'package:gifs_to_win/models/image_model.dart';
+import '../model.dart';
 
-import 'http_error.dart';
-
-class ImageRepoository {
+class ImageRepository {
   final Client client;
-  ImageRepoository({@required this.client});
+  ImageRepository({@required this.client});
   List<ImageModel> _gifList;
   Future<List<ImageModel>> getAll({@required int limit}) async {
     try {

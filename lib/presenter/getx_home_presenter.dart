@@ -1,3 +1,8 @@
 import 'package:get/get.dart';
 
-class HomePresenter extends GetxController {}
+import '../models/model.dart';
+
+class HomePresenter extends GetxController {
+  final ImageRepository repository;
+  HomePresenter(this.repository);
+}
