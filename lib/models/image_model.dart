@@ -1,11 +1,13 @@
 class ImageModel {
   String id;
-  String name;
+  String url;
+  String username;
   String title;
 
   ImageModel({
     this.id,
-    this.name,
+    this.url,
+    this.username,
     this.title,
   });
 }
