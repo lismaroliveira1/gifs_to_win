@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:http/http.dart';
 
 import '../model.dart';
+import 'api_key.dart';
 
 class ImageRepository {
   final Client client;
@@ -13,7 +14,7 @@ class ImageRepository {
   Future<List<ImageModel>> getAll({@required int limit}) async {
     try {
       String url =
-          "https://api.giphy.com/v1/gifs/trending?api_key=xfo6ZXIbu3zAwbUm6BjO2MrIGzolUZKi&limit=$limit&rating=g";
+          "https://api.giphy.com/v1/gifs/trending?api_key=$api_key&limit=$limit&rating=g";
       final response = await client.get(Uri.parse(url));
       return mapToGifList(response: jsonDecode(response.body));
     } on HttpError {
