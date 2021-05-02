@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.6,
         ),
         actions: [
-          buildPopupMenuButton(),
+          buildPopupMenuButton(presenter: presenter),
         ],
       ),
       body: GestureDetector(
@@ -58,89 +58,11 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              _createGridImages(presenter: presenter),
+              buildGridImages(presenter: presenter),
             ],
           ),
         ),
       ),
     );
   }
-
-  PopupMenuButton<int> buildPopupMenuButton() {
-    return PopupMenuButton(
-        initialValue: presenter.limitImageView,
-        onSelected: (value) => presenter.changeTotalPerPage(limit: value),
-        itemBuilder: (context) {
-          return [
-            CheckedPopupMenuItem(
-              value: 15,
-              checked: presenter.limitImageView == 15,
-              child: Text('15 por página'),
-            ),
-            CheckedPopupMenuItem(
-              value: 30,
-              checked: presenter.limitImageView == 30,
-              child: Text('30 por página'),
-            ),
-            CheckedPopupMenuItem(
-              value: 50,
-              checked: presenter.limitImageView == 50,
-              child: Text('50 por página'),
-            ),
-          ];
-        });
-  }
-
-  Widget _createGridImages({@required HomePresenter presenter}) => Expanded(
-        child: LazyLoadScrollView(
-          onEndOfPage: () => presenter.getMoreImages(),
-          child: GridView.builder(
-            padding: EdgeInsets.all(10.0),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10.0,
-              mainAxisSpacing: 10.0,
-            ),
-            itemCount: presenter.imageListStream.length,
-            itemBuilder: (context, index) {
-              double edge = MediaQuery.of(context).size.width * 0.4;
-              return InkWell(
-                onTap: () {
-                  hideKeyboard(context: context);
-                },
-                child: Card(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Container(
-                          height: edge * 0.95,
-                          width: edge * 0.95,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  presenter.imageListStream[index].url),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: edge,
-                        height: 15,
-                        child: Text(
-                          presenter.imageListStream[index].title,
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.clip,
-                          softWrap: true,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-      );
 }
