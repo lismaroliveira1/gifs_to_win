@@ -21,7 +21,15 @@ class HomePage extends StatelessWidget {
               child: Form(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Pesquisar',
+                      labelStyle: TextStyle(
+                        fontSize: 16,
+                      ),
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
                 ),
               ),
             ),
