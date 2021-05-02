@@ -17,9 +17,15 @@ Widget buildGridImages({@required HomePresenter presenter}) => Expanded(
           itemCount: presenter.imageListStream.length,
           itemBuilder: (context, index) {
             double edge = MediaQuery.of(context).size.width * 0.4;
+            ScaffoldMessengerState _snackBarContext =
+                ScaffoldMessenger.of(context);
             return InkWell(
               onTap: () {
                 hideKeyboard(context: context);
+                _snackBarContext.hideCurrentSnackBar();
+                _snackBarContext.showSnackBar(
+                  imageSnackBar(),
+                );
               },
               child: Card(
                 child: Column(

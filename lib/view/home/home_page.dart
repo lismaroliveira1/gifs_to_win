@@ -10,18 +10,9 @@ class HomePage extends StatelessWidget {
   final HomePresenter presenter;
   HomePage({@required this.presenter});
 
-  final GlobalKey _scaffoldKey = new GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     ScaffoldMessengerState _snackBarContext = ScaffoldMessenger.of(context);
-
-    void _hideSnackBar() {
-      if (_snackBarContext.mounted) {
-        _snackBarContext.hideCurrentSnackBar();
-      }
-    }
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -38,6 +29,9 @@ class HomePage extends StatelessWidget {
         onTap: () {
           hideKeyboard(context: context);
         },
+        onLongPress: () {
+          hideKeyboard(context: context);
+        },
         child: Obx(
           () => Column(
             children: [
@@ -47,6 +41,7 @@ class HomePage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
+                      onTap: () => _snackBarContext.hideCurrentSnackBar(),
                       decoration: InputDecoration(
                         labelText: 'Pesquisar',
                         labelStyle: TextStyle(
