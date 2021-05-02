@@ -2,18 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
+import '../view.dart';
 import './environment.dart';
 import '../../presenter/presenter.dart';
 
 class HomePage extends StatelessWidget {
   final HomePresenter presenter;
   HomePage({@required this.presenter});
+
+  final GlobalKey _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
-    void _hideKeyboard() {
-      final currentFocus = FocusScope.of(context);
-      if (!currentFocus.hasPrimaryFocus) {
-        currentFocus.unfocus();
+    ScaffoldMessengerState _snackBarContext = ScaffoldMessenger.of(context);
+
+    void _hideSnackBar() {
+      if (_snackBarContext.mounted) {
+        _snackBarContext.hideCurrentSnackBar();
       }
     }
 
@@ -30,7 +35,9 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: GestureDetector(
-        onTap: _hideKeyboard,
+        onTap: () {
+          hideKeyboard(context: context);
+        },
         child: Obx(
           () => Column(
             children: [
@@ -97,34 +104,39 @@ class HomePage extends StatelessWidget {
             itemCount: presenter.imageListStream.length,
             itemBuilder: (context, index) {
               double edge = MediaQuery.of(context).size.width * 0.4;
-              return Card(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Container(
-                        height: edge * 0.95,
-                        width: edge * 0.95,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                presenter.imageListStream[index].url),
+              return InkWell(
+                onTap: () {
+                  hideKeyboard(context: context);
+                },
+                child: Card(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Container(
+                          height: edge * 0.95,
+                          width: edge * 0.95,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                  presenter.imageListStream[index].url),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Container(
-                      width: edge,
-                      height: 15,
-                      child: Text(
-                        presenter.imageListStream[index].title,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.clip,
-                        softWrap: true,
+                      Container(
+                        width: edge,
+                        height: 15,
+                        child: Text(
+                          presenter.imageListStream[index].title,
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.clip,
+                          softWrap: true,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },
