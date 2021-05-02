@@ -24,7 +24,7 @@ Widget buildGridImages({@required HomePresenter presenter}) => Expanded(
                 hideKeyboard(context: context);
                 _snackBarContext.hideCurrentSnackBar();
                 _snackBarContext.showSnackBar(
-                  imageSnackBar(),
+                  imageSnackBar(context: context, presenter: presenter),
                 );
               },
               child: Card(
