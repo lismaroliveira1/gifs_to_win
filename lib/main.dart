@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import './presenter/presenter.dart';
-import 'view/home/home_page.dart';
+import './view/view.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,7 +20,11 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       getPages: [
-        GetPage(name: '/', page: () => HomePage()),
+        GetPage(
+          name: '/',
+          binding: HomeBinding(),
+          page: () => HomePage(presenter: Get.find()),
+        ),
       ],
     );
   }
