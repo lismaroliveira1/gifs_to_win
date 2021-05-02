@@ -9,7 +9,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Image.network(
+              'https://developers.giphy.com/branch/master/static/header-logo-8974b8ae658f704a5b48a2d039b8ad93.gif')),
       body: Obx(
         () => Column(
           children: [
@@ -41,23 +44,23 @@ class HomePage extends StatelessWidget {
           itemBuilder: (context, index) {
             double edge = MediaQuery.of(context).size.width * 0.4;
             return Card(
-                child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Container(
-                    height: edge * 0.95,
-                    width: edge * 0.95,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image:
-                            NetworkImage(presenter.imageListStream[index].url),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Container(
+                      height: edge * 0.95,
+                      width: edge * 0.95,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                              presenter.imageListStream[index].url),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
+                  Container(
                     width: edge,
                     height: 15,
                     child: Text(
@@ -65,9 +68,11 @@ class HomePage extends StatelessWidget {
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
                       softWrap: true,
-                    )),
-              ],
-            ));
+                    ),
+                  ),
+                ],
+              ),
+            );
           },
         ),
       );
