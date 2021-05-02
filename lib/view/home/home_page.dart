@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import './environment.dart';
+
 import '../../presenter/presenter.dart';
 
 class HomePage extends StatelessWidget {
@@ -17,9 +19,9 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: Image.network(
-              'https://developers.giphy.com/branch/master/static/header-logo-8974b8ae658f704a5b48a2d039b8ad93.gif')),
+        backgroundColor: Colors.black,
+        title: Image.network(url),
+      ),
       body: GestureDetector(
         onTap: _hideKeyboard,
         child: Obx(
