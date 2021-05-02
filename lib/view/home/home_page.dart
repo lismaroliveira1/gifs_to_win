@@ -8,33 +8,43 @@ class HomePage extends StatelessWidget {
   HomePage({@required this.presenter});
   @override
   Widget build(BuildContext context) {
+    void _hideKeyboard() {
+      final currentFocus = FocusScope.of(context);
+      if (!currentFocus.hasPrimaryFocus) {
+        currentFocus.unfocus();
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.black,
           title: Image.network(
               'https://developers.giphy.com/branch/master/static/header-logo-8974b8ae658f704a5b48a2d039b8ad93.gif')),
-      body: Obx(
-        () => Column(
-          children: [
-            Container(
-              height: 80,
-              child: Form(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Pesquisar',
-                      labelStyle: TextStyle(
-                        fontSize: 16,
+      body: GestureDetector(
+        onTap: _hideKeyboard,
+        child: Obx(
+          () => Column(
+            children: [
+              Container(
+                height: 80,
+                child: Form(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        labelText: 'Pesquisar',
+                        labelStyle: TextStyle(
+                          fontSize: 16,
+                        ),
+                        border: OutlineInputBorder(),
                       ),
-                      border: OutlineInputBorder(),
                     ),
                   ),
                 ),
               ),
-            ),
-            _createGridImages(presenter: presenter),
-          ],
+              _createGridImages(presenter: presenter),
+            ],
+          ),
         ),
       ),
     );
