@@ -34,4 +34,12 @@ class HomePresenter extends GetxController {
       _imageList.add(element);
     });
   }
+
+  void editImage({@required String id, @required String title}) {
+    _imageList.forEach((image) {
+      if (image.id == id) {
+        image.title = title;
+      }
+    });
+  }
 }

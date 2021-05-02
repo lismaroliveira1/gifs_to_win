@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../presenter/presenter.dart';
+import '../view.dart';
 
-SnackBar imageSnackBar(
-    {@required BuildContext context, @required HomePresenter presenter}) {
+SnackBar imageSnackBar({
+  @required BuildContext context,
+  @required HomePresenter presenter,
+  @required String id,
+  @required String title,
+  @required String url,
+}) {
   ScaffoldMessengerState _snackBarContext = ScaffoldMessenger.of(context);
   return SnackBar(
     shape: RoundedRectangleBorder(

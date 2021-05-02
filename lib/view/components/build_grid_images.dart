@@ -4,7 +4,10 @@ import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import '../../presenter/presenter.dart';
 import '../view.dart';
 
-Widget buildGridImages({@required HomePresenter presenter}) => Expanded(
+Widget buildGridImages({
+  @required HomePresenter presenter,
+}) =>
+    Expanded(
       child: LazyLoadScrollView(
         onEndOfPage: () => presenter.getMoreImages(),
         child: GridView.builder(
@@ -16,6 +19,9 @@ Widget buildGridImages({@required HomePresenter presenter}) => Expanded(
           ),
           itemCount: presenter.imageListStream.length,
           itemBuilder: (context, index) {
+            String id = presenter.imageListStream[index].id;
+            String title = presenter.imageListStream[index].title;
+            String imageUrl = presenter.imageListStream[index].url;
             double edge = MediaQuery.of(context).size.width * 0.4;
             ScaffoldMessengerState _snackBarContext =
                 ScaffoldMessenger.of(context);
@@ -24,7 +30,13 @@ Widget buildGridImages({@required HomePresenter presenter}) => Expanded(
                 hideKeyboard(context: context);
                 _snackBarContext.hideCurrentSnackBar();
                 _snackBarContext.showSnackBar(
-                  imageSnackBar(context: context, presenter: presenter),
+                  imageSnackBar(
+                    context: context,
+                    presenter: presenter,
+                    id: id,
+                    title: title,
+                    url: imageUrl,
+                  ),
                 );
               },
               child: Card(
@@ -38,8 +50,7 @@ Widget buildGridImages({@required HomePresenter presenter}) => Expanded(
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage(
-                                presenter.imageListStream[index].url),
+                            image: NetworkImage(imageUrl),
                           ),
                         ),
                       ),
