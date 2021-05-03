@@ -11,8 +11,27 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ScaffoldMessengerState _snackBarContext = ScaffoldMessenger.of(context);
+    final _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
-      appBar: buildAppBar(context: context, presenter: presenter),
+      key: _scaffoldKey,
+      drawer: CurstomDrawer(),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        title: Image.network(
+          url,
+          width: MediaQuery.of(context).size.width * 0.6,
+        ),
+        actions: [
+          buildPopupMenuButton(presenter: presenter),
+        ],
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: () {
+            _scaffoldKey.currentState.openDrawer();
+          },
+        ),
+      ),
       body: Builder(builder: (context) {
         presenter.navigateToStream.listen((page) {
           if (page?.isNotEmpty == true) {
@@ -56,3 +75,5 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+class CustomDrawer {}

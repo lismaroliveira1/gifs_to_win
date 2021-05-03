@@ -19,7 +19,9 @@ AppBar buildAppBar({
     ],
     leading: IconButton(
       icon: Icon(Icons.menu),
-      onPressed: () {},
+      onPressed: () {
+        Scaffold.of(context).openDrawer();
+      },
     ),
   );
 }

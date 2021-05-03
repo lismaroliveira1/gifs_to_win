@@ -12,9 +12,14 @@ class CurstomDrawer extends StatelessWidget {
 
   Widget _buildDrawerBack() => Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-          Colors.black54,
-          Colors.black12,
-        ])),
+          gradient: LinearGradient(
+            colors: [
+              Colors.black54,
+              Colors.black12,
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
       );
 }
