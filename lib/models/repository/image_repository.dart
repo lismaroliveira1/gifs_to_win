@@ -14,8 +14,18 @@ class ImageRepository {
   Future<List<ImageModel>> getAll(
       {@required int limit, @required int offset}) async {
     try {
+      String url = "$baseUrl$api_key&limit=$limit&rating=g&offset=$offset";
+      final response = await client.get(Uri.parse(url));
+      return mapToGifList(response: jsonDecode(response.body));
+    } on HttpError {
+      throw HttpError.unexpected;
+    }
+  }
+
+  Future<List<ImageModel>> getImagesByName(String username) async {
+    try {
       String url =
-          "https://api.giphy.com/v1/gifs/trending?api_key=$api_key&limit=$limit&rating=g&offset=$offset";
+          "$baseUrl$api_key&q=$username&limit=100&offset=0&rating=g&lang=en";
       final response = await client.get(Uri.parse(url));
       return mapToGifList(response: jsonDecode(response.body));
     } on HttpError {
