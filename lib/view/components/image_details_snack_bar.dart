@@ -15,7 +15,7 @@ SnackBar imageDetailsSnackBar({
       ),
     ),
     content: Container(
-      height: MediaQuery.of(context).size.height * 0.7,
+      height: MediaQuery.of(context).size.height * 0.55,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,16 +33,45 @@ SnackBar imageDetailsSnackBar({
               ),
             ),
           ),
-          Container(
-            height: _edge,
-            width: _edge,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(url),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Container(
+              height: _edge,
+              width: _edge,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(url),
+                ),
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Salvar',
+                    style: TextStyle(
+                      fontSize: 24,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Cancelar',
+                    style: TextStyle(
+                      fontSize: 24,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     ),
