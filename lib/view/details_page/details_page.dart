@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:gifs_to_win/view/details/components/components.dart';
 
+import '../view.dart';
 import './../../presenter/presenter.dart';
 
 class DetailsPage extends StatelessWidget {

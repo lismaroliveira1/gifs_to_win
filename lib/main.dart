@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import './presenter/presenter.dart';
 import './view/view.dart';
-import 'view/details/details_binding.dart';
+import './view/details_page/details_binding.dart';
 
 void main() {
   runApp(MyApp());
