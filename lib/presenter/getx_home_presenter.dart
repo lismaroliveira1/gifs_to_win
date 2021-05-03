@@ -12,11 +12,16 @@ class HomePresenter extends GetxController {
     @required this.repository,
   });
 
+  var _navigateTo = RxString('/');
   var _imageList = <ImageModel>[].obs;
+  var _imageDetails = Rx<ImageModel>(null);
   var _imageListSaved = <dynamic>[].obs;
   var _defaultLimit = 15.obs;
   var _defaultOffset = 1.obs;
+
   List<ImageModel> get imageListStream => _imageList.toList();
+  Stream<ImageModel> get imageDetailsStream => _imageDetails.stream;
+
   int get limitImageView => _defaultLimit.toInt();
   @override
   void onInit() async {
@@ -48,6 +53,13 @@ class HomePresenter extends GetxController {
       if (image.id == id) {
         image.title = title;
       }
+    });
+  }
+
+  void showGifDetails({@required Map imageMap}) {
+    _imageDetails.value = ImageModel.fromMap(imageMap);
+    Future.delayed(Duration(seconds: 1), () {
+      _navigateTo.value = '/details';
     });
   }
 

@@ -25,6 +25,11 @@ class MyApp extends StatelessWidget {
           binding: HomeBinding(),
           page: () => HomePage(presenter: Get.find()),
         ),
+        GetPage(
+          name: '/details',
+          binding: HomeBinding(),
+          page: () => DetailsPage(),
+        ),
       ],
     );
   }

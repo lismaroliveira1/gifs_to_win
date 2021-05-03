@@ -20,4 +20,17 @@ class ImageModel {
     @required this.username,
     @required this.title,
   });
+
+  factory ImageModel.fromMap(Map imageMap) {
+    return new ImageModel(
+      id: imageMap['id'],
+      url: imageMap['url'],
+      username: imageMap['username'],
+      title: imageMap['title'],
+      slug: imageMap['slug'],
+      rating: imageMap['rating'],
+      importDateTime: imageMap['import_date_time'],
+      trendingDateTime: imageMap['trending_date_time'],
+    );
+  }
 }
