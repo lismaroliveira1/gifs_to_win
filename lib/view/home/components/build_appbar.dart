@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gifs_to_win/presenter/presenter.dart';
 
-import '../../presenter/presenter.dart';
-import '../view.dart';
+import '../../view.dart';
 
 AppBar buildAppBar({
   @required BuildContext context,

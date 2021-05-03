@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './components.dart';
-import '../../presenter/presenter.dart';
+import '../../../presenter/presenter.dart';
 
 SnackBar imageDetailsSnackBar({
   @required BuildContext context,

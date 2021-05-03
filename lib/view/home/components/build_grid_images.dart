@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
-import '../../presenter/presenter.dart';
-import '../view.dart';
+import '../../../presenter/presenter.dart';
+import '../../view.dart';
 
 Widget buildGridImages({
   @required HomePresenter presenter,

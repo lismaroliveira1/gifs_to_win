@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-import '../../presenter/presenter.dart';
+import '../../../presenter/presenter.dart';
 
 Future editImageTitleDialog({
   @required BuildContext context,
