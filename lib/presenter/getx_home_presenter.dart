@@ -14,6 +14,7 @@ class GetXHomePresenter extends GetxController {
   });
 
   var _navigateTo = RxString('/');
+  var _jumpTo = RxString('/');
   var _imageList = <ImageModel>[].obs;
   var _imageListRelated = <ImageModel>[].obs;
   var _imageDetails = Rx<ImageModel>(null);
@@ -27,6 +28,7 @@ class GetXHomePresenter extends GetxController {
   ImageModel get imageDetailsStream => _imageDetails.value;
   List<ImageModel> get imageListRelatedStream => _imageListRelated.toList();
   Stream<String> get navigateToStream => _navigateTo.stream;
+  Stream<String> get jumpToStream => _jumpTo.stream;
   String get errorTextDialogStream => _errorTextDialog.value;
   int get limitImageView => _defaultLimit.toInt();
   bool get isValidNameStream => _isValidName.value;
@@ -117,6 +119,6 @@ class GetXHomePresenter extends GetxController {
   }
 
   void jumpToPage(String page) {
-    _navigateTo.value = 'page';
+    _jumpTo.value = page;
   }
 }

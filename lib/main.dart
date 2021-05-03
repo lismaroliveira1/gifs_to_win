@@ -31,6 +31,14 @@ class MyApp extends StatelessWidget {
           binding: DetailsBinding(),
           page: () => DetailsPage(presenter: Get.find()),
         ),
+        GetPage(
+          name: '/saved',
+          page: () => DetailsPage(presenter: Get.find()),
+        ),
+        GetPage(
+          name: '/trash',
+          page: () => DetailsPage(presenter: Get.find()),
+        ),
       ],
     );
   }

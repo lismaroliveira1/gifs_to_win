@@ -38,6 +38,11 @@ class HomePage extends StatelessWidget {
             Get.toNamed(page);
           }
         });
+        presenter.jumpToStream.listen((page) {
+          if (page?.isNotEmpty == true) {
+            Get.offAllNamed(page);
+          }
+        });
         return GestureDetector(
           onTap: () {
             hideKeyboard(context: context);

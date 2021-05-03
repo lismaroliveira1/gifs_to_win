@@ -30,7 +30,7 @@ class CurstomDrawer extends StatelessWidget {
                   item: 'Home',
                   presenter: presenter,
                   context: context,
-                  routePage: '/home',
+                  routePage: '/',
                 ),
                 buildDrawerButtonItem(
                   item: 'Gifs Salvos',
@@ -61,7 +61,10 @@ class CurstomDrawer extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         Navigator.of(context).pop();
-        presenter.jumpToPage(routePage);
+        Future.delayed(
+          Duration(milliseconds: 500),
+          () => presenter.jumpToPage(routePage),
+        );
       },
       child: Text(item),
     );
