@@ -27,7 +27,7 @@ class GetXHomePresenter extends GetxController {
   ImageModel get imageDetailsStream => _imageDetails.value;
   List<ImageModel> get imageListRelatedStream => _imageListRelated.toList();
   Stream<String> get navigateToStream => _navigateTo.stream;
-  Stream<String> get errorTextDialogStream => _navigateTo.stream;
+  String get errorTextDialogStream => _errorTextDialog.value;
   int get limitImageView => _defaultLimit.toInt();
   bool get isValidNameStream => _isValidName.value;
   @override
@@ -98,11 +98,21 @@ class GetXHomePresenter extends GetxController {
     String patttern = r'(^[a-zA-Z ]*$)';
     RegExp regExp = new RegExp(patttern);
     if (value.length == 0) {
+      _isValidName.value = false;
+      _errorTextDialog.value = null;
+    } else if (value.length > 0 && value.length < 4) {
       _errorTextDialog.value = "Informe o nome";
+      _isValidName.value = false;
     } else if (!regExp.hasMatch(value)) {
       _errorTextDialog.value = "O nome deve conter caracteres de a-z ou A-Z";
+      _isValidName.value = false;
+    } else {
+      _isValidName.value = true;
+      _errorTextDialog.value = null;
     }
-    _isValidName.value = true;
-    _errorTextDialog.value = null;
+  }
+
+  void makeValidateNameFalse() {
+    _isValidName.value = false;
   }
 }

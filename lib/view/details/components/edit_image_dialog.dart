@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 
 import '../../../presenter/presenter.dart';
@@ -14,41 +15,45 @@ Future editImageTitleDialog({
     () => showDialog(
       context: context,
       builder: (_) {
+        presenter.makeValidateNameFalse();
         return Form(
           key: _formKey,
-          child: AlertDialog(
-            title: Text('Editar'),
-            content: TextFormField(
-              controller: _titleTextController,
-              decoration: InputDecoration(
-                labelText: 'Novo título',
-                hintText: presenter.imageDetailsStream.title,
-              ),
-              onChanged: (newValue) {
-                presenter.validateName(newValue);
-              },
-            ),
-            actions: [
-              ElevatedButton(
-                onPressed: presenter.isValidNameStream
-                    ? () async {
-                        Navigator.pop(context);
-                        presenter.saveImage(
-                          id: presenter.imageDetailsStream.id,
-                          title: _titleTextController.text,
-                          url: presenter.imageDetailsStream.url,
-                        );
-                      }
-                    : null,
-                child: Text('Salvar'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
+          child: Obx(
+            () => AlertDialog(
+              title: Text('Editar'),
+              content: TextFormField(
+                controller: _titleTextController,
+                decoration: InputDecoration(
+                  errorText: presenter.errorTextDialogStream,
+                  labelText: 'Novo título',
+                  hintText: presenter.imageDetailsStream.title,
+                ),
+                onChanged: (newValue) {
+                  presenter.validateName(newValue);
                 },
-                child: Text('Cancelar'),
-              )
-            ],
+              ),
+              actions: [
+                ElevatedButton(
+                  onPressed: presenter.isValidNameStream
+                      ? () async {
+                          Navigator.pop(context);
+                          presenter.saveImage(
+                            id: presenter.imageDetailsStream.id,
+                            title: _titleTextController.text,
+                            url: presenter.imageDetailsStream.url,
+                          );
+                        }
+                      : null,
+                  child: Text('Salvar'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Cancelar'),
+                )
+              ],
+            ),
           ),
         );
       },
