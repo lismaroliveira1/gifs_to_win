@@ -10,6 +10,7 @@ class HomePresenter extends GetxController {
   });
 
   var _imageList = <ImageModel>[].obs;
+  var _imageListSaved = <ImageModel>[].obs;
   var _defaultLimit = 15.obs;
   var _defaultOffset = 1.obs;
   List<ImageModel> get imageListStream => _imageList.toList();
@@ -18,6 +19,7 @@ class HomePresenter extends GetxController {
   void onInit() async {
     _imageList.value =
         await repository.getAll(limit: _defaultLimit.value, offset: 1);
+
     super.onInit();
   }
 
@@ -41,5 +43,19 @@ class HomePresenter extends GetxController {
         image.title = title;
       }
     });
+  }
+
+  void saveImage({
+    @required String id,
+    @required String title,
+    @required String url,
+  }) {
+    _imageListSaved.add(
+      ImageModel(
+        id: id,
+        title: title,
+        url: url,
+      ),
+    );
   }
 }
