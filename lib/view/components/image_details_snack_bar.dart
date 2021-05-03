@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './components.dart';
+
 SnackBar imageDetailsSnackBar({
   @required BuildContext context,
   @required String id,
@@ -85,32 +87,7 @@ SnackBar imageDetailsSnackBar({
             icon: Icon(Icons.edit),
             onPressed: () {
               _snackBarContext.hideCurrentSnackBar();
-              Future.delayed(
-                Duration(milliseconds: 300),
-                () => showDialog(
-                  context: context,
-                  builder: (_) {
-                    return AlertDialog(
-                      title: Text('Editar'),
-                      content: TextField(
-                          decoration: InputDecoration(
-                        labelText: 'Novo título',
-                        hintText: title,
-                      )),
-                      actions: [
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: Text('Salvar'),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: Text('Cancelar'),
-                        )
-                      ],
-                    );
-                  },
-                ),
-              );
+              editImageTitleDialog(context: context, title: title);
             },
           ),
         )
