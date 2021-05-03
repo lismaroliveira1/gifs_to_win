@@ -27,6 +27,14 @@ SnackBar imageSnackBar({
             icon: Icon(Icons.edit),
             onPressed: () {
               _snackBarContext.hideCurrentSnackBar();
+              _snackBarContext.showSnackBar(
+                imageDetailsSnackBar(
+                  context: context,
+                  id: id,
+                  title: title,
+                  url: url,
+                ),
+              );
             },
           ),
           IconButton(
