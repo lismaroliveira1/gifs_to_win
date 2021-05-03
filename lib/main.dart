@@ -33,7 +33,8 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: '/saved',
-          page: () => DetailsPage(presenter: Get.find()),
+          binding: GifSavedBindings(),
+          page: () => GifSavedPage(presenter: Get.find()),
         ),
         GetPage(
           name: '/trash',
