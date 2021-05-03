@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
 import '../view.dart';
 import './environment.dart';
