@@ -1,6 +1,10 @@
+import 'package:gifs_to_win/presenter/presenter.dart';
+import 'package:meta/meta.dart';
 import 'package:flutter/material.dart';
 
 class CurstomDrawer extends StatelessWidget {
+  final GetXHomePresenter presenter;
+  CurstomDrawer(this.presenter);
   @override
   Widget build(BuildContext context) {
     double _edge = MediaQuery.of(context).size.width * 0.95;
@@ -22,9 +26,24 @@ class CurstomDrawer extends StatelessWidget {
                     ),
                   ),
                 ),
-                buildDrawerButtonItem('Home'),
-                buildDrawerButtonItem('Gifs Salvos'),
-                buildDrawerButtonItem('Lixeira'),
+                buildDrawerButtonItem(
+                  item: 'Home',
+                  presenter: presenter,
+                  context: context,
+                  routePage: '/home',
+                ),
+                buildDrawerButtonItem(
+                  item: 'Gifs Salvos',
+                  presenter: presenter,
+                  context: context,
+                  routePage: '/saved',
+                ),
+                buildDrawerButtonItem(
+                  item: 'Lixeira',
+                  presenter: presenter,
+                  context: context,
+                  routePage: '/trash',
+                ),
               ],
             ),
           ),
@@ -33,9 +52,17 @@ class CurstomDrawer extends StatelessWidget {
     );
   }
 
-  ElevatedButton buildDrawerButtonItem(String item) {
+  ElevatedButton buildDrawerButtonItem({
+    @required String item,
+    @required GetXHomePresenter presenter,
+    @required BuildContext context,
+    @required String routePage,
+  }) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.of(context).pop();
+        presenter.jumpToPage(routePage);
+      },
       child: Text(item),
     );
   }

@@ -115,4 +115,8 @@ class GetXHomePresenter extends GetxController {
   void makeValidateNameFalse() {
     _isValidName.value = false;
   }
+
+  void jumpToPage(String page) {
+    _navigateTo.value = 'page';
+  }
 }

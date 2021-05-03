@@ -7,14 +7,14 @@ import '../view.dart';
 class HomePage extends StatelessWidget {
   final GetXHomePresenter presenter;
   HomePage({@required this.presenter});
-
+  final _pageController = PageController();
   @override
   Widget build(BuildContext context) {
     ScaffoldMessengerState _snackBarContext = ScaffoldMessenger.of(context);
     final _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: _scaffoldKey,
-      drawer: CurstomDrawer(),
+      drawer: CurstomDrawer(presenter),
       appBar: AppBar(
         backgroundColor: Colors.black,
         centerTitle: true,
