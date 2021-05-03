@@ -19,25 +19,27 @@ Widget buildGridImages({
           ),
           itemCount: presenter.imageListStream.length,
           itemBuilder: (context, index) {
-            String id = presenter.imageListStream[index].id;
-            String title = presenter.imageListStream[index].title;
-            String imageUrl = presenter.imageListStream[index].url;
+            Map imageMap = {
+              'id': presenter.imageListStream[index].id,
+              'url': presenter.imageListStream[index].url,
+              'username': presenter.imageListStream[index].username,
+              'title': presenter.imageListStream[index].title,
+              'slug': presenter.imageListStream[index].slug,
+              'rating': presenter.imageListStream[index].rating,
+              'importDateTime': presenter.imageListStream[index].importDateTime,
+              'trendingDateTime':
+                  presenter.imageListStream[index].trendingDateTime,
+            };
             double edge = MediaQuery.of(context).size.width * 0.4;
             ScaffoldMessengerState _snackBarContext =
                 ScaffoldMessenger.of(context);
             return InkWell(
               onTap: () {
-                hideKeyboard(context: context);
-                _snackBarContext.hideCurrentSnackBar();
-                _snackBarContext.showSnackBar(
-                  imageSnackBar(
-                    context: context,
-                    presenter: presenter,
-                    id: id,
-                    title: title,
-                    url: imageUrl,
-                  ),
-                );
+                if (!hideKeyboard(context: context)) {
+                  _snackBarContext.hideCurrentSnackBar();
+                  presenter.showGifDetails(imageMap: imageMap);
+                  print("ok");
+                }
               },
               child: Card(
                 child: Column(
@@ -50,7 +52,7 @@ Widget buildGridImages({
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage(imageUrl),
+                            image: NetworkImage(imageMap['url']),
                           ),
                         ),
                       ),

@@ -29,8 +29,8 @@ class ImageModel {
       title: imageMap['title'],
       slug: imageMap['slug'],
       rating: imageMap['rating'],
-      importDateTime: imageMap['import_date_time'],
-      trendingDateTime: imageMap['trending_date_time'],
+      importDateTime: imageMap['importDateTime'],
+      trendingDateTime: imageMap['trendingDateTime'],
     );
   }
 }
