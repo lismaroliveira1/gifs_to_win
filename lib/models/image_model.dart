@@ -8,17 +8,21 @@ class ImageModel {
   String slug;
   String rating;
   String importDateTime;
-  String trendingDateTime;
+  String height;
+  String width;
+  String size;
 
   ImageModel({
     @required this.id,
     @required this.importDateTime,
     @required this.rating,
     @required this.slug,
-    @required this.trendingDateTime,
     @required this.url,
     @required this.username,
     @required this.title,
+    @required this.height,
+    @required this.width,
+    @required this.size,
   });
 
   factory ImageModel.fromMap(Map imageMap) {
@@ -30,7 +34,9 @@ class ImageModel {
       slug: imageMap['slug'],
       rating: imageMap['rating'],
       importDateTime: imageMap['importDateTime'],
-      trendingDateTime: imageMap['trendingDateTime'],
+      width: imageMap['width'],
+      height: imageMap['height'],
+      size: imageMap['size'],
     );
   }
 }

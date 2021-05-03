@@ -8,7 +8,7 @@ Future editImageTitleDialog({
   @required String title,
   @required String id,
   @required String url,
-  @required HomePresenter presenter,
+  @required GetXHomePresenter presenter,
 }) {
   TextEditingController _titleTextController = TextEditingController();
   return Future.delayed(

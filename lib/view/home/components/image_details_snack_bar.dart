@@ -8,7 +8,7 @@ SnackBar imageDetailsSnackBar({
   @required String id,
   @required String title,
   @required String url,
-  @required HomePresenter presenter,
+  @required GetXHomePresenter presenter,
 }) {
   double _edge = MediaQuery.of(context).size.width * 0.6;
   ScaffoldMessengerState _snackBarContext = ScaffoldMessenger.of(context);

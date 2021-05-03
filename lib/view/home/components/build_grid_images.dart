@@ -5,7 +5,7 @@ import '../../../presenter/presenter.dart';
 import '../../view.dart';
 
 Widget buildGridImages({
-  @required HomePresenter presenter,
+  @required GetXHomePresenter presenter,
 }) =>
     Expanded(
       child: LazyLoadScrollView(
@@ -27,19 +27,15 @@ Widget buildGridImages({
               'slug': presenter.imageListStream[index].slug,
               'rating': presenter.imageListStream[index].rating,
               'importDateTime': presenter.imageListStream[index].importDateTime,
-              'trendingDateTime':
-                  presenter.imageListStream[index].trendingDateTime,
             };
             double edge = MediaQuery.of(context).size.width * 0.4;
             ScaffoldMessengerState _snackBarContext =
                 ScaffoldMessenger.of(context);
             return InkWell(
               onTap: () {
-                if (!hideKeyboard(context: context)) {
-                  _snackBarContext.hideCurrentSnackBar();
-                  presenter.showGifDetails(imageMap: imageMap);
-                  print("ok");
-                }
+                hideKeyboard(context: context);
+                _snackBarContext.hideCurrentSnackBar();
+                presenter.showGifDetails(imageMap: imageMap);
               },
               child: Card(
                 child: Column(

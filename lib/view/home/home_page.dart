@@ -5,7 +5,7 @@ import '../../presenter/presenter.dart';
 import '../view.dart';
 
 class HomePage extends StatelessWidget {
-  final HomePresenter presenter;
+  final GetXHomePresenter presenter;
   HomePage({@required this.presenter});
 
   @override

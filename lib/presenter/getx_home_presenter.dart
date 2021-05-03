@@ -6,9 +6,10 @@ import 'package:meta/meta.dart';
 import '../models/model.dart';
 import './commons/commons.dart';
 
-class HomePresenter extends GetxController {
+class GetXHomePresenter extends GetxController {
   final ImageRepository repository;
-  HomePresenter({
+
+  GetXHomePresenter({
     @required this.repository,
   });
 
@@ -20,7 +21,7 @@ class HomePresenter extends GetxController {
   var _defaultOffset = 1.obs;
 
   List<ImageModel> get imageListStream => _imageList.toList();
-  Stream<ImageModel> get imageDetailsStream => _imageDetails.stream;
+  ImageModel get imageDetailsStream => _imageDetails.value;
   Stream<String> get navigateToStream => _navigateTo.stream;
 
   int get limitImageView => _defaultLimit.toInt();
@@ -36,13 +37,13 @@ class HomePresenter extends GetxController {
     super.onInit();
   }
 
-  void changeTotalPerPage({@required int limit}) async {
+  Future<void> changeTotalPerPage({@required int limit}) async {
     _defaultLimit.value = limit;
     _imageList.value =
         await repository.getAll(limit: _defaultLimit.value, offset: 1);
   }
 
-  void getMoreImages() async {
+  Future<void> getMoreImages() async {
     var newList = await repository.getAll(
         limit: _defaultLimit.value, offset: _defaultOffset.value++);
     newList.forEach((element) {

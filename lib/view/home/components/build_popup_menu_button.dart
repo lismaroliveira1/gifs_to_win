@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../presenter/presenter.dart';
 
-PopupMenuButton<int> buildPopupMenuButton({@required HomePresenter presenter}) {
+PopupMenuButton<int> buildPopupMenuButton(
+    {@required GetXHomePresenter presenter}) {
   return PopupMenuButton(
       initialValue: presenter.limitImageView,
       onSelected: (value) => presenter.changeTotalPerPage(limit: value),

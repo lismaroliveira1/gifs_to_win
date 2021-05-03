@@ -5,7 +5,7 @@ import '../../view.dart';
 
 SnackBar imageSnackBar({
   @required BuildContext context,
-  @required HomePresenter presenter,
+  @required GetXHomePresenter presenter,
   @required String id,
   @required String title,
   @required String url,

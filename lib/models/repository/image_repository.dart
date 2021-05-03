@@ -31,13 +31,15 @@ class ImageRepository {
     for (LinkedHashMap gif in gifsMap) {
       _gifList.add(ImageModel(
         id: gif['id'],
-        url: gif['images']['fixed_height_small']['url'],
+        url: gif['images']['original']['webp'],
         title: gif['title'],
         slug: gif['slug'],
         username: gif['username'],
         rating: gif['rating'],
         importDateTime: gif['import_datetime'],
-        trendingDateTime: gif['trending_datetime'],
+        width: gif['images']['original']['width'],
+        height: gif['images']['original']['height'],
+        size: gif['images']['original']['size'],
       ));
     }
     return _gifList;
