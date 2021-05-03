@@ -7,34 +7,49 @@ Future editImageTitleDialog({
   @required BuildContext context,
   @required GetXHomePresenter presenter,
 }) {
+  final _formKey = GlobalKey<FormState>();
   TextEditingController _titleTextController = TextEditingController();
   return Future.delayed(
     Duration(milliseconds: 300),
     () => showDialog(
       context: context,
       builder: (_) {
-        return AlertDialog(
-          title: Text('Editar'),
-          content: TextField(
+        return Form(
+          key: _formKey,
+          child: AlertDialog(
+            title: Text('Editar'),
+            content: TextFormField(
               controller: _titleTextController,
               decoration: InputDecoration(
                 labelText: 'Novo título',
                 hintText: presenter.imageDetailsStream.title,
-              )),
-          actions: [
-            ElevatedButton(
-              onPressed: () async {
-                Navigator.pop(context);
+              ),
+              onChanged: (newValue) {
+                presenter.validateName(newValue);
               },
-              child: Text('Salvar'),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('Cancelar'),
-            )
-          ],
+            actions: [
+              ElevatedButton(
+                onPressed: presenter.isValidNameStream
+                    ? () async {
+                        Navigator.pop(context);
+                        presenter.saveImage(
+                          id: presenter.imageDetailsStream.id,
+                          title: _titleTextController.text,
+                          url: presenter.imageDetailsStream.url,
+                        );
+                      }
+                    : null,
+                child: Text('Salvar'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Cancelar'),
+              )
+            ],
+          ),
         );
       },
     ),

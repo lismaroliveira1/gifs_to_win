@@ -20,20 +20,30 @@ class GetXHomePresenter extends GetxController {
   var _imageListSaved = <dynamic>[].obs;
   var _defaultLimit = 15.obs;
   var _defaultOffset = 1.obs;
+  var _isValidName = false.obs;
+  var _errorTextDialog = RxString(null);
 
   List<ImageModel> get imageListStream => _imageList.toList();
   ImageModel get imageDetailsStream => _imageDetails.value;
   List<ImageModel> get imageListRelatedStream => _imageListRelated.toList();
   Stream<String> get navigateToStream => _navigateTo.stream;
+  Stream<String> get errorTextDialogStream => _navigateTo.stream;
   int get limitImageView => _defaultLimit.toInt();
+  bool get isValidNameStream => _isValidName.value;
   @override
   void onInit() async {
     _navigateTo.value = '';
-    var listCache = await readData();
-    _imageListSaved.value = jsonDecode(listCache);
+    var listSavedCache = await readData('saved');
+    if (listSavedCache == "{[]}" ||
+        listSavedCache == "{}" ||
+        listSavedCache == "[]" ||
+        listSavedCache == "") {
+      _imageList..value = [];
+    } else {
+      _imageListSaved.value = jsonDecode(listSavedCache);
+    }
     _imageList.value =
         await repository.getAll(limit: _defaultLimit.value, offset: 1);
-
     super.onInit();
   }
 
@@ -79,7 +89,20 @@ class GetXHomePresenter extends GetxController {
       'title': title,
       'url': url,
     });
-    await writeData(jsonEncode(_imageListSaved));
+    await writeData(jsonEncode(_imageListSaved), path: 'saved');
     print(_imageListSaved.length);
+  }
+
+  void validateName(String value) {
+    print(value);
+    String patttern = r'(^[a-zA-Z ]*$)';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      _errorTextDialog.value = "Informe o nome";
+    } else if (!regExp.hasMatch(value)) {
+      _errorTextDialog.value = "O nome deve conter caracteres de a-z ou A-Z";
+    }
+    _isValidName.value = true;
+    _errorTextDialog.value = null;
   }
 }

@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:meta/meta.dart';
 import 'package:path_provider/path_provider.dart';
 
 Future<String> get localPath async {
@@ -7,19 +7,19 @@ Future<String> get localPath async {
   return path.path;
 }
 
-Future<File> get localFile async {
+Future<File> localFile(String path) async {
   final file = await localPath;
-  return new File('$file/data.txt');
+  return new File('$file/path.txt');
 }
 
-Future<void> writeData(String jsonString) async {
-  final file = await localFile;
+Future<void> writeData(String jsonString, {@required String path}) async {
+  final file = await localFile(path);
   file.writeAsStringSync(jsonString);
 }
 
-Future<String> readData() async {
+Future<String> readData(String path) async {
   try {
-    final file = await localFile;
+    final file = await localFile(path);
     String data = await file.readAsString();
     return data;
   } catch (e) {
