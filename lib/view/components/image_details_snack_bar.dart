@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 import './components.dart';
+import '../../presenter/presenter.dart';
 
 SnackBar imageDetailsSnackBar({
   @required BuildContext context,
   @required String id,
   @required String title,
   @required String url,
+  @required HomePresenter presenter,
 }) {
   double _edge = MediaQuery.of(context).size.width * 0.6;
   ScaffoldMessengerState _snackBarContext = ScaffoldMessenger.of(context);
@@ -87,7 +89,13 @@ SnackBar imageDetailsSnackBar({
             icon: Icon(Icons.edit),
             onPressed: () {
               _snackBarContext.hideCurrentSnackBar();
-              editImageTitleDialog(context: context, title: title);
+              editImageTitleDialog(
+                context: context,
+                title: title,
+                id: id,
+                url: url,
+                presenter: presenter,
+              );
             },
           ),
         )

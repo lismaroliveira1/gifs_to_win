@@ -9,7 +9,6 @@ Future<String> get localPath async {
 
 Future<File> get localFile async {
   final file = await localPath;
-
   return new File('$file/data.txt');
 }
 

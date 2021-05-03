@@ -29,6 +29,7 @@ SnackBar imageSnackBar({
               _snackBarContext.hideCurrentSnackBar();
               _snackBarContext.showSnackBar(
                 imageDetailsSnackBar(
+                  presenter: presenter,
                   context: context,
                   id: id,
                   title: title,

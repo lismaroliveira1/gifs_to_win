@@ -33,6 +33,11 @@ class ImageRepository {
         id: gif['id'],
         url: gif['images']['fixed_height_small']['url'],
         title: gif['title'],
+        slug: gif['slug'],
+        username: gif['username'],
+        rating: gif['rating'],
+        importDateTime: gif['import_datetime'],
+        trendingDateTime: gif['trending_datetime'],
       ));
     }
     return _gifList;
