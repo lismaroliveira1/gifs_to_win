@@ -27,6 +27,9 @@ Widget buildGridImages({
               'slug': presenter.imageListStream[index].slug,
               'rating': presenter.imageListStream[index].rating,
               'importDateTime': presenter.imageListStream[index].importDateTime,
+              'height': presenter.imageListStream[index].height,
+              'width': presenter.imageListStream[index].width,
+              'size': presenter.imageListStream[index].size,
             };
             double edge = MediaQuery.of(context).size.width * 0.4;
             ScaffoldMessengerState _snackBarContext =

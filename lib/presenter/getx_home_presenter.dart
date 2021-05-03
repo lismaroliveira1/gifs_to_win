@@ -15,6 +15,7 @@ class GetXHomePresenter extends GetxController {
 
   var _navigateTo = RxString('/');
   var _imageList = <ImageModel>[].obs;
+  var _imageListRelated = <ImageModel>[].obs;
   var _imageDetails = Rx<ImageModel>(null);
   var _imageListSaved = <dynamic>[].obs;
   var _defaultLimit = 15.obs;
@@ -22,15 +23,14 @@ class GetXHomePresenter extends GetxController {
 
   List<ImageModel> get imageListStream => _imageList.toList();
   ImageModel get imageDetailsStream => _imageDetails.value;
+  List<ImageModel> get imageListRelatedStream => _imageListRelated.toList();
   Stream<String> get navigateToStream => _navigateTo.stream;
-
   int get limitImageView => _defaultLimit.toInt();
   @override
   void onInit() async {
     _navigateTo.value = '';
     var listCache = await readData();
     _imageListSaved.value = jsonDecode(listCache);
-    print(_imageListSaved.length);
     _imageList.value =
         await repository.getAll(limit: _defaultLimit.value, offset: 1);
 
@@ -59,12 +59,14 @@ class GetXHomePresenter extends GetxController {
     });
   }
 
-  void showGifDetails({@required Map imageMap}) {
+  void showGifDetails({@required Map imageMap}) async {
     _imageDetails.value = ImageModel.fromMap(imageMap);
     Future.delayed(Duration(milliseconds: 250), () {
       _navigateTo.value = '';
       _navigateTo.value = '/details';
     });
+    _imageListRelated.value =
+        await repository.getImagesByName(imageMap['username']);
   }
 
   Future<void> saveImage({

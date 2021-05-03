@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:gifs_to_win/view/details/components/components.dart';
 
 import './../../presenter/presenter.dart';
 
 class DetailsPage extends StatelessWidget {
   final GetXHomePresenter presenter;
   DetailsPage({@required this.presenter});
+
   @override
   Widget build(BuildContext context) {
     double _edge = MediaQuery.of(context).size.width;
@@ -42,7 +44,85 @@ class DetailsPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                    )
+                    ),
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Column(
+                              children: <Widget>[
+                                Text('Nome de Usuário'),
+                                Text(presenter.imageDetailsStream.username),
+                              ],
+                            ),
+                            Column(
+                              children: <Widget>[
+                                Text('Classificação'),
+                                Text(presenter.imageDetailsStream.rating),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Column(
+                              children: <Widget>[
+                                Text('Altura'),
+                                Text(
+                                    presenter.imageDetailsStream.height + "px"),
+                              ],
+                            ),
+                            Column(
+                              children: <Widget>[
+                                Text('Largura'),
+                                Text(presenter.imageDetailsStream.width + "px"),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text('Tamanho'),
+                        Text(presenter.imageDetailsStream.size + "KB"),
+                      ],
+                    ),
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                editImageTitleDialog(
+                                  context: context,
+                                  presenter: presenter,
+                                );
+                              },
+                              child: Text('Editar'),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text('Deletar'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text('Salvar'),
+                    ),
                   ],
                 ),
               ),
