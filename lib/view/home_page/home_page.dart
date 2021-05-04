@@ -7,7 +7,6 @@ import '../view.dart';
 class HomePage extends StatelessWidget {
   final GetXHomePresenter presenter;
   HomePage({@required this.presenter});
-  final _pageController = PageController();
   @override
   Widget build(BuildContext context) {
     ScaffoldMessengerState _snackBarContext = ScaffoldMessenger.of(context);
@@ -15,23 +14,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       key: _scaffoldKey,
       drawer: CurstomDrawer(presenter),
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        centerTitle: true,
-        title: Image.network(
-          url,
-          width: MediaQuery.of(context).size.width * 0.6,
-        ),
-        actions: [
-          buildPopupMenuButton(presenter: presenter),
-        ],
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {
-            _scaffoldKey.currentState.openDrawer();
-          },
-        ),
-      ),
+      appBar: buildAppBar(context, _scaffoldKey),
       body: Builder(builder: (context) {
         presenter.navigateToStream.listen((page) {
           if (page?.isNotEmpty == true) {
@@ -79,6 +62,25 @@ class HomePage extends StatelessWidget {
       }),
     );
   }
-}
 
-class CustomDrawer {}
+  AppBar buildAppBar(
+      BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey) {
+    return AppBar(
+      backgroundColor: Colors.black,
+      centerTitle: true,
+      title: Image.network(
+        url,
+        width: MediaQuery.of(context).size.width * 0.6,
+      ),
+      actions: [
+        buildPopupMenuButton(presenter: presenter),
+      ],
+      leading: IconButton(
+        icon: Icon(Icons.menu),
+        onPressed: () {
+          _scaffoldKey.currentState.openDrawer();
+        },
+      ),
+    );
+  }
+}

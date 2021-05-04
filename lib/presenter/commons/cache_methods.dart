@@ -21,7 +21,9 @@ Future<String> readData(String path) async {
   try {
     final file = await localFile(path);
     String data = await file.readAsString();
-    return data;
+    return data == "{[]}" || data == "{}" || data == "[]" || data == ""
+        ? '{}'
+        : data;
   } catch (e) {
     return '{[]}';
   }

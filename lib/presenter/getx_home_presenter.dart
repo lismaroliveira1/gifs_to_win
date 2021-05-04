@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 
-import '../models/model.dart';
+import '../model/model.dart';
 import './commons/commons.dart';
 
 class GetXHomePresenter extends GetxController {
@@ -36,14 +36,7 @@ class GetXHomePresenter extends GetxController {
   void onInit() async {
     _navigateTo.value = '';
     var listSavedCache = await readData('saved');
-    if (listSavedCache == "{[]}" ||
-        listSavedCache == "{}" ||
-        listSavedCache == "[]" ||
-        listSavedCache == "") {
-      _imageList..value = [];
-    } else {
-      _imageListSaved.value = jsonDecode(listSavedCache);
-    }
+    _imageListSaved.value = jsonDecode(listSavedCache);
     _imageList.value =
         await repository.getAll(limit: _defaultLimit.value, offset: 1);
     super.onInit();

@@ -8,5 +8,7 @@ class ApplicationBinding extends Bindings {
   void dependencies() {
     Get.lazyPut(() => Client());
     Get.lazyPut(() => GetXHomePresenter(repository: Get.find()));
+    Get.lazyPut(() => GetXSavedPresenter(repository: Get.find()));
+    Get.lazyPut(() => GetXTrashPresenter(repository: Get.find()));
   }
 }

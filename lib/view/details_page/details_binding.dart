@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../models/model.dart';
+import '../../model/model.dart';
 import '../../presenter/presenter.dart';
 
 class DetailsBinding implements Bindings {

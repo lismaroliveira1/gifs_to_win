@@ -12,7 +12,10 @@ class DetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double _edge = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: buildAppBar(
+        context: context,
+        presenter: presenter,
+      ),
       body: Builder(
         builder: (context) {
           return Obx(

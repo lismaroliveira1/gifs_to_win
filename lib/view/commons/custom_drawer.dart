@@ -3,10 +3,11 @@ import 'package:meta/meta.dart';
 import 'package:flutter/material.dart';
 
 class CurstomDrawer extends StatelessWidget {
-  final GetXHomePresenter presenter;
-  CurstomDrawer(this.presenter);
+  final GetXHomePresenter homePresenter;
+  CurstomDrawer(this.homePresenter);
   @override
   Widget build(BuildContext context) {
+    final presenter = this.homePresenter;
     double _edge = MediaQuery.of(context).size.width * 0.95;
     return Drawer(
       child: Stack(

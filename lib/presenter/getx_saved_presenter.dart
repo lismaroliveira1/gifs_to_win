@@ -1,13 +1,23 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
-import '../models/model.dart';
+import '../model/model.dart';
+
+import './commons/commons.dart';
 
 class GetXSavedPresenter extends GetxController {
   final ImageRepository repository;
   GetXSavedPresenter({@required this.repository});
+
+  var _imageListSaved = <dynamic>[].obs;
+
   @override
-  void onInit() {
-    // TODO: implement onInit
+  void onInit() async {
+    await repository.getAll(limit: 15, offset: 1);
+    var listSavedCache = await readData('saved');
+    _imageListSaved.value = jsonDecode(listSavedCache);
+    print(listSavedCache.length);
     super.onInit();
   }
 }

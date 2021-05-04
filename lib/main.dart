@@ -38,7 +38,8 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: '/trash',
-          page: () => DetailsPage(presenter: Get.find()),
+          binding: TrashBinding(),
+          page: () => TrashPage(presenter: Get.find()),
         ),
       ],
     );
