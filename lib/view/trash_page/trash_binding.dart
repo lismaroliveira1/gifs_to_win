@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 
-import '../../model/model.dart';
 import '../../presenter/presenter.dart';
+import '../../model/model.dart';
 
 class TrashBinding implements Bindings {
   @override
@@ -13,5 +13,6 @@ class TrashBinding implements Bindings {
       repository: Get.find(),
       cache: Get.find(),
     ));
+    Get.lazyPut(() => GetXTrashPresenter(result: Get.find()));
   }
 }

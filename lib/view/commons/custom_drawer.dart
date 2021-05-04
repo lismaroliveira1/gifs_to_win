@@ -1,9 +1,8 @@
-import 'package:gifs_to_win/presenter/presenter.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter/material.dart';
 
 class CurstomDrawer extends StatelessWidget {
-  final Function callback;
+  final Function(String route) callback;
   CurstomDrawer(this.callback);
   @override
   Widget build(BuildContext context) {
@@ -63,7 +62,7 @@ class CurstomDrawer extends StatelessWidget {
         Navigator.of(context).pop();
         Future.delayed(
           Duration(milliseconds: 500),
-          callback,
+          callback(routePage),
         );
       },
       child: Text(item),

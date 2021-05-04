@@ -40,7 +40,7 @@ class GetXHomePresenter extends GetxController {
     super.onInit();
   }
 
-  Future<void> changeTotalPerPage({@required int limit}) async {
+  void changeTotalPerPage(int limit) async {
     _defaultLimit.value = limit;
     _imageList.value =
         await result.repository.getAll(limit: _defaultLimit.value, offset: 1);

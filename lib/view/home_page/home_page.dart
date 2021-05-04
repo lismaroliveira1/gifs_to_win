@@ -13,8 +13,13 @@ class HomePage extends StatelessWidget {
     final _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: _scaffoldKey,
-      drawer: CurstomDrawer(callback),
-      appBar: buildAppBar(context, _scaffoldKey),
+      drawer: CurstomDrawer(presenter.jumpToPage),
+      appBar: buildAppBar(
+        context: context,
+        scaffoldKey: _scaffoldKey,
+        initialValue: 1,
+        callback: presenter.changeTotalPerPage,
+      ),
       body: Builder(builder: (context) {
         presenter.navigateToStream.listen((page) {
           if (page?.isNotEmpty == true) {
@@ -62,27 +67,4 @@ class HomePage extends StatelessWidget {
       }),
     );
   }
-
-  AppBar buildAppBar(
-      BuildContext context, GlobalKey<ScaffoldState> _scaffoldKey) {
-    return AppBar(
-      backgroundColor: Colors.black,
-      centerTitle: true,
-      title: Image.network(
-        url,
-        width: MediaQuery.of(context).size.width * 0.6,
-      ),
-      actions: [
-        buildPopupMenuButton(presenter: presenter),
-      ],
-      leading: IconButton(
-        icon: Icon(Icons.menu),
-        onPressed: () {
-          _scaffoldKey.currentState.openDrawer();
-        },
-      ),
-    );
-  }
-
-  callback() {}
 }

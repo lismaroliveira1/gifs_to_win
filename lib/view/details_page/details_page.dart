@@ -11,12 +11,16 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double _edge = MediaQuery.of(context).size.width;
+    final _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
+      key: _scaffoldKey,
       appBar: buildAppBar(
         context: context,
-        presenter: presenter,
+        scaffoldKey: _scaffoldKey,
+        initialValue: 1,
+        callback: presenter.changeTotalPerPage,
       ),
-      drawer: CurstomDrawer(() {}),
+      drawer: CurstomDrawer(presenter.jumpToPage),
       body: Builder(
         builder: (context) {
           return Obx(

@@ -7,11 +7,17 @@ class GetXSavedPresenter extends GetxController {
   GetXSavedPresenter({@required this.result});
 
   var _imageListSaved = <ImageModel>[].obs;
-  List<ImageModel> get imageSavedListStream => _imageListSaved.toList();
+  var _jumpTo = RxString('/');
 
+  List<ImageModel> get imageSavedListStream => _imageListSaved.toList();
+  Stream<String> get jumpToStream => _jumpTo.stream;
   @override
   void onInit() async {
     _imageListSaved.value = await result.cache.readData('saved');
     super.onInit();
+  }
+
+  void jumpToPage(String page) {
+    _jumpTo.value = page;
   }
 }

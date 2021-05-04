@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gifs_to_win/presenter/getx_trash_presenter.dart';
 
 import '../view.dart';
@@ -19,8 +20,17 @@ class TrashPage extends StatelessWidget {
           },
         ),
       ),
-      drawer: CurstomDrawer(() {}),
-      body: Container(),
+      drawer: CurstomDrawer(presenter.jumpToPage),
+      body: Builder(
+        builder: (context) {
+          presenter.jumpToStream.listen((page) {
+            if (page?.isNotEmpty == true) {
+              Get.offAllNamed(page);
+            }
+          });
+          return Container();
+        },
+      ),
     );
   }
 }

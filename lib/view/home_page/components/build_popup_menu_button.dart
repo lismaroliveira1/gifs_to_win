@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
 
-import '../../../presenter/presenter.dart';
-
-PopupMenuButton<int> buildPopupMenuButton(
-    {@required GetXHomePresenter presenter}) {
+PopupMenuButton<int> buildPopupMenuButton({
+  @required Function(int value) callback,
+  @required int initialValue,
+}) {
   return PopupMenuButton(
-      initialValue: presenter.limitImageView,
-      onSelected: (value) => presenter.changeTotalPerPage(limit: value),
+      initialValue: initialValue,
+      onSelected: (value) => callback,
       itemBuilder: (context) {
         return [
           CheckedPopupMenuItem(
-            value: 15,
-            checked: presenter.limitImageView == 15,
-            child: Text('15 por página'),
+            value: 1,
+            checked: initialValue == 1,
+            child: Text('Lista'),
           ),
           CheckedPopupMenuItem(
-            value: 30,
-            checked: presenter.limitImageView == 30,
-            child: Text('30 por página'),
-          ),
-          CheckedPopupMenuItem(
-            value: 50,
-            checked: presenter.limitImageView == 50,
-            child: Text('50 por página'),
+            value: 2,
+            checked: initialValue == 2,
+            child: Text('Grade'),
           ),
         ];
       });

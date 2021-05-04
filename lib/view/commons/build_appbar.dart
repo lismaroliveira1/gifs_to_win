@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../presenter/presenter.dart';
 import '../view.dart';
 
 AppBar buildAppBar({
   @required BuildContext context,
-  @required GetXHomePresenter presenter,
+  @required GlobalKey<ScaffoldState> scaffoldKey,
+  @required Function(int value) callback,
+  @required int initialValue,
 }) {
   return AppBar(
     backgroundColor: Colors.black,
@@ -15,12 +16,15 @@ AppBar buildAppBar({
       width: MediaQuery.of(context).size.width * 0.6,
     ),
     actions: [
-      buildPopupMenuButton(presenter: presenter),
+      buildPopupMenuButton(
+        callback: callback,
+        initialValue: initialValue,
+      ),
     ],
     leading: IconButton(
       icon: Icon(Icons.menu),
       onPressed: () {
-        Scaffold.of(context).openDrawer();
+        scaffoldKey.currentState.openDrawer();
       },
     ),
   );
