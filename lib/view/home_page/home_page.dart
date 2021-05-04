@@ -59,7 +59,11 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                buildGridImages(presenter: presenter),
+                buildGridImages(
+                  showGifDetails: presenter.showGifDetails,
+                  imageList: presenter.imageListMapOut,
+                  getMoreImages: presenter.getMoreImages,
+                ),
               ],
             ),
           ),

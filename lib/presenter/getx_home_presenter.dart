@@ -16,15 +16,16 @@ class GetXHomePresenter extends GetxController {
   var _navigateTo = RxString('/');
   var _jumpTo = RxString('/');
   var _imageList = <ImageModel>[].obs;
+  var _imageListMap = <Map>[].obs;
   var _imageListRelated = <ImageModel>[].obs;
   var _imageDetails = Rx<ImageModel>(null);
   var _imageListSaved = <ImageModel>[].obs;
-  var _defaultLimit = 15.obs;
-  var _defaultOffset = 1.obs;
+  var _defaultLimit = 30.obs;
   var _isValidName = false.obs;
   var _errorTextDialog = RxString(null);
 
   List<ImageModel> get imageListStream => _imageList.toList();
+  List<Map> get imageListMapOut => _imageListMap.toList();
   ImageModel get imageDetailsStream => _imageDetails.value;
   List<ImageModel> get imageListRelatedStream => [];
   Stream<String> get navigateToStream => _navigateTo.stream;
@@ -35,8 +36,12 @@ class GetXHomePresenter extends GetxController {
   @override
   void onInit() async {
     _navigateTo.value = '';
+    _imageList.clear();
     _imageList.value =
         await result.repository.getAll(limit: _defaultLimit.value, offset: 1);
+    _imageList.forEach((element) {
+      _imageListMap.add(element.toMap());
+    });
     super.onInit();
   }
 
@@ -47,10 +52,11 @@ class GetXHomePresenter extends GetxController {
   }
 
   Future<void> getMoreImages() async {
-    var newList = await result.repository
-        .getAll(limit: _defaultLimit.value, offset: _defaultOffset.value++);
+    var newList = await result.repository.getRandom();
+    print(newList.length);
     newList.forEach((element) {
       _imageList.add(element);
+      _imageListMap.add(element.toMap());
     });
   }
 
@@ -62,7 +68,7 @@ class GetXHomePresenter extends GetxController {
     });
   }
 
-  void showGifDetails({@required Map imageMap}) async {
+  void showGifDetails(Map imageMap) async {
     _imageDetails.value = ImageModel.fromMap(imageMap);
     Future.delayed(Duration(milliseconds: 250), () {
       _navigateTo.value = '';

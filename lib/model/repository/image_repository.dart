@@ -22,6 +22,16 @@ class ImageRepository {
     }
   }
 
+  Future<List<ImageModel>> getRandom() async {
+    try {
+      String url = "$baseUrl$api_key&tag=&rating=g";
+      final response = await client.get(Uri.parse(url));
+      return mapToGifList(response: jsonDecode(response.body));
+    } on HttpError {
+      throw HttpError.unexpected;
+    }
+  }
+
   Future<List<ImageModel>> getImagesByName(String username) async {
     try {
       String url =
