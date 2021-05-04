@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gifs_to_win/presenter/getx_trash_presenter.dart';
 
-import '../view.dart';
-
 class TrashPage extends StatelessWidget {
   final GetXTrashPresenter presenter;
   TrashPage({@required this.presenter});
