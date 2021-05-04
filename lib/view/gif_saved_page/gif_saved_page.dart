@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 import 'package:gifs_to_win/presenter/getx_saved_presenter.dart';
 
+import '../view.dart';
+
 class GifSavedPage extends StatelessWidget {
   final GetXSavedPresenter presenter;
   GifSavedPage({@required this.presenter});
@@ -20,6 +22,7 @@ class GifSavedPage extends StatelessWidget {
           },
         ),
       ),
+      drawer: CurstomDrawer(() {}),
       body: Obx(
         () => Column(
           children: [
@@ -44,7 +47,40 @@ class GifSavedPage extends StatelessWidget {
             Expanded(
               child: ListView(
                 children: presenter.imageSavedListStream
-                    .map((e) => ListTile())
+                    .map(
+                      (imageGif) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: <Widget>[
+                            Container(
+                              height: 150,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(8),
+                                ),
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(imageGif.url),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    imageGif.title,
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
                     .toList(),
               ),
             ),

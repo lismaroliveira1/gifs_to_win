@@ -9,6 +9,9 @@ class TrashBinding implements Bindings {
   void dependencies() {
     Get.lazyPut(() => Client());
     Get.lazyPut(() => ImageRepository(client: Get.find()));
-    Get.lazyPut(() => GetXTrashPresenter(repository: Get.find()));
+    Get.put(ImageResults(
+      repository: Get.find(),
+      cache: Get.find(),
+    ));
   }
 }

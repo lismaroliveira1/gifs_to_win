@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
     final _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: _scaffoldKey,
-      drawer: CurstomDrawer(presenter),
+      drawer: CurstomDrawer(callback),
       appBar: buildAppBar(context, _scaffoldKey),
       body: Builder(builder: (context) {
         presenter.navigateToStream.listen((page) {
@@ -83,4 +83,6 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+
+  callback() {}
 }

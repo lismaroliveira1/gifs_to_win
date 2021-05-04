@@ -16,6 +16,7 @@ class DetailsPage extends StatelessWidget {
         context: context,
         presenter: presenter,
       ),
+      drawer: CurstomDrawer(() {}),
       body: Builder(
         builder: (context) {
           return Obx(

@@ -3,11 +3,10 @@ import 'package:meta/meta.dart';
 import 'package:flutter/material.dart';
 
 class CurstomDrawer extends StatelessWidget {
-  final GetXHomePresenter homePresenter;
-  CurstomDrawer(this.homePresenter);
+  final Function callback;
+  CurstomDrawer(this.callback);
   @override
   Widget build(BuildContext context) {
-    final presenter = this.homePresenter;
     double _edge = MediaQuery.of(context).size.width * 0.95;
     return Drawer(
       child: Stack(
@@ -29,19 +28,19 @@ class CurstomDrawer extends StatelessWidget {
                 ),
                 buildDrawerButtonItem(
                   item: 'Home',
-                  presenter: presenter,
+                  callback: callback,
                   context: context,
                   routePage: '/',
                 ),
                 buildDrawerButtonItem(
                   item: 'Gifs Salvos',
-                  presenter: presenter,
+                  callback: callback,
                   context: context,
                   routePage: '/saved',
                 ),
                 buildDrawerButtonItem(
                   item: 'Lixeira',
-                  presenter: presenter,
+                  callback: callback,
                   context: context,
                   routePage: '/trash',
                 ),
@@ -55,16 +54,16 @@ class CurstomDrawer extends StatelessWidget {
 
   ElevatedButton buildDrawerButtonItem({
     @required String item,
-    @required GetXHomePresenter presenter,
     @required BuildContext context,
     @required String routePage,
+    @required Function callback,
   }) {
     return ElevatedButton(
       onPressed: () {
         Navigator.of(context).pop();
         Future.delayed(
           Duration(milliseconds: 500),
-          () => presenter.jumpToPage(routePage),
+          callback,
         );
       },
       child: Text(item),
