@@ -7,10 +7,10 @@ import '../model/model.dart';
 import './commons/commons.dart';
 
 class GetXHomePresenter extends GetxController {
-  final ImageRepository repository;
+  final ImageResults result;
 
   GetXHomePresenter({
-    @required this.repository,
+    @required this.result,
   });
 
   var _navigateTo = RxString('/');
@@ -38,19 +38,19 @@ class GetXHomePresenter extends GetxController {
     var listSavedCache = await readData('saved');
     _imageListSaved.value = jsonDecode(listSavedCache);
     _imageList.value =
-        await repository.getAll(limit: _defaultLimit.value, offset: 1);
+        await result.repository.getAll(limit: _defaultLimit.value, offset: 1);
     super.onInit();
   }
 
   Future<void> changeTotalPerPage({@required int limit}) async {
     _defaultLimit.value = limit;
     _imageList.value =
-        await repository.getAll(limit: _defaultLimit.value, offset: 1);
+        await result.repository.getAll(limit: _defaultLimit.value, offset: 1);
   }
 
   Future<void> getMoreImages() async {
-    var newList = await repository.getAll(
-        limit: _defaultLimit.value, offset: _defaultOffset.value++);
+    var newList = await result.repository
+        .getAll(limit: _defaultLimit.value, offset: _defaultOffset.value++);
     newList.forEach((element) {
       _imageList.add(element);
     });
@@ -71,7 +71,7 @@ class GetXHomePresenter extends GetxController {
       _navigateTo.value = '/details';
     });
     _imageListRelated.value =
-        await repository.getImagesByName(imageMap['username']);
+        await result.repository.getImagesByName(imageMap['username']);
   }
 
   Future<void> saveImage({

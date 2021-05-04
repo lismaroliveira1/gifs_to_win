@@ -8,7 +8,12 @@ class GifSavedBindings extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => Client());
+    Get.put(Cache());
+    Get.put(ImageResults(
+      repository: Get.find(),
+      cache: Get.find(),
+    ));
     Get.lazyPut(() => ImageRepository(client: Get.find()));
-    Get.lazyPut(() => GetXSavedPresenter(repository: Get.find()));
+    Get.lazyPut(() => GetXSavedPresenter(result: Get.find()));
   }
 }

@@ -7,14 +7,14 @@ import '../model/model.dart';
 import './commons/commons.dart';
 
 class GetXSavedPresenter extends GetxController {
-  final ImageRepository repository;
-  GetXSavedPresenter({@required this.repository});
+  final ImageResults result;
+  GetXSavedPresenter({@required this.result});
 
   var _imageListSaved = <dynamic>[].obs;
 
   @override
   void onInit() async {
-    await repository.getAll(limit: 15, offset: 1);
+    await result.repository.getAll(limit: 15, offset: 1);
     var listSavedCache = await readData('saved');
     _imageListSaved.value = jsonDecode(listSavedCache);
     print(listSavedCache.length);
