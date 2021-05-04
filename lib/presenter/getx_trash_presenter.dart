@@ -12,14 +12,13 @@ class GetXTrashPresenter extends GetxController {
 
   var _blackList = <dynamic>[].obs;
 
-  List<ImageModel> get imageListStream => _blackList.toList();
+  List<ImageModel> get imageDeletedListStream => _blackList.toList();
 
   @override
   void onInit() async {
     await repository.getAll(limit: 15, offset: 1);
     var blackListCache = await readData('deleted');
     _blackList.value = jsonDecode(blackListCache);
-    print(blackListCache.length);
     super.onInit();
   }
 }

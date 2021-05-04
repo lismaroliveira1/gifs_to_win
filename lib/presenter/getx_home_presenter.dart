@@ -18,7 +18,7 @@ class GetXHomePresenter extends GetxController {
   var _imageList = <ImageModel>[].obs;
   var _imageListRelated = <ImageModel>[].obs;
   var _imageDetails = Rx<ImageModel>(null);
-  var _imageListSaved = <dynamic>[].obs;
+  var _imageListSaved = <ImageModel>[].obs;
   var _defaultLimit = 15.obs;
   var _defaultOffset = 1.obs;
   var _isValidName = false.obs;
@@ -26,7 +26,7 @@ class GetXHomePresenter extends GetxController {
 
   List<ImageModel> get imageListStream => _imageList.toList();
   ImageModel get imageDetailsStream => _imageDetails.value;
-  List<ImageModel> get imageListRelatedStream => _imageListRelated.toList();
+  List<ImageModel> get imageListRelatedStream => [];
   Stream<String> get navigateToStream => _navigateTo.stream;
   Stream<String> get jumpToStream => _jumpTo.stream;
   String get errorTextDialogStream => _errorTextDialog.value;
@@ -35,8 +35,6 @@ class GetXHomePresenter extends GetxController {
   @override
   void onInit() async {
     _navigateTo.value = '';
-    var listSavedCache = await readData('saved');
-    _imageListSaved.value = jsonDecode(listSavedCache);
     _imageList.value =
         await result.repository.getAll(limit: _defaultLimit.value, offset: 1);
     super.onInit();
@@ -79,11 +77,11 @@ class GetXHomePresenter extends GetxController {
     @required String title,
     @required String url,
   }) async {
-    _imageListSaved.add({
+    _imageListSaved.add(ImageModel.fromMap({
       'id': id,
       'title': title,
       'url': url,
-    });
+    }));
     await writeData(jsonEncode(_imageListSaved), path: 'saved');
     print(_imageListSaved.length);
   }

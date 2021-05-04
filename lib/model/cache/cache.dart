@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
+import 'package:gifs_to_win/model/image_model.dart';
 import 'package:meta/meta.dart';
 import 'package:path_provider/path_provider.dart';
 
 class Cache {
+  List<ImageModel> _list;
   Future<String> get localPath async {
     final path = await getApplicationSupportDirectory();
     return path.path;
@@ -18,15 +21,20 @@ class Cache {
     file.writeAsStringSync(jsonString);
   }
 
-  Future<String> readData(String path) async {
+  Future<List<ImageModel>> readData(String path) async {
     try {
+      _list = [];
       final file = await localFile(path);
       String data = await file.readAsString();
-      return data == "{[]}" || data == "{}" || data == "[]" || data == ""
-          ? '{}'
-          : data;
+      final _listDynamic = jsonDecode(data);
+      _listDynamic.forEach((element) {
+        _list.add(ImageModel.fromJson(element));
+      });
+      print(_list.length);
+      return _list;
     } catch (e) {
-      return '{[]}';
+      print(e);
+      return [];
     }
   }
 }

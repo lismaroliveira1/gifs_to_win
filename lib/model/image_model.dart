@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:meta/meta.dart';
 
 class ImageModel {
@@ -25,18 +27,61 @@ class ImageModel {
     @required this.size,
   });
 
-  factory ImageModel.fromMap(Map imageMap) {
-    return new ImageModel(
-      id: imageMap['id'],
-      url: imageMap['url'],
-      username: imageMap['username'],
-      title: imageMap['title'],
-      slug: imageMap['slug'],
-      rating: imageMap['rating'],
-      importDateTime: imageMap['importDateTime'],
-      width: imageMap['width'],
-      height: imageMap['height'],
-      size: imageMap['size'],
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'url': url,
+      'username': username,
+      'title': title,
+      'slug': slug,
+      'rating': rating,
+      'importDateTime': importDateTime,
+      'height': height,
+      'width': width,
+      'size': size,
+    };
+  }
+
+  factory ImageModel.fromMap(Map<dynamic, dynamic> map) {
+    return ImageModel(
+      id: map['id'],
+      url: map['url'],
+      username: map['username'],
+      title: map['title'],
+      slug: map['slug'],
+      rating: map['rating'],
+      importDateTime: map['importDateTime'],
+      height: map['height'],
+      width: map['width'],
+      size: map['size'],
+    );
+  }
+  factory ImageModel.fromJson(Map<String, dynamic> map) {
+    return ImageModel(
+      id: map['id'],
+      url: map['url'],
+      username: map['username'],
+      title: map['title'],
+      slug: map['slug'],
+      rating: map['rating'],
+      importDateTime: map['importDateTime'],
+      height: map['height'],
+      width: map['width'],
+      size: map['size'],
+    );
+  }
+  factory ImageModel.fromDynamic(dynamic map) {
+    return ImageModel(
+      id: map['id'],
+      url: map['url'],
+      username: map['username'],
+      title: map['title'],
+      slug: map['slug'],
+      rating: map['rating'],
+      importDateTime: map['importDateTime'],
+      height: map['height'],
+      width: map['width'],
+      size: map['size'],
     );
   }
 }
