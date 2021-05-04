@@ -7,11 +7,12 @@ import './../../presenter/presenter.dart';
 class DetailsPage extends StatelessWidget {
   final GetXHomePresenter presenter;
   DetailsPage({@required this.presenter});
+  final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     double _edge = MediaQuery.of(context).size.width;
-    final _scaffoldKey = GlobalKey<ScaffoldState>();
+    hideKeyboard(context: context);
     return Scaffold(
       key: _scaffoldKey,
       appBar: buildAppBar(

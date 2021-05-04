@@ -13,7 +13,7 @@ class Cache {
 
   Future<File> localFile(String path) async {
     final file = await localPath;
-    return new File('$file/path.txt');
+    return new File('$file/$path.txt');
   }
 
   Future<void> writeData(String jsonString, {@required String path}) async {
@@ -33,7 +33,6 @@ class Cache {
       print(_list.length);
       return _list;
     } catch (e) {
-      print(e);
       return [];
     }
   }

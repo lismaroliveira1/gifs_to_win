@@ -20,4 +20,8 @@ class GetXSavedPresenter extends GetxController {
   void jumpToPage(String page) {
     _jumpTo.value = page;
   }
+
+  void getImages() async {
+    _imageListSaved.value = await result.cache.readData('saved');
+  }
 }

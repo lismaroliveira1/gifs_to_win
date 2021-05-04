@@ -10,8 +10,7 @@ Widget buildGridImages({
 }) =>
     Expanded(
       child: LazyLoadScrollView(
-        onEndOfPage: () => getMoreImages,
-        //onEndOfPage: () => presenter.getMoreImages(),
+        onEndOfPage: () async => getMoreImages(),
         child: GridView.builder(
           padding: EdgeInsets.all(10.0),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -21,7 +20,6 @@ Widget buildGridImages({
           ),
           itemCount: imageList.length,
           itemBuilder: (context, index) {
-            print("ok");
             double edge = MediaQuery.of(context).size.width * 0.4;
             ScaffoldMessengerState _snackBarContext =
                 ScaffoldMessenger.of(context);

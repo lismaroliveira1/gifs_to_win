@@ -28,9 +28,7 @@ Future editImageTitleDialog({
                   labelText: 'Novo título',
                   hintText: presenter.imageDetailsStream.title,
                 ),
-                onChanged: (newValue) {
-                  presenter.validateName(newValue);
-                },
+                onChanged: presenter.validateName,
               ),
               actions: [
                 ElevatedButton(

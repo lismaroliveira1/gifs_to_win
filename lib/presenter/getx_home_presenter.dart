@@ -20,6 +20,7 @@ class GetXHomePresenter extends GetxController {
   var _imageListRelated = <ImageModel>[].obs;
   var _imageDetails = Rx<ImageModel>(null);
   var _imageListSaved = <ImageModel>[].obs;
+  var _imageListDeleted = <ImageModel>[].obs;
   var _defaultLimit = 30.obs;
   var _isValidName = false.obs;
   var _errorTextDialog = RxString(null);
@@ -89,6 +90,20 @@ class GetXHomePresenter extends GetxController {
       'url': url,
     }));
     await writeData(jsonEncode(_imageListSaved), path: 'saved');
+    print(_imageListSaved.length);
+  }
+
+  Future<void> deleteImage({
+    @required String id,
+    @required String title,
+    @required String url,
+  }) async {
+    _imageListDeleted.add(ImageModel.fromMap({
+      'id': id,
+      'title': title,
+      'url': url,
+    }));
+    await writeData(jsonEncode(_imageListDeleted), path: 'saved');
     print(_imageListSaved.length);
   }
 

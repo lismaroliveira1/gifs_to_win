@@ -6,20 +6,22 @@ import '../view.dart';
 
 class HomePage extends StatelessWidget {
   final GetXHomePresenter presenter;
-  HomePage({@required this.presenter});
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  HomePage({
+    @required this.presenter,
+  });
   @override
   Widget build(BuildContext context) {
-    ScaffoldMessengerState _snackBarContext = ScaffoldMessenger.of(context);
-    final _scaffoldKey = GlobalKey<ScaffoldState>();
+    final _formKey = GlobalKey<FormState>();
     return Scaffold(
       key: _scaffoldKey,
-      drawer: CurstomDrawer(presenter.jumpToPage),
       appBar: buildAppBar(
         context: context,
         scaffoldKey: _scaffoldKey,
         initialValue: 1,
         callback: presenter.changeTotalPerPage,
       ),
+      drawer: CurstomDrawer(presenter.jumpToPage),
       body: Builder(builder: (context) {
         presenter.navigateToStream.listen((page) {
           if (page?.isNotEmpty == true) {
@@ -35,40 +37,60 @@ class HomePage extends StatelessWidget {
           onTap: () {
             hideKeyboard(context: context);
           },
-          onLongPress: () {
-            hideKeyboard(context: context);
-          },
-          child: Obx(
-            () => Column(
-              children: [
-                Container(
-                  height: 80,
-                  child: Form(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        onTap: () => _snackBarContext.hideCurrentSnackBar(),
-                        decoration: InputDecoration(
-                          labelText: 'Pesquisar',
-                          labelStyle: TextStyle(
-                            fontSize: 16,
-                          ),
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                buildGridImages(
+          child: Column(
+            children: [
+              buildForm(_formKey, context),
+              Obx(
+                () => buildGridImages(
                   showGifDetails: presenter.showGifDetails,
                   imageList: presenter.imageListMapOut,
                   getMoreImages: presenter.getMoreImages,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       }),
+    );
+  }
+
+  Container buildForm(GlobalKey<FormState> _formKey, BuildContext context) {
+    final FocusNode _ageFocus = FocusNode();
+    final _textEditingController = TextEditingController();
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextFormField(
+          focusNode: _ageFocus,
+          onTap: () {
+            hideKeyboard(context: context);
+          },
+          controller: _textEditingController,
+          decoration: InputDecoration(
+            labelText: 'Pesquisar',
+            hintText: 'Casa',
+            labelStyle: TextStyle(
+              fontSize: 16,
+            ),
+            filled: true,
+            border: OutlineInputBorder(),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade300, width: 2),
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(5),
+                topLeft: Radius.circular(5),
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade300, width: 2),
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(5),
+                topLeft: Radius.circular(5),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
