@@ -30,7 +30,6 @@ class Cache {
       _listDynamic.forEach((element) {
         _list.add(ImageModel.fromJson(element));
       });
-      print(_list.length);
       return _list;
     } catch (e) {
       return [];

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 
 import '../model/model.dart';
-import './commons/commons.dart';
 
 class GetXHomePresenter extends GetxController {
   final ImageResults result;
@@ -18,7 +17,11 @@ class GetXHomePresenter extends GetxController {
   var _imageList = <ImageModel>[].obs;
   var _imageListMap = <Map>[].obs;
   var _imageListRelated = <ImageModel>[].obs;
-  var _imageDetails = Rx<ImageModel>(null);
+  var _imageDetails = Rx<ImageModel>(ImageModel(
+    id: '',
+    title: '',
+    url: '',
+  ));
   var _imageListSaved = <ImageModel>[].obs;
   var _imageListDeleted = <ImageModel>[].obs;
   var _defaultLimit = 30.obs;
@@ -54,7 +57,6 @@ class GetXHomePresenter extends GetxController {
 
   Future<void> getMoreImages() async {
     var newList = await result.repository.getRandom();
-    print(newList.length);
     newList.forEach((element) {
       _imageList.add(element);
       _imageListMap.add(element.toMap());
@@ -70,7 +72,9 @@ class GetXHomePresenter extends GetxController {
   }
 
   void showGifDetails(Map imageMap) async {
+    print(imageMap);
     _imageDetails.value = ImageModel.fromMap(imageMap);
+    print(_imageDetails.value.id);
     Future.delayed(Duration(milliseconds: 250), () {
       _navigateTo.value = '';
       _navigateTo.value = '/details';
@@ -84,13 +88,22 @@ class GetXHomePresenter extends GetxController {
     @required String title,
     @required String url,
   }) async {
-    _imageListSaved.add(ImageModel.fromMap({
+    List<Map> _flag = [];
+    _imageListSaved.clear();
+    _imageListSaved.value = await result.cache.readData('saved');
+    _imageListSaved.forEach((element) {
+      _flag.add({
+        'id': element.id,
+        'title': element.title,
+        'url': element.url,
+      });
+    });
+    _flag.add({
       'id': id,
       'title': title,
       'url': url,
-    }));
-    await writeData(jsonEncode(_imageListSaved), path: 'saved');
-    print(_imageListSaved.length);
+    });
+    await result.cache.writeData(jsonEncode(_flag), path: 'saved');
   }
 
   Future<void> deleteImage({
@@ -103,12 +116,10 @@ class GetXHomePresenter extends GetxController {
       'title': title,
       'url': url,
     }));
-    await writeData(jsonEncode(_imageListDeleted), path: 'saved');
-    print(_imageListSaved.length);
+    await result.cache.writeData(jsonEncode({}), path: 'deleted');
   }
 
   void validateName(String value) {
-    print(value);
     String patttern = r'(^[a-zA-Z ]*$)';
     RegExp regExp = new RegExp(patttern);
     if (value.length == 0) {

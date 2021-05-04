@@ -26,7 +26,6 @@ class GifSavedPage extends StatelessWidget {
       drawer: CurstomDrawer(presenter.jumpToPage),
       body: Builder(
         builder: (context) {
-          presenter.getImages();
           presenter.jumpToStream.listen((page) {
             if (page?.isNotEmpty == true) {
               Get.offAllNamed(page);

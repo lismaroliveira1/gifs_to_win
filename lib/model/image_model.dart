@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 class ImageModel {
   String id;
   String url;
@@ -13,16 +11,16 @@ class ImageModel {
   String size;
 
   ImageModel({
-    @required this.id,
-    @required this.importDateTime,
-    @required this.rating,
-    @required this.slug,
-    @required this.url,
-    @required this.username,
-    @required this.title,
-    @required this.height,
-    @required this.width,
-    @required this.size,
+    this.id,
+    this.importDateTime,
+    this.rating,
+    this.slug,
+    this.url,
+    this.username,
+    this.title,
+    this.height,
+    this.width,
+    this.size,
   });
 
   Map<String, dynamic> toMap() {
@@ -41,7 +39,7 @@ class ImageModel {
   }
 
   factory ImageModel.fromMap(Map<dynamic, dynamic> map) {
-    return ImageModel(
+    final imageMapModel = ImageModel(
       id: map['id'],
       url: map['url'],
       username: map['username'],
@@ -53,6 +51,7 @@ class ImageModel {
       width: map['width'],
       size: map['size'],
     );
+    return imageMapModel;
   }
   factory ImageModel.fromJson(Map<String, dynamic> map) {
     return ImageModel(

@@ -13,6 +13,7 @@ class GetXSavedPresenter extends GetxController {
   Stream<String> get jumpToStream => _jumpTo.stream;
   @override
   void onInit() async {
+    _imageListSaved.clear();
     _imageListSaved.value = await result.cache.readData('saved');
     super.onInit();
   }
@@ -22,6 +23,7 @@ class GetXSavedPresenter extends GetxController {
   }
 
   void getImages() async {
+    _imageListSaved.clear();
     _imageListSaved.value = await result.cache.readData('saved');
   }
 }
