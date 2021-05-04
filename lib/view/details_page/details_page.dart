@@ -121,7 +121,9 @@ class DetailsPage extends StatelessWidget {
                               child: Text('Editar'),
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                presenter.moveToBlakiList();
+                              },
                               child: Text('Deletar'),
                             ),
                           ],

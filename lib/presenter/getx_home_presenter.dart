@@ -72,7 +72,6 @@ class GetXHomePresenter extends GetxController {
   }
 
   void showGifDetails(Map imageMap) async {
-    print(imageMap);
     _imageDetails.value = ImageModel.fromMap(imageMap);
     print(_imageDetails.value.id);
     Future.delayed(Duration(milliseconds: 250), () {
@@ -144,4 +143,6 @@ class GetXHomePresenter extends GetxController {
   void jumpToPage(String page) {
     _jumpTo.value = page;
   }
+
+  void moveToBlakiList() {}
 }
