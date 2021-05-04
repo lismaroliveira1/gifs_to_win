@@ -26,4 +26,6 @@ class GetXSavedPresenter extends GetxController {
     _imageListSaved.clear();
     _imageListSaved.value = await result.cache.readData('saved');
   }
+
+  void changeViewMode(int limit) async {}
 }

@@ -19,7 +19,7 @@ class DetailsPage extends StatelessWidget {
         context: context,
         scaffoldKey: _scaffoldKey,
         initialValue: 1,
-        callback: presenter.changeTotalPerPage,
+        buttonCallback: presenter.changeTotalPerPage,
       ),
       drawer: CurstomDrawer(presenter.jumpToPage),
       body: Builder(
@@ -122,7 +122,11 @@ class DetailsPage extends StatelessWidget {
                             ),
                             TextButton(
                               onPressed: () {
-                                presenter.moveToBlakiList();
+                                presenter.moveToBlakiList(
+                                  id: presenter.imageDetailsStream.id,
+                                  title: presenter.imageDetailsStream.title,
+                                  url: presenter.imageDetailsStream.url,
+                                );
                               },
                               child: Text('Deletar'),
                             ),

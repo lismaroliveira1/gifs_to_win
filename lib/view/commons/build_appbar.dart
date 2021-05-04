@@ -5,7 +5,7 @@ import '../view.dart';
 AppBar buildAppBar({
   @required BuildContext context,
   @required GlobalKey<ScaffoldState> scaffoldKey,
-  @required Function(int value) callback,
+  @required Function(int value) buttonCallback,
   @required int initialValue,
 }) {
   return AppBar(
@@ -17,7 +17,7 @@ AppBar buildAppBar({
     ),
     actions: [
       buildPopupMenuButton(
-        callback: callback,
+        callback: buttonCallback,
         initialValue: initialValue,
       ),
     ],

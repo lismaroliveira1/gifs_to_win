@@ -17,11 +17,18 @@ class GetXHomePresenter extends GetxController {
   var _imageList = <ImageModel>[].obs;
   var _imageListMap = <Map>[].obs;
   var _imageListRelated = <ImageModel>[].obs;
-  var _imageDetails = Rx<ImageModel>(ImageModel(
+  var _imageDetails = ImageModel(
     id: '',
-    title: '',
     url: '',
-  ));
+    username: '',
+    title: '',
+    slug: '',
+    rating: '',
+    importDateTime: '',
+    height: '',
+    width: '',
+    size: '',
+  ).obs;
   var _imageListSaved = <ImageModel>[].obs;
   var _imageListDeleted = <ImageModel>[].obs;
   var _defaultLimit = 30.obs;
@@ -55,6 +62,8 @@ class GetXHomePresenter extends GetxController {
         await result.repository.getAll(limit: _defaultLimit.value, offset: 1);
   }
 
+  void changeViewMode(int limit) async {}
+
   Future<void> getMoreImages() async {
     var newList = await result.repository.getRandom();
     newList.forEach((element) {
@@ -73,7 +82,6 @@ class GetXHomePresenter extends GetxController {
 
   void showGifDetails(Map imageMap) async {
     _imageDetails.value = ImageModel.fromMap(imageMap);
-    print(_imageDetails.value.id);
     Future.delayed(Duration(milliseconds: 250), () {
       _navigateTo.value = '';
       _navigateTo.value = '/details';
@@ -144,5 +152,27 @@ class GetXHomePresenter extends GetxController {
     _jumpTo.value = page;
   }
 
-  void moveToBlakiList() {}
+  void moveToBlakiList({
+    @required String id,
+    @required String title,
+    @required String url,
+  }) async {
+    List<Map> _flag = [];
+    _imageListDeleted.clear();
+    _imageListSaved.value = await result.cache.readData('deleted');
+    _imageListSaved.forEach((element) {
+      _flag.add({
+        'id': element.id,
+        'title': element.title,
+        'url': element.url,
+      });
+    });
+    _flag.add({
+      'id': id,
+      'title': title,
+      'url': url,
+    });
+    await result.cache.writeData(jsonEncode(_flag), path: 'deleted');
+    _navigateTo.value = '/';
+  }
 }

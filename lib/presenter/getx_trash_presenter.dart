@@ -13,7 +13,7 @@ class GetXTrashPresenter extends GetxController {
   Stream<String> get jumpToStream => _jumpTo.stream;
   @override
   void onInit() async {
-    await result.repository.getAll(limit: 15, offset: 1);
+    _blackList.clear();
     _blackList.value = await result.cache.readData('deleted');
     super.onInit();
   }

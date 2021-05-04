@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
         context: context,
         scaffoldKey: _scaffoldKey,
         initialValue: 1,
-        callback: presenter.changeTotalPerPage,
+        buttonCallback: presenter.changeTotalPerPage,
       ),
       drawer: CurstomDrawer(presenter.jumpToPage),
       body: Builder(builder: (context) {

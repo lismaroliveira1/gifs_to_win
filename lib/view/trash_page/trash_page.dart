@@ -28,7 +28,32 @@ class TrashPage extends StatelessWidget {
               Get.offAllNamed(page);
             }
           });
-          return Container();
+          return Obx(
+            () => Column(
+              children: [
+                Container(
+                  height: 80,
+                  child: Form(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Pesquisar',
+                          labelStyle: TextStyle(
+                            fontSize: 16,
+                          ),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: buildImageListView(presenter.imageDeletedListStream),
+                ),
+              ],
+            ),
+          );
         },
       ),
     );
