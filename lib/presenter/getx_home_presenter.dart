@@ -37,24 +37,27 @@ class GetXHomePresenter extends GetxController {
   var _imageListSaved = <ImageModel>[].obs;
   var _imageListDeleted = <ImageModel>[].obs;
   var _defaultLimit = 30.obs;
+  var _wayViewMode = 1.obs;
   var _isValidName = false.obs;
   var _errorTextDialog = RxString(null);
 
   List<ImageModel> get imageListStream => _imageList.toList();
   List<ImageModel> get imageListSearchedOut => _imageListSearched.toList();
   List<Map> get imageListMapOut => _imageListMap.toList();
+  List<ImageModel> get imageListModelOut => _imageList.toList();
   List<Map> get imageListSearchedMapOut => _imageListSearchedMap.toList();
+  List<ImageModel> get imageListSearchedModelOut => _imageListSearched.toList();
   ImageModel get imageDetailsStream => _imageDetails.value;
   List<ImageModel> get imageListRelatedStream => [];
   Stream<String> get navigateToStream => _navigateTo.stream;
   Stream<String> get jumpToStream => _jumpTo.stream;
   String get errorTextDialogStream => _errorTextDialog.value;
   int get limitImageView => _defaultLimit.toInt();
+  int get wayViewModeOut => _wayViewMode.toInt();
   bool get isValidNameStream => _isValidName.value;
 
   @override
   void onInit() async {
-    _navigateTo.value = '';
     clearValues();
     _imageList.value =
         await result.repository.getAll(limit: _defaultLimit.value, offset: 1);
@@ -64,13 +67,9 @@ class GetXHomePresenter extends GetxController {
     super.onInit();
   }
 
-  void changeTotalPerPage(int limit) async {
-    _defaultLimit.value = limit;
-    _imageList.value =
-        await result.repository.getAll(limit: _defaultLimit.value, offset: 1);
+  void changeWayViewMode(int value) async {
+    _wayViewMode.value = value;
   }
-
-  void changeViewMode(int limit) async {}
 
   Future<void> getMoreImages() async {
     var newList = await result.repository.getRandom();

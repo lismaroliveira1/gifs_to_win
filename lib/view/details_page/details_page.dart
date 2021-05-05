@@ -19,7 +19,7 @@ class DetailsPage extends StatelessWidget {
         context: context,
         scaffoldKey: _scaffoldKey,
         initialValue: 1,
-        buttonCallback: presenter.changeTotalPerPage,
+        buttonCallback: presenter.changeWayViewMode,
       ),
       drawer: CurstomDrawer(presenter.jumpToPage),
       body: Builder(
