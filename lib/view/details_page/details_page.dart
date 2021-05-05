@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../view.dart';
 import './../../presenter/presenter.dart';
@@ -20,6 +21,7 @@ class DetailsPage extends StatelessWidget {
         scaffoldKey: _scaffoldKey,
         initialValue: 1,
         buttonCallback: presenter.changeWayViewMode,
+        title: 'Detalhes',
       ),
       drawer: CurstomDrawer(presenter.jumpToPage),
       body: Builder(
@@ -41,7 +43,7 @@ class DetailsPage extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
+                      padding: const EdgeInsets.only(top: 8.0, bottom: 20),
                       child: Container(
                         height: _edge,
                         width: _edge,
@@ -58,17 +60,38 @@ class DetailsPage extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
                             Column(
                               children: <Widget>[
-                                Text('Nome de Usuário'),
-                                Text(presenter.imageDetailsStream.username),
+                                Text(
+                                  'Nome de Usuário',
+                                  style: GoogleFonts.itim(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.blueGrey[700],
+                                  ),
+                                ),
+                                Text(
+                                  presenter.imageDetailsStream.username,
+                                  style: GoogleFonts.itim(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.blueGrey[700],
+                                  ),
+                                ),
                               ],
                             ),
                             Column(
                               children: <Widget>[
-                                Text('Classificação'),
+                                Text(
+                                  'Classificação',
+                                  style: GoogleFonts.itim(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.blueGrey[700],
+                                  ),
+                                ),
                                 Text(presenter.imageDetailsStream.rating),
                               ],
                             ),
@@ -80,18 +103,32 @@ class DetailsPage extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
                             Column(
                               children: <Widget>[
-                                Text('Altura'),
+                                Text(
+                                  'Altura',
+                                  style: GoogleFonts.itim(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.blueGrey[700],
+                                  ),
+                                ),
                                 Text(
                                     presenter.imageDetailsStream.height + "px"),
                               ],
                             ),
                             Column(
                               children: <Widget>[
-                                Text('Largura'),
+                                Text(
+                                  'Largura',
+                                  style: GoogleFonts.itim(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.blueGrey[700],
+                                  ),
+                                ),
                                 Text(presenter.imageDetailsStream.width + "px"),
                               ],
                             ),
@@ -101,7 +138,14 @@ class DetailsPage extends StatelessWidget {
                     ),
                     Column(
                       children: <Widget>[
-                        Text('Tamanho'),
+                        Text(
+                          'Tamanho',
+                          style: GoogleFonts.itim(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.blueGrey[700],
+                          ),
+                        ),
                         Text(presenter.imageDetailsStream.size + "KB"),
                       ],
                     ),

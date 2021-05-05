@@ -21,6 +21,7 @@ class GifSavedPage extends StatelessWidget {
         scaffoldKey: _scaffoldKey,
         initialValue: 1,
         buttonCallback: presenter.changeViewMode,
+        title: 'GifsSalvos',
       ),
       drawer: CurstomDrawer(presenter.jumpToPage),
       body: GestureDetector(
@@ -43,6 +44,7 @@ class GifSavedPage extends StatelessWidget {
                   ),
                   Expanded(
                     child: buildImageListView(
+                      showGifDetails: (map) {},
                       imageList: presenter.imageListSearchedMapOut,
                       isSearch: false,
                       searchName: '',

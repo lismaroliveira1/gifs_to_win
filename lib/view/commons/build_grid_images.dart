@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
 import '../view.dart';
@@ -39,32 +40,40 @@ Widget buildGridImages({
                       showGifDetails(imageList[index]);
                     },
                     child: Card(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Container(
-                              height: edge * 0.95,
-                              width: edge * 0.95,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(imageList[index]['url']),
+                      elevation: 12,
+                      child: Center(
+                        child: Expanded(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
+                                child: Container(
+                                  height: edge * 0.85,
+                                  width: edge * 0.85,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image:
+                                          NetworkImage(imageList[index]['url']),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                              Text(
+                                imageList[index]['title'],
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.itim(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black54,
+                                ),
+                                overflow: TextOverflow.fade,
+                                softWrap: true,
+                              ),
+                            ],
                           ),
-                          Container(
-                            width: edge,
-                            height: 15,
-                            child: Text(
-                              imageList[index]['title'],
-                              textAlign: TextAlign.center,
-                              overflow: TextOverflow.clip,
-                              softWrap: true,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   );

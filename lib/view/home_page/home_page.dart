@@ -22,6 +22,7 @@ class HomePage extends StatelessWidget {
           scaffoldKey: _scaffoldKey,
           initialValue: presenter.wayViewModeOut,
           buttonCallback: (value) => presenter.changeWayViewMode(value),
+          title: 'Home',
         ),
         drawer: CurstomDrawer(presenter.jumpToPage),
         body: Builder(
@@ -60,6 +61,8 @@ class HomePage extends StatelessWidget {
                                 ? presenter.imageListSearchedMapOut.length > 0
                                     ? Expanded(
                                         child: buildImageListView(
+                                          showGifDetails:
+                                              presenter.showGifDetails,
                                           imageList:
                                               presenter.imageListSearchedMapOut,
                                           isSearch: presenter
@@ -72,6 +75,8 @@ class HomePage extends StatelessWidget {
                                       )
                                     : Expanded(
                                         child: buildImageListView(
+                                          showGifDetails:
+                                              presenter.showGifDetails,
                                           imageList: presenter.imageListMapOut,
                                           isSearch: presenter
                                                   .imageListSearchedMapOut

@@ -19,6 +19,7 @@ class TrashPage extends StatelessWidget {
         scaffoldKey: _scaffoldKey,
         initialValue: 1,
         buttonCallback: presenter.changeViewMode,
+        title: 'Lixeira',
       ),
       drawer: CurstomDrawer(presenter.jumpToPage),
       body: GestureDetector(

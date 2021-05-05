@@ -69,7 +69,6 @@ class BuildForm extends StatelessWidget {
             labelStyle: TextStyle(
               fontSize: 16,
             ),
-            border: OutlineInputBorder(),
           ),
           onChanged: onChanged,
           onFieldSubmitted: (value) {

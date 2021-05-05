@@ -19,6 +19,7 @@ dependencies:
   http:
   lazy_load_scrollview:
   path_provider:
+  google_fonts:
 
 dev_dependencies:
   flutter_test:

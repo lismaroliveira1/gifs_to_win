@@ -7,13 +7,24 @@ AppBar buildAppBar({
   @required GlobalKey<ScaffoldState> scaffoldKey,
   @required Function(int value) buttonCallback,
   @required int initialValue,
+  @required String title,
 }) {
   return AppBar(
-    backgroundColor: Colors.black,
     centerTitle: true,
-    title: Image.network(
-      url,
-      width: MediaQuery.of(context).size.width * 0.6,
+    elevation: 8,
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          height: 60,
+          width: 60,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/eagle_image.gif'),
+          )),
+        ),
+        Text(title),
+      ],
     ),
     actions: [
       buildPopupMenuButton(
