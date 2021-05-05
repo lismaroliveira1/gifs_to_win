@@ -4,19 +4,23 @@ import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 
 import '../model/model.dart';
+import './presenter.dart';
 
 class GetXHomePresenter extends GetxController {
   final ImageResults result;
-
+  final CommonController commons;
   GetXHomePresenter({
     @required this.result,
+    @required this.commons,
   });
 
   var _navigateTo = RxString('/');
+  var nameSearched = <String>[].obs;
   var _jumpTo = RxString('/');
   var _imageList = <ImageModel>[].obs;
   var _imageListMap = <Map>[].obs;
   var _imageListRelated = <ImageModel>[].obs;
+
   var _imageDetails = ImageModel(
     id: '',
     url: '',
@@ -29,6 +33,7 @@ class GetXHomePresenter extends GetxController {
     width: '',
     size: '',
   ).obs;
+
   var _imageListSaved = <ImageModel>[].obs;
   var _imageListDeleted = <ImageModel>[].obs;
   var _defaultLimit = 30.obs;
@@ -127,22 +132,16 @@ class GetXHomePresenter extends GetxController {
     await result.cache.writeData(jsonEncode({}), path: 'deleted');
   }
 
-  void validateName(String value) {
-    String patttern = r'(^[a-zA-Z ]*$)';
-    RegExp regExp = new RegExp(patttern);
-    if (value.length == 0) {
-      _isValidName.value = false;
-      _errorTextDialog.value = null;
-    } else if (value.length > 0 && value.length < 4) {
-      _errorTextDialog.value = "Informe o nome";
-      _isValidName.value = false;
-    } else if (!regExp.hasMatch(value)) {
-      _errorTextDialog.value = "O nome deve conter caracteres de a-z ou A-Z";
-      _isValidName.value = false;
-    } else {
-      _isValidName.value = true;
-      _errorTextDialog.value = null;
-    }
+  validateDialogName(String value) {
+    final validationResult = commons.validateName(value);
+    _isValidName.value = validationResult['isValidName'];
+    _errorTextDialog.value = validationResult['errorTextDialog'];
+  }
+
+  validateSearchName(String value) {
+    final validationResult = commons.validateName(value);
+    _isValidName.value = validationResult['isValidName'];
+    _errorTextDialog.value = validationResult['errorTextDialog'];
   }
 
   void makeValidateNameFalse() {

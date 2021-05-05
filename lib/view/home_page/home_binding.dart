@@ -12,6 +12,7 @@ class HomeBinding implements Bindings {
       cache: Get.find(),
     ));
     Get.lazyPut(() => ImageRepository(client: Get.find()));
-    Get.lazyPut(() => GetXHomePresenter(result: Get.find()));
+    Get.lazyPut(
+        () => GetXHomePresenter(result: Get.find(), commons: Get.find()));
   }
 }

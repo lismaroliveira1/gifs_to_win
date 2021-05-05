@@ -36,17 +36,20 @@ class HomePage extends StatelessWidget {
           onTap: () {
             hideKeyboard(context: context);
           },
-          child: Column(
-            children: [
-              buildForm(onChanged: presenter.validateName),
-              Obx(
-                () => buildGridImages(
+          child: Obx(
+            () => Column(
+              children: [
+                buildForm(
+                  onChanged: presenter.validateSearchName,
+                  errorText: presenter.errorTextDialogStream,
+                ),
+                buildGridImages(
                   showGifDetails: presenter.showGifDetails,
                   imageList: presenter.imageListMapOut,
                   getMoreImages: presenter.getMoreImages,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       }),

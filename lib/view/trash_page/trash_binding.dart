@@ -13,6 +13,11 @@ class TrashBinding implements Bindings {
       repository: Get.find(),
       cache: Get.find(),
     ));
-    Get.lazyPut(() => GetXTrashPresenter(result: Get.find()));
+    Get.lazyPut(
+      () => GetXTrashPresenter(
+        result: Get.find(),
+        commons: Get.find(),
+      ),
+    );
   }
 }

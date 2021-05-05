@@ -7,9 +7,10 @@ import '../view.dart';
 class TrashPage extends StatelessWidget {
   final GetXTrashPresenter presenter;
   TrashPage({@required this.presenter});
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
-    final _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: _scaffoldKey,
       appBar: buildAppBar(
@@ -19,24 +20,30 @@ class TrashPage extends StatelessWidget {
         buttonCallback: presenter.changeViewMode,
       ),
       drawer: CurstomDrawer(presenter.jumpToPage),
-      body: Builder(
-        builder: (context) {
-          presenter.jumpToStream.listen((page) {
-            if (page?.isNotEmpty == true) {
-              Get.offAllNamed(page);
-            }
-          });
-          return Obx(
-            () => Column(
-              children: [
-                buildForm(onChanged: presenter.validateName),
-                Expanded(
-                  child: buildImageListView(presenter.imageDeletedListStream),
-                ),
-              ],
-            ),
-          );
-        },
+      body: GestureDetector(
+        onTap: () => hideKeyboard(context: context),
+        child: Builder(
+          builder: (context) {
+            presenter.jumpToStream.listen((page) {
+              if (page?.isNotEmpty == true) {
+                Get.offAllNamed(page);
+              }
+            });
+            return Obx(
+              () => Column(
+                children: [
+                  buildForm(
+                    onChanged: presenter.validateSearchName,
+                    errorText: presenter.errorTextDialogStream,
+                  ),
+                  Expanded(
+                    child: buildImageListView(presenter.imageDeletedListStream),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
