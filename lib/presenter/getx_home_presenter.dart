@@ -69,6 +69,7 @@ class GetXHomePresenter extends GetxController {
       _imageListMap.add(element.toMap());
     });
     _isLoading.value = false;
+    print(_imageList.length);
     super.onInit();
   }
 

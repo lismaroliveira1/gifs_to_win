@@ -34,25 +34,32 @@ class GifSavedPage extends StatelessWidget {
               }
             });
             return Obx(
-              () => Column(
-                children: [
-                  buildForm(
-                    onChanged: presenter.validateSearchName,
-                    errorText: presenter.errorTextDialogStream,
-                    controller: _controller,
-                    onSubmited: presenter.onSubmited,
-                  ),
-                  Expanded(
-                    child: buildImageListView(
-                      showGifDetails: (map) {},
-                      imageList: presenter.imageListSearchedMapOut,
-                      isSearch: false,
-                      searchName: '',
-                      closeCallback: () {},
+              () => presenter.isLoadingOut
+                  ? Container(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  : Column(
+                      children: [
+                        buildForm(
+                          onChanged: presenter.validateSearchName,
+                          errorText: presenter.errorTextDialogStream,
+                          controller: _controller,
+                          onSubmited: presenter.onSubmited,
+                        ),
+                        Expanded(
+                          child: buildImageListView(
+                            getMoreImages: () async {},
+                            showGifDetails: (map) {},
+                            imageList: presenter.imageListSearchedMapOut,
+                            isSearch: false,
+                            searchName: '',
+                            closeCallback: () {},
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
             );
           },
         ),

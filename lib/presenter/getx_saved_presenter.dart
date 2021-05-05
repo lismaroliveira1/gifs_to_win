@@ -12,6 +12,7 @@ class GetXSavedPresenter extends GetxController {
     @required this.commons,
   });
 
+  var _isLoading = true.obs;
   var _isValidName = false.obs;
   var _errorTextDialog = RxString(null);
   var _imageListSaved = <ImageModel>[].obs;
@@ -21,11 +22,14 @@ class GetXSavedPresenter extends GetxController {
   List<ImageModel> get imageSavedListStream => _imageListSaved.toList();
   String get errorTextDialogStream => _errorTextDialog.value;
   List<Map> get imageListSearchedMapOut => _imageListSearchedMap.toList();
+  bool get isLoadingOut => _isLoading.value;
 
   Stream<String> get jumpToStream => _jumpTo.stream;
   @override
   void onInit() async {
+    _isLoading.value = true;
     _imageListSaved.value = await result.cache.readData('saved');
+    _isLoading.value = false;
     super.onInit();
   }
 

@@ -61,6 +61,8 @@ class HomePage extends StatelessWidget {
                                 ? presenter.imageListSearchedMapOut.length > 0
                                     ? Expanded(
                                         child: buildImageListView(
+                                          getMoreImages:
+                                              presenter.getMoreImages,
                                           showGifDetails:
                                               presenter.showGifDetails,
                                           imageList:
@@ -75,6 +77,8 @@ class HomePage extends StatelessWidget {
                                       )
                                     : Expanded(
                                         child: buildImageListView(
+                                          getMoreImages:
+                                              presenter.getMoreImages,
                                           showGifDetails:
                                               presenter.showGifDetails,
                                           imageList: presenter.imageListMapOut,
