@@ -32,10 +32,9 @@ class ImageRepository {
     }
   }
 
-  Future<List<ImageModel>> getImagesByName(String username) async {
+  Future<List<ImageModel>> getImagesByName(String value) async {
     try {
-      String url =
-          "$baseUrl$api_key&q=$username&limit=100&offset=0&rating=g&lang=en";
+      String url = "$baseUrlSearch$api_key&q=$value&limit=50&lang=pt-br";
       final response = await client.get(Uri.parse(url));
       return mapToGifList(response: jsonDecode(response.body));
     } on HttpError {
@@ -49,18 +48,20 @@ class ImageRepository {
       throw HttpError.invalidData;
     List<dynamic> gifsMap = response['data'];
     for (LinkedHashMap gif in gifsMap) {
-      _gifList.add(ImageModel(
-        id: gif['id'],
-        url: gif['images']['original']['webp'],
-        title: gif['title'],
-        slug: gif['slug'],
-        username: gif['username'],
-        rating: gif['rating'],
-        importDateTime: gif['import_datetime'],
-        width: gif['images']['original']['width'],
-        height: gif['images']['original']['height'],
-        size: gif['images']['original']['size'],
-      ));
+      _gifList.add(
+        ImageModel(
+          id: gif['id'],
+          url: gif['images']['original']['webp'],
+          title: gif['title'],
+          slug: gif['slug'],
+          username: gif['username'],
+          rating: gif['rating'],
+          importDateTime: gif['import_datetime'],
+          width: gif['images']['original']['width'],
+          height: gif['images']['original']['height'],
+          size: gif['images']['original']['size'],
+        ),
+      );
     }
     return _gifList;
   }

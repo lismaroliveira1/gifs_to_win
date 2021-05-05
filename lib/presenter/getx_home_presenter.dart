@@ -14,13 +14,6 @@ class GetXHomePresenter extends GetxController {
     @required this.commons,
   });
 
-  var _navigateTo = RxString('/');
-  var nameSearched = <String>[].obs;
-  var _jumpTo = RxString('/');
-  var _imageList = <ImageModel>[].obs;
-  var _imageListMap = <Map>[].obs;
-  var _imageListRelated = <ImageModel>[].obs;
-
   var _imageDetails = ImageModel(
     id: '',
     url: '',
@@ -34,6 +27,13 @@ class GetXHomePresenter extends GetxController {
     size: '',
   ).obs;
 
+  var _navigateTo = RxString('/');
+  var _jumpTo = RxString('/');
+  var _imageList = <ImageModel>[].obs;
+  var _imageListMap = <Map>[].obs;
+  var _imageListSearchedMap = <Map>[].obs;
+  var _imageListRelated = <ImageModel>[].obs;
+  var _imageListSearched = <ImageModel>[].obs;
   var _imageListSaved = <ImageModel>[].obs;
   var _imageListDeleted = <ImageModel>[].obs;
   var _defaultLimit = 30.obs;
@@ -41,7 +41,9 @@ class GetXHomePresenter extends GetxController {
   var _errorTextDialog = RxString(null);
 
   List<ImageModel> get imageListStream => _imageList.toList();
+  List<ImageModel> get imageListSearchedOut => _imageListSearched.toList();
   List<Map> get imageListMapOut => _imageListMap.toList();
+  List<Map> get imageListSearchedMapOut => _imageListSearchedMap.toList();
   ImageModel get imageDetailsStream => _imageDetails.value;
   List<ImageModel> get imageListRelatedStream => [];
   Stream<String> get navigateToStream => _navigateTo.stream;
@@ -53,7 +55,7 @@ class GetXHomePresenter extends GetxController {
   @override
   void onInit() async {
     _navigateTo.value = '';
-    _imageList.clear();
+    clearValues();
     _imageList.value =
         await result.repository.getAll(limit: _defaultLimit.value, offset: 1);
     _imageList.forEach((element) {
@@ -142,6 +144,7 @@ class GetXHomePresenter extends GetxController {
     final validationResult = commons.validateName(value);
     _isValidName.value = validationResult['isValidName'];
     _errorTextDialog.value = validationResult['errorTextDialog'];
+    if (_isValidName.value) {}
   }
 
   void makeValidateNameFalse() {
@@ -174,5 +177,20 @@ class GetXHomePresenter extends GetxController {
     });
     await result.cache.writeData(jsonEncode(_flag), path: 'deleted');
     _navigateTo.value = '/';
+  }
+
+  void onSubmited(String value) async {
+    clearValues();
+    _errorTextDialog.value = null;
+    _imageListSearched.value = await result.repository.getImagesByName(value);
+    _imageListSearched.forEach((element) {
+      _imageListSearchedMap.add(element.toMap());
+    });
+  }
+
+  void clearValues() {
+    _imageList.clear();
+    _imageListSearched.clear();
+    _imageListSearchedMap.clear();
   }
 }

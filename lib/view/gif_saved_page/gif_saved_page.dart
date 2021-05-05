@@ -10,6 +10,7 @@ class GifSavedPage extends StatelessWidget {
   GifSavedPage({@required this.presenter});
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +38,8 @@ class GifSavedPage extends StatelessWidget {
                   buildForm(
                     onChanged: presenter.validateSearchName,
                     errorText: presenter.errorTextDialogStream,
+                    controller: _controller,
+                    onSubmited: presenter.onSubmited,
                   ),
                   Expanded(
                     child: buildImageListView(presenter.imageSavedListStream),

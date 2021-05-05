@@ -8,6 +8,7 @@ class TrashPage extends StatelessWidget {
   final GetXTrashPresenter presenter;
   TrashPage({@required this.presenter});
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +36,8 @@ class TrashPage extends StatelessWidget {
                   buildForm(
                     onChanged: presenter.validateSearchName,
                     errorText: presenter.errorTextDialogStream,
+                    controller: _controller,
+                    onSubmited: presenter.onSubmited,
                   ),
                   Expanded(
                     child: buildImageListView(presenter.imageDeletedListStream),

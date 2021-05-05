@@ -39,4 +39,8 @@ class GetXTrashPresenter extends GetxController {
     _isValidName.value = validationResult['isValidName'];
     _errorTextDialog.value = validationResult['errorTextDialog'];
   }
+
+  void onSubmited(String value) {
+    result.repository.getImagesByName(value);
+  }
 }

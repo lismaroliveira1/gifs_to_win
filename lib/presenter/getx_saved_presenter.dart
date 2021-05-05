@@ -39,9 +39,13 @@ class GetXSavedPresenter extends GetxController {
 
   void changeViewMode(int limit) async {}
 
-  validateSearchName(String value) {
+  void validateSearchName(String value) {
     final validationResult = commons.validateName(value);
     _isValidName.value = validationResult['isValidName'];
     _errorTextDialog.value = validationResult['errorTextDialog'];
+  }
+
+  void onSubmited(String value) {
+    result.repository.getImagesByName(value);
   }
 }

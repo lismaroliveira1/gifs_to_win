@@ -7,6 +7,8 @@ import '../view.dart';
 class HomePage extends StatelessWidget {
   final GetXHomePresenter presenter;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final TextEditingController _controller = TextEditingController();
+
   HomePage({
     @required this.presenter,
   });
@@ -39,15 +41,23 @@ class HomePage extends StatelessWidget {
           child: Obx(
             () => Column(
               children: [
-                buildForm(
+                BuildForm(
                   onChanged: presenter.validateSearchName,
                   errorText: presenter.errorTextDialogStream,
+                  controller: _controller,
+                  onSubmited: presenter.onSubmited,
                 ),
-                buildGridImages(
-                  showGifDetails: presenter.showGifDetails,
-                  imageList: presenter.imageListMapOut,
-                  getMoreImages: presenter.getMoreImages,
-                ),
+                presenter.imageListSearchedOut.length == 0
+                    ? buildGridImages(
+                        showGifDetails: presenter.showGifDetails,
+                        imageList: presenter.imageListMapOut,
+                        getMoreImages: presenter.getMoreImages,
+                      )
+                    : buildGridImages(
+                        showGifDetails: presenter.showGifDetails,
+                        imageList: presenter.imageListSearchedMapOut,
+                        getMoreImages: presenter.getMoreImages,
+                      ),
               ],
             ),
           ),
