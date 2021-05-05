@@ -12,13 +12,11 @@ class TrashPage extends StatelessWidget {
     final _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {
-            _scaffoldKey.currentState.openDrawer();
-          },
-        ),
+      appBar: buildAppBar(
+        context: context,
+        scaffoldKey: _scaffoldKey,
+        initialValue: 1,
+        buttonCallback: presenter.changeViewMode,
       ),
       drawer: CurstomDrawer(presenter.jumpToPage),
       body: Builder(
@@ -31,23 +29,7 @@ class TrashPage extends StatelessWidget {
           return Obx(
             () => Column(
               children: [
-                Container(
-                  height: 80,
-                  child: Form(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          labelText: 'Pesquisar',
-                          labelStyle: TextStyle(
-                            fontSize: 16,
-                          ),
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                buildForm(onChanged: presenter.validateName),
                 Expanded(
                   child: buildImageListView(presenter.imageDeletedListStream),
                 ),

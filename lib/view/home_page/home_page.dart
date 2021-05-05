@@ -12,7 +12,6 @@ class HomePage extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     return Scaffold(
       key: _scaffoldKey,
       appBar: buildAppBar(
@@ -39,7 +38,7 @@ class HomePage extends StatelessWidget {
           },
           child: Column(
             children: [
-              buildForm(_formKey, context),
+              buildForm(onChanged: presenter.validateName),
               Obx(
                 () => buildGridImages(
                   showGifDetails: presenter.showGifDetails,
@@ -51,46 +50,6 @@ class HomePage extends StatelessWidget {
           ),
         );
       }),
-    );
-  }
-
-  Container buildForm(GlobalKey<FormState> _formKey, BuildContext context) {
-    final FocusNode _ageFocus = FocusNode();
-    final _textEditingController = TextEditingController();
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: TextFormField(
-          focusNode: _ageFocus,
-          onTap: () {
-            hideKeyboard(context: context);
-          },
-          controller: _textEditingController,
-          decoration: InputDecoration(
-            labelText: 'Pesquisar',
-            hintText: 'Casa',
-            labelStyle: TextStyle(
-              fontSize: 16,
-            ),
-            filled: true,
-            border: OutlineInputBorder(),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade300, width: 2),
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(5),
-                topLeft: Radius.circular(5),
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade300, width: 2),
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(5),
-                topLeft: Radius.circular(5),
-              ),
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

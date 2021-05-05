@@ -44,6 +44,7 @@ class GetXHomePresenter extends GetxController {
   String get errorTextDialogStream => _errorTextDialog.value;
   int get limitImageView => _defaultLimit.toInt();
   bool get isValidNameStream => _isValidName.value;
+
   @override
   void onInit() async {
     _navigateTo.value = '';

@@ -8,10 +8,10 @@ import '../view.dart';
 class GifSavedPage extends StatelessWidget {
   final GetXSavedPresenter presenter;
   GifSavedPage({@required this.presenter});
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    final _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: _scaffoldKey,
       appBar: buildAppBar(
@@ -31,23 +31,7 @@ class GifSavedPage extends StatelessWidget {
           return Obx(
             () => Column(
               children: [
-                Container(
-                  height: 80,
-                  child: Form(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          labelText: 'Pesquisar',
-                          labelStyle: TextStyle(
-                            fontSize: 16,
-                          ),
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                buildForm(onChanged: presenter.validateName),
                 Expanded(
                   child: buildImageListView(presenter.imageSavedListStream),
                 ),
