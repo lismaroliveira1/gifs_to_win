@@ -14,11 +14,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
+      theme: makeAppTheme(),
       debugShowCheckedModeBanner: false,
       initialBinding: ApplicationBinding(),
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       initialRoute: '/',
       getPages: [
         GetPage(
