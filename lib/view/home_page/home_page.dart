@@ -36,42 +36,80 @@ class HomePage extends StatelessWidget {
                 Get.offAllNamed(page);
               }
             });
+
             return GestureDetector(
-              onTap: () {
-                hideKeyboard(context: context);
-              },
-              child: Column(
-                children: [
-                  BuildForm(
-                    onChanged: presenter.validateSearchName,
-                    errorText: presenter.errorTextDialogStream,
-                    controller: _controller,
-                    onSubmited: presenter.onSubmited,
-                  ),
-                  presenter.wayViewModeOut == 1
-                      ? Expanded(
-                          child: presenter.imageListSearchedOut.length == 0
-                              ? buildImageListView(
-                                  presenter.imageListModelOut,
-                                )
-                              : buildImageListView(
-                                  presenter.imageListSearchedMapOut,
-                                ),
+                onTap: () {
+                  hideKeyboard(context: context);
+                },
+                child: Obx(
+                  () => presenter.isLoadingStream
+                      ? Container(
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
                         )
-                      : presenter.imageListSearchedOut.length == 0
-                          ? buildGridImages(
-                              showGifDetails: presenter.showGifDetails,
-                              imageList: presenter.imageListMapOut,
-                              getMoreImages: presenter.getMoreImages,
-                            )
-                          : buildGridImages(
-                              showGifDetails: presenter.showGifDetails,
-                              imageList: presenter.imageListSearchedMapOut,
-                              getMoreImages: presenter.getMoreImages,
+                      : Column(
+                          children: [
+                            BuildForm(
+                              onChanged: presenter.validateSearchName,
+                              errorText: presenter.errorTextDialogStream,
+                              controller: _controller,
+                              onSubmited: presenter.onSubmited,
                             ),
-                ],
-              ),
-            );
+                            presenter.wayViewModeOut == 1
+                                ? presenter.imageListSearchedMapOut.length > 0
+                                    ? Expanded(
+                                        child: buildImageListView(
+                                          imageList:
+                                              presenter.imageListSearchedMapOut,
+                                          isSearch: presenter
+                                                  .imageListSearchedMapOut
+                                                  .length >
+                                              0,
+                                          searchName: presenter.searchNameOut,
+                                          closeCallback: presenter.closeSearch,
+                                        ),
+                                      )
+                                    : Expanded(
+                                        child: buildImageListView(
+                                          imageList: presenter.imageListMapOut,
+                                          isSearch: presenter
+                                                  .imageListSearchedMapOut
+                                                  .length >
+                                              0,
+                                          searchName: presenter.searchNameOut,
+                                          closeCallback: presenter.closeSearch,
+                                        ),
+                                      )
+                                : presenter.imageListSearchedMapOut.length > 0
+                                    ? buildGridImages(
+                                        showGifDetails:
+                                            presenter.showGifDetails,
+                                        imageList:
+                                            presenter.imageListSearchedMapOut,
+                                        getMoreImages: presenter.getMoreImages,
+                                        isSearch: presenter
+                                                .imageListSearchedMapOut
+                                                .length >
+                                            0,
+                                        searchName: presenter.searchNameOut,
+                                        closeCallback: presenter.closeSearch,
+                                      )
+                                    : buildGridImages(
+                                        showGifDetails:
+                                            presenter.showGifDetails,
+                                        imageList: presenter.imageListMapOut,
+                                        getMoreImages: presenter.getMoreImages,
+                                        isSearch: presenter
+                                                .imageListSearchedMapOut
+                                                .length >
+                                            0,
+                                        searchName: presenter.searchNameOut,
+                                        closeCallback: presenter.closeSearch,
+                                      ),
+                          ],
+                        ),
+                ));
           },
         ),
       ),

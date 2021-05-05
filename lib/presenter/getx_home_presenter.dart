@@ -40,6 +40,8 @@ class GetXHomePresenter extends GetxController {
   var _wayViewMode = 1.obs;
   var _isValidName = false.obs;
   var _errorTextDialog = RxString(null);
+  var _isLoading = true.obs;
+  var _searchName = RxString('');
 
   List<ImageModel> get imageListStream => _imageList.toList();
   List<ImageModel> get imageListSearchedOut => _imageListSearched.toList();
@@ -55,6 +57,8 @@ class GetXHomePresenter extends GetxController {
   int get limitImageView => _defaultLimit.toInt();
   int get wayViewModeOut => _wayViewMode.toInt();
   bool get isValidNameStream => _isValidName.value;
+  bool get isLoadingStream => _isLoading.value;
+  String get searchNameOut => _searchName.value;
 
   @override
   void onInit() async {
@@ -64,6 +68,7 @@ class GetXHomePresenter extends GetxController {
     _imageList.forEach((element) {
       _imageListMap.add(element.toMap());
     });
+    _isLoading.value = false;
     super.onInit();
   }
 
@@ -140,10 +145,11 @@ class GetXHomePresenter extends GetxController {
   }
 
   validateSearchName(String value) {
+    _isLoading.value = true;
     final validationResult = commons.validateName(value);
     _isValidName.value = validationResult['isValidName'];
     _errorTextDialog.value = validationResult['errorTextDialog'];
-    if (_isValidName.value) {}
+    _isLoading.value = false;
   }
 
   void makeValidateNameFalse() {
@@ -179,16 +185,25 @@ class GetXHomePresenter extends GetxController {
   }
 
   void onSubmited(String value) async {
-    clearValues();
+    _isLoading.value = true;
+    _searchName.value = value;
     _errorTextDialog.value = null;
     _imageListSearched.value = await result.repository.getImagesByName(value);
+    _imageListSearchedMap.clear();
     _imageListSearched.forEach((element) {
+      print("ok");
       _imageListSearchedMap.add(element.toMap());
     });
+    _isLoading.value = false;
   }
 
   void clearValues() {
     _imageList.clear();
+    _imageListSearched.clear();
+    _imageListSearchedMap.clear();
+  }
+
+  void closeSearch() {
     _imageListSearched.clear();
     _imageListSearchedMap.clear();
   }

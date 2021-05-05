@@ -39,9 +39,6 @@ class TrashPage extends StatelessWidget {
                     controller: _controller,
                     onSubmited: presenter.onSubmited,
                   ),
-                  Expanded(
-                    child: buildImageListView(presenter.imageDeletedListStream),
-                  ),
                 ],
               ),
             );

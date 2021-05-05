@@ -16,14 +16,15 @@ class GetXSavedPresenter extends GetxController {
   var _errorTextDialog = RxString(null);
   var _imageListSaved = <ImageModel>[].obs;
   var _jumpTo = RxString('/');
+  var _imageListSearchedMap = <Map>[].obs;
 
   List<ImageModel> get imageSavedListStream => _imageListSaved.toList();
   String get errorTextDialogStream => _errorTextDialog.value;
+  List<Map> get imageListSearchedMapOut => _imageListSearchedMap.toList();
 
   Stream<String> get jumpToStream => _jumpTo.stream;
   @override
   void onInit() async {
-    _imageListSaved.clear();
     _imageListSaved.value = await result.cache.readData('saved');
     super.onInit();
   }
@@ -47,5 +48,10 @@ class GetXSavedPresenter extends GetxController {
 
   void onSubmited(String value) {
     result.repository.getImagesByName(value);
+  }
+
+  void clearValues() {
+    _imageListSaved.clear();
+    _imageListSearchedMap.clear();
   }
 }

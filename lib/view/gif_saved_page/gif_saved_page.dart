@@ -42,7 +42,12 @@ class GifSavedPage extends StatelessWidget {
                     onSubmited: presenter.onSubmited,
                   ),
                   Expanded(
-                    child: buildImageListView(presenter.imageSavedListStream),
+                    child: buildImageListView(
+                      imageList: presenter.imageListSearchedMapOut,
+                      isSearch: false,
+                      searchName: '',
+                      closeCallback: () {},
+                    ),
                   ),
                 ],
               ),
