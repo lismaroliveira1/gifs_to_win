@@ -32,7 +32,6 @@ class GetXHomePresenter extends GetxController {
   var _imageList = <ImageModel>[].obs;
   var _imageListMap = <Map>[].obs;
   var _imageListSearchedMap = <Map>[].obs;
-  var _imageListRelated = <ImageModel>[].obs;
   var _imageListSearched = <ImageModel>[].obs;
   var _imageListSaved = <ImageModel>[].obs;
   var _imageListDeleted = <ImageModel>[].obs;
@@ -41,7 +40,9 @@ class GetXHomePresenter extends GetxController {
   var _isValidName = false.obs;
   var _errorTextDialog = RxString(null);
   var _isLoading = true.obs;
+  var _showEditImageDialog = false.obs;
   var _searchName = RxString('');
+  var _imageDetailsMap = {}.obs;
 
   List<ImageModel> get imageListStream => _imageList.toList();
   List<ImageModel> get imageListSearchedOut => _imageListSearched.toList();
@@ -49,14 +50,16 @@ class GetXHomePresenter extends GetxController {
   List<ImageModel> get imageListModelOut => _imageList.toList();
   List<Map> get imageListSearchedMapOut => _imageListSearchedMap.toList();
   List<ImageModel> get imageListSearchedModelOut => _imageListSearched.toList();
-  ImageModel get imageDetailsStream => _imageDetails.value;
+  ImageModel get imageDetailsOut => _imageDetails.value;
+  Map get imageDetailsMapOut => _imageDetailsMap;
   List<ImageModel> get imageListRelatedStream => [];
   Stream<String> get navigateToStream => _navigateTo.stream;
   Stream<String> get jumpToStream => _jumpTo.stream;
-  String get errorTextDialogStream => _errorTextDialog.value;
+  Stream<bool> get showEditDialogStream => _showEditImageDialog.stream;
+  String get errorTextDialogOut => _errorTextDialog.value;
   int get limitImageView => _defaultLimit.toInt();
   int get wayViewModeOut => _wayViewMode.toInt();
-  bool get isValidNameStream => _isValidName.value;
+  bool get isValidNameOut => _isValidName.value;
   bool get isLoadingStream => _isLoading.value;
   String get searchNameOut => _searchName.value;
 
@@ -69,7 +72,6 @@ class GetXHomePresenter extends GetxController {
       _imageListMap.add(element.toMap());
     });
     _isLoading.value = false;
-    print(_imageList.length);
     super.onInit();
   }
 
@@ -95,12 +97,7 @@ class GetXHomePresenter extends GetxController {
 
   void showGifDetails(Map imageMap) async {
     _imageDetails.value = ImageModel.fromMap(imageMap);
-    Future.delayed(Duration(milliseconds: 250), () {
-      _navigateTo.value = '';
-      _navigateTo.value = '/details';
-    });
-    _imageListRelated.value =
-        await result.repository.getImagesByName(imageMap['username']);
+    _imageDetailsMap.value = _imageDetails.value.toMap();
   }
 
   Future<void> saveImage({
@@ -161,11 +158,9 @@ class GetXHomePresenter extends GetxController {
     _jumpTo.value = page;
   }
 
-  void moveToBlakiList({
-    @required String id,
-    @required String title,
-    @required String url,
-  }) async {
+  void moveToBlakiList(
+    Map imageGif,
+  ) async {
     List<Map> _flag = [];
     _imageListDeleted.clear();
     _imageListSaved.value = await result.cache.readData('deleted');
@@ -177,9 +172,9 @@ class GetXHomePresenter extends GetxController {
       });
     });
     _flag.add({
-      'id': id,
-      'title': title,
-      'url': url,
+      'id': imageGif['id'],
+      'title': imageGif['title'],
+      'url': imageGif['url'],
     });
     await result.cache.writeData(jsonEncode(_flag), path: 'deleted');
     _navigateTo.value = '/';
@@ -192,7 +187,6 @@ class GetXHomePresenter extends GetxController {
     _imageListSearched.value = await result.repository.getImagesByName(value);
     _imageListSearchedMap.clear();
     _imageListSearched.forEach((element) {
-      print("ok");
       _imageListSearchedMap.add(element.toMap());
     });
     _isLoading.value = false;
@@ -207,5 +201,9 @@ class GetXHomePresenter extends GetxController {
   void closeSearch() {
     _imageListSearched.clear();
     _imageListSearchedMap.clear();
+  }
+
+  void showEditDialog() {
+    _showEditImageDialog.value = !_showEditImageDialog.value;
   }
 }

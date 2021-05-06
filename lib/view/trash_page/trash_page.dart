@@ -39,6 +39,8 @@ class TrashPage extends StatelessWidget {
                     errorText: presenter.errorTextDialogStream,
                     controller: _controller,
                     onSubmited: presenter.onSubmited,
+                    labelText: 'Pesquisar',
+                    hintText: '',
                   ),
                 ],
               ),

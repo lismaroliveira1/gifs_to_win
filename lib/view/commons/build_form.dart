@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
-Widget buildForm(
-    {@required Function(String) onChanged,
-    @required String errorText,
-    @required TextEditingController controller,
-    @required Function(String) onSubmited}) {
+Widget buildForm({
+  @required Function(String) onChanged,
+  @required String errorText,
+  @required TextEditingController controller,
+  @required Function(String) onSubmited,
+  @required String labelText,
+  @required String hintText,
+}) {
   return Container(
     child: Padding(
       padding: const EdgeInsets.all(8.0),
@@ -19,8 +22,9 @@ Widget buildForm(
               controller.clear();
             },
           ),
-          labelText: 'Pesquisar',
+          labelText: labelText,
           errorText: errorText,
+          hintText: hintText,
           labelStyle: TextStyle(
             fontSize: 16,
           ),

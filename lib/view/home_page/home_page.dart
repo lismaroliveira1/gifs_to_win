@@ -37,7 +37,16 @@ class HomePage extends StatelessWidget {
                 Get.offAllNamed(page);
               }
             });
-
+            presenter.showEditDialogStream.listen((showEditDialog) {
+              buildShowModalDialog(
+                context: context,
+                imageMap: presenter.imageDetailsMapOut,
+                controller: _controller,
+                errorText: presenter.errorTextDialogOut,
+                onChanged: (value) => presenter.validateDialogName,
+                onSubmited: (value) => presenter.onSubmited(value),
+              );
+            });
             return GestureDetector(
                 onTap: () {
                   hideKeyboard(context: context);
@@ -53,7 +62,7 @@ class HomePage extends StatelessWidget {
                           children: [
                             BuildForm(
                               onChanged: presenter.validateSearchName,
-                              errorText: presenter.errorTextDialogStream,
+                              errorText: presenter.errorTextDialogOut,
                               controller: _controller,
                               onSubmited: presenter.onSubmited,
                             ),
@@ -61,6 +70,7 @@ class HomePage extends StatelessWidget {
                                 ? presenter.imageListSearchedMapOut.length > 0
                                     ? Expanded(
                                         child: buildImageListView(
+                                          context: context,
                                           getMoreImages:
                                               presenter.getMoreImages,
                                           showGifDetails:
@@ -73,10 +83,15 @@ class HomePage extends StatelessWidget {
                                               0,
                                           searchName: presenter.searchNameOut,
                                           closeCallback: presenter.closeSearch,
+                                          moveToBlakiList:
+                                              presenter.moveToBlakiList,
+                                          editImageTitleDialog:
+                                              presenter.showEditDialog,
                                         ),
                                       )
                                     : Expanded(
                                         child: buildImageListView(
+                                          context: context,
                                           getMoreImages:
                                               presenter.getMoreImages,
                                           showGifDetails:
@@ -88,6 +103,10 @@ class HomePage extends StatelessWidget {
                                               0,
                                           searchName: presenter.searchNameOut,
                                           closeCallback: presenter.closeSearch,
+                                          moveToBlakiList:
+                                              presenter.moveToBlakiList,
+                                          editImageTitleDialog:
+                                              presenter.showEditDialog,
                                         ),
                                       )
                                 : presenter.imageListSearchedMapOut.length > 0

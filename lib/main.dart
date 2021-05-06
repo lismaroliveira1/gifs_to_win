@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import './presenter/presenter.dart';
 import './view/view.dart';
-import './view/details_page/details_binding.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,11 +22,6 @@ class MyApp extends StatelessWidget {
           name: '/',
           binding: HomeBinding(),
           page: () => HomePage(presenter: Get.find()),
-        ),
-        GetPage(
-          name: '/details',
-          binding: DetailsBinding(),
-          page: () => DetailsPage(presenter: Get.find()),
         ),
         GetPage(
           name: '/saved',

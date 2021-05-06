@@ -8,7 +8,6 @@ PopupMenuButton<int> buildPopupMenuButton({
       initialValue: initialValue,
       onSelected: (value) => callback(value),
       itemBuilder: (context) {
-        print(initialValue);
         return [
           CheckedPopupMenuItem(
             value: 1,
