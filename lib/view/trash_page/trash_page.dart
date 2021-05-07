@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_inner_drawer/inner_drawer.dart';
 import 'package:get/get.dart';
 import 'package:gifs_to_win/presenter/getx_trash_presenter.dart';
 
@@ -7,16 +8,15 @@ import '../view.dart';
 class TrashPage extends StatelessWidget {
   final GetXTrashPresenter presenter;
   TrashPage({@required this.presenter});
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController _controller = TextEditingController();
-
+  final GlobalKey<InnerDrawerState> _innerDrawerKey =
+      GlobalKey<InnerDrawerState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       appBar: buildAppBar(
         context: context,
-        scaffoldKey: _scaffoldKey,
+        innerDrawerKey: _innerDrawerKey,
         initialValue: 1,
         buttonCallback: presenter.changeViewMode,
         title: 'Lixeira',

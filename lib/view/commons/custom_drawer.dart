@@ -50,6 +50,14 @@ class CurstomDrawer extends StatelessWidget {
                 ),
                 Divider(),
                 buildDrawerButtonItem(
+                  item: 'Configurações',
+                  callback: callback,
+                  context: context,
+                  routePage: '/setupPage',
+                  icon: Icons.delete,
+                ),
+                Divider(),
+                buildDrawerButtonItem(
                   item: 'Lixeira',
                   callback: callback,
                   context: context,

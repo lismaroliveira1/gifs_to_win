@@ -21,6 +21,7 @@ dependencies:
   path_provider:
   google_fonts:
   animations:
+  flutter_inner_drawer:
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_inner_drawer/inner_drawer.dart';
 import 'package:get/get.dart';
 
 import 'package:gifs_to_win/presenter/getx_saved_presenter.dart';
@@ -9,17 +10,16 @@ class GifSavedPage extends StatelessWidget {
   final GetXSavedPresenter presenter;
   GifSavedPage({@required this.presenter});
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController _controller = TextEditingController();
-
+  final GlobalKey<InnerDrawerState> _innerDrawerKey =
+      GlobalKey<InnerDrawerState>();
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        key: _scaffoldKey,
         appBar: buildAppBar(
           context: context,
-          scaffoldKey: _scaffoldKey,
+          innerDrawerKey: _innerDrawerKey,
           initialValue: presenter.wayViewModeOut,
           buttonCallback: presenter.changeWayViewMode,
           title: 'GifsSalvos',

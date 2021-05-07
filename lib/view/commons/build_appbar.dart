@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_inner_drawer/inner_drawer.dart';
 
 import '../view.dart';
 
 AppBar buildAppBar({
   @required BuildContext context,
-  @required GlobalKey<ScaffoldState> scaffoldKey,
+  @required GlobalKey<InnerDrawerState> innerDrawerKey,
   @required Function(int value) buttonCallback,
   @required int initialValue,
   @required String title,
@@ -35,7 +36,8 @@ AppBar buildAppBar({
     leading: IconButton(
       icon: Icon(Icons.menu),
       onPressed: () {
-        scaffoldKey.currentState.openDrawer();
+        innerDrawerKey.currentState
+            .toggle(direction: InnerDrawerDirection.start);
       },
     ),
   );
