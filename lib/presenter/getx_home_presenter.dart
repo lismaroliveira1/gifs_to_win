@@ -116,15 +116,12 @@ class GetXHomePresenter extends GetxController {
     await getRelatedImages(imageMap['slug'.split('_')[0]]);
   }
 
-  Future<void> saveImage({@required Map imageMap}) async {
+  Future<void> saveImage(Map imageMap) async {
     List<Map> _flag = [];
-    _imageListSaved.clear();
-    _imageListSaved.value = await result.cache.readData('saved');
-    _imageListSaved.forEach((element) {
-      _flag.add(element.toMap());
-    });
+    _flag = await result.cache.readData('saved');
     _flag.add(imageMap);
     await result.cache.writeData(jsonEncode(_flag), path: 'saved');
+    print(_flag);
   }
 
   Future<void> deleteImage({
@@ -161,7 +158,7 @@ class GetXHomePresenter extends GetxController {
   ) async {
     List<Map> _flag = [];
     _imageListDeleted.clear();
-    _imageListSaved.value = await result.cache.readData('deleted');
+    //_imageListSaved.value = await result.cache.readData('deleted');
     _imageListSaved.forEach((element) {
       _flag.add(element.toMap());
     });

@@ -46,8 +46,7 @@ class HomePage extends StatelessWidget {
                 onChanged: (value) => presenter.validateDialogName,
                 onSubmited: (value) => presenter.onSubmited(value),
                 icon: Icons.edit,
-                saveImage: (imageToSave) =>
-                    presenter.saveImage(imageMap: imageToSave),
+                saveImage: (imageToSave) => presenter.saveImage(imageToSave),
               );
             });
             return Obx(
@@ -86,8 +85,12 @@ class HomePage extends StatelessWidget {
                                           presenter.moveToBlakiList,
                                       editImageTitleDialog:
                                           presenter.showEditDialog,
-                                      getRelatedImages: (name) =>
-                                          presenter.getRelatedImages(name),
+                                      deleteImage:
+                                          (Map<dynamic, dynamic> imageMap) {},
+                                      saveImage: (imageMap) =>
+                                          presenter.saveImage(imageMap),
+                                      shareImage:
+                                          (Map<dynamic, dynamic> imageMap) {},
                                     ),
                                   ))
                                 : Expanded(
@@ -104,8 +107,12 @@ class HomePage extends StatelessWidget {
                                           presenter.moveToBlakiList,
                                       editImageTitleDialog:
                                           presenter.showEditDialog,
-                                      getRelatedImages: (name) =>
-                                          presenter.getRelatedImages(name),
+                                      deleteImage:
+                                          (Map<dynamic, dynamic> imageMap) {},
+                                      saveImage: (imageMap) =>
+                                          presenter.saveImage(imageMap),
+                                      shareImage:
+                                          (Map<dynamic, dynamic> imageMap) {},
                                     ),
                                   )
                             : presenter.imageListSearchedMapOut.length > 0

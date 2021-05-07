@@ -15,7 +15,9 @@ Widget buildImageListView({
   @required Function editImageTitleDialog,
   @required Function(Map imageMap) moveToBlakiList,
   @required BuildContext context,
-  @required Function(String name) getRelatedImages,
+  @required Function(Map imageMap) saveImage,
+  @required Function(Map imageMap) deleteImage,
+  @required Function(Map imageMap) shareImage,
 }) {
   return Container(
     height: MediaQuery.of(context).size.height,
@@ -43,12 +45,17 @@ Widget buildImageListView({
                           return builListTileClosedWidget(imageGif['image']);
                         },
                         openBuilder: (context, action) {
+                          List<Map<dynamic, dynamic>> _flag =
+                              imageGif['relateds'];
                           return builListTileOpenedWidget(
-                            imageGif['image'],
-                            context,
-                            editImageTitleDialog,
-                            moveToBlakiList,
-                            imageGif['relateds'],
+                            imageGif: imageGif,
+                            context: context,
+                            editImageTitleDialog: editImageTitleDialog,
+                            moveToBlakiList: moveToBlakiList,
+                            listRelatedImagesMap: _flag,
+                            deleteImage: (imageMap) => deleteImage(imageMap),
+                            saveImage: (imageMap) => saveImage(imageMap),
+                            shareImage: (imageMap) => shareImage(imageMap),
                           );
                         },
                       ),

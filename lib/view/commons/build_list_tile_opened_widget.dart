@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Widget builListTileOpenedWidget(
-  Map imageGif,
-  BuildContext context,
-  Function editImageTitleDialog,
-  moveToBlakiList(Map imageMap),
-  List<Map> listRelatedImagesMap,
-) {
+Widget builListTileOpenedWidget({
+  @required Map imageGif,
+  @required BuildContext context,
+  @required Function editImageTitleDialog,
+  @required moveToBlakiList(Map imageMap),
+  @required List<Map> listRelatedImagesMap,
+  @required Function(Map imageMap) saveImage,
+  @required Function(Map imageMap) deleteImage,
+  @required Function(Map imageMap) shareImage,
+}) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
@@ -17,7 +20,7 @@ Widget builListTileOpenedWidget(
           horizontal: 18,
         ),
         child: Text(
-          imageGif['title'],
+          imageGif['image']['title'],
           textAlign: TextAlign.center,
           style: GoogleFonts.itim(
             fontSize: 28,
@@ -36,7 +39,7 @@ Widget builListTileOpenedWidget(
               Radius.circular(12),
             ),
             image: DecorationImage(
-              image: NetworkImage(imageGif['url']),
+              image: NetworkImage(imageGif['image']['url']),
               fit: BoxFit.cover,
             ),
           ),
@@ -64,6 +67,24 @@ Widget builListTileOpenedWidget(
                 ),
               )
               .toList(),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(top: 18.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            TextButton(
+              onPressed: () {
+                saveImage(imageGif);
+              },
+              child: Text('Salvar'),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: Text('Deletar'),
+            ),
+          ],
         ),
       ),
       Padding(

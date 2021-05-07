@@ -28,16 +28,15 @@ class GetXSavedPresenter extends GetxController {
   var _isLoading = true.obs;
   var _isValidName = false.obs;
   var _errorTextDialog = RxString(null);
-  var _imageListSaved = <ImageModel>[].obs;
+  var _imageListSaved = <Map>[].obs;
   var _jumpTo = RxString('/');
   var _imageListSearchedMap = <Map>[].obs;
   var _wayViewMode = 1.obs;
   var _imageDetailsMap = {}.obs;
-  var _imageListDeleted = <ImageModel>[].obs;
   var _navigateTo = RxString('/');
   var _showEditImageDialog = false.obs;
 
-  List<ImageModel> get imageSavedListStream => _imageListSaved.toList();
+  List<Map> get imageSavedLisMapOut => _imageListSaved.toList();
   String get errorTextDialogStream => _errorTextDialog.value;
   List<Map> get imageListSearchedMapOut => _imageListSearchedMap.toList();
   int get wayViewModeOut => _wayViewMode.toInt();
@@ -52,9 +51,20 @@ class GetXSavedPresenter extends GetxController {
   @override
   void onInit() async {
     _isLoading.value = true;
-    _imageListSaved.value = await result.cache.readData('saved');
-    _imageListSaved.forEach((element) {
-      _imageListSearchedMap.add(element.toMap());
+    Map _image;
+    List<Map> _relateds;
+    var _flag = await result.cache.readData('saved');
+    _flag.forEach((element) {
+      _image = {};
+      _relateds = [];
+      _image = element['image'];
+      for (dynamic p in element['relateds']) {
+        _relateds.add(p);
+      }
+      _imageListSaved.add({
+        'image': _image,
+        'relateds': _relateds,
+      });
     });
     _isLoading.value = false;
     super.onInit();
@@ -95,17 +105,7 @@ class GetXSavedPresenter extends GetxController {
 
   void moveToBlakiList(
     Map imageGif,
-  ) async {
-    List<Map> _flag = [];
-    _imageListDeleted.clear();
-    _imageListSaved.value = await result.cache.readData('deleted');
-    _imageListSaved.forEach((element) {
-      _flag.add(element.toMap());
-    });
-    _flag.add(imageGif);
-    await result.cache.writeData(jsonEncode(_flag), path: 'deleted');
-    _navigateTo.value = '/';
-  }
+  ) async {}
 
   void showEditDialog() {
     _showEditImageDialog.value = !_showEditImageDialog.value;

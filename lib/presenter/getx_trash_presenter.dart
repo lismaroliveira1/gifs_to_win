@@ -12,11 +12,11 @@ class GetXTrashPresenter extends GetxController {
   });
 
   var _isValidName = false.obs;
-  var _blackList = <ImageModel>[].obs;
+  var _blackList = <Map>[].obs;
   var _jumpTo = RxString('/');
   var _errorTextDialog = RxString(null);
 
-  List<ImageModel> get imageDeletedListStream => _blackList.toList();
+  List<Map> get imageDeletedListStream => _blackList.toList();
   bool get isValidNameStream => _isValidName.value;
   Stream<String> get jumpToStream => _jumpTo.stream;
   String get errorTextDialogStream => _errorTextDialog.value;
