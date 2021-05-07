@@ -37,6 +37,7 @@ class ImageRepository {
   Future<List<ImageModel>> getImagesByName(String value) async {
     try {
       String url = "$baseUrlSearch$api_key&q=$value&limit=50&lang=pt-br";
+      print(url);
       final response = await client.get(Uri.parse(url));
       return mapToGifList(response: jsonDecode(response.body));
     } on HttpError {

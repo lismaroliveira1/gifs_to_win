@@ -42,24 +42,35 @@ Widget builListTileOpenedWidget(
           ),
         ),
       ),
-      Container(
-        height: 120,
+      SizedBox(
+        height: 140,
         child: ListView(
           scrollDirection: Axis.horizontal,
-          children: listRelatedImagesMap.map(
-            (image) {
-              return Container(
-                height: 100,
-                width: 100,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                  image: DecorationImage(
-                    image: NetworkImage(image['url']),
+          children: listRelatedImagesMap
+              .map(
+                (image) => Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      image: DecorationImage(
+                        image: NetworkImage(image['url']),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
-              );
-            },
-          ).toList(),
+              )
+              .toList(),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(top: 14.0),
+        child: TextButton(
+          onPressed: () {},
+          child: Text('Share'),
         ),
       )
     ],

@@ -30,7 +30,7 @@ class GetXHomePresenter extends GetxController {
   var _navigateTo = RxString('/');
   var _jumpTo = RxString('/');
   var _imageList = <ImageModel>[].obs;
-  var _imageListRelated = <ImageModel>[].obs;
+  var _imageListRelated = <ImageModel>[];
   var _imageMapRelated = <Map>[];
   var _imageListMap = <Map>[].obs;
   var _imageListSearchedMap = <Map>[].obs;
@@ -73,14 +73,15 @@ class GetXHomePresenter extends GetxController {
     _imageList.value = await result.repository
         .getAll(limit: _defaultLimit.value, offset: _offsetPage.value);
     _imageList.forEach((element) async {
-      _imageListRelated.value =
-          await result.repository.getImagesByName(element.slug.split('_')[0]);
-      _imageListRelated.forEach((element) {
-        _imageMapRelated.add(element.toMap());
+      List<Map> flag = [];
+      List<ImageModel> images =
+          await result.repository.getImagesByName(element.title.split(' ')[2]);
+      images.forEach((element) {
+        flag.add(element.toMap());
       });
       _imageListMap.add({
         'image': element.toMap(),
-        'relateds': _imageMapRelated,
+        'relateds': flag,
       });
     });
     _isLoading.value = false;
@@ -95,9 +96,17 @@ class GetXHomePresenter extends GetxController {
     _offsetPage.value++;
     var newList =
         await result.repository.getAll(limit: 50, offset: _offsetPage.value);
-    newList.forEach((element) {
-      _imageList.add(element);
-      _imageListMap.add(element.toMap());
+    newList.forEach((element) async {
+      List<Map> flag = [];
+      List<ImageModel> images =
+          await result.repository.getImagesByName(element.title.split(' ')[2]);
+      images.forEach((element) {
+        flag.add(element.toMap());
+      });
+      _imageListMap.add({
+        'image': element.toMap(),
+        'relateds': flag,
+      });
     });
   }
 
@@ -192,7 +201,7 @@ class GetXHomePresenter extends GetxController {
 
   Future<void> getRelatedImages(String name) async {
     isGettingRelateds.value = true;
-    _imageListRelated.value = await result.repository.getImagesByName(name);
+    _imageListRelated = await result.repository.getImagesByName(name);
     _imageListRelated.forEach((element) {
       _imageMapRelated.add(element.toMap());
     });
