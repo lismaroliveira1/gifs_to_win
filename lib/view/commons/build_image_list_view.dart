@@ -15,6 +15,7 @@ Widget buildImageListView({
   @required Function editImageTitleDialog,
   @required Function(Map imageMap) moveToBlakiList,
   @required BuildContext context,
+  @required Function(String name) getRelatedImages,
 }) {
   return Container(
     height: MediaQuery.of(context).size.height,
@@ -34,20 +35,20 @@ Widget buildImageListView({
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       onTap: () {
-                        print(imageGif);
                         hideKeyboard(context: context);
                       },
                       child: OpenContainer(
                         transitionType: ContainerTransitionType.fadeThrough,
                         closedBuilder: (context, action) {
-                          return builListTileClosedWidget(imageGif);
+                          return builListTileClosedWidget(imageGif['image']);
                         },
                         openBuilder: (context, action) {
                           return builListTileOpenedWidget(
-                            imageGif,
+                            imageGif['image'],
                             context,
                             editImageTitleDialog,
                             moveToBlakiList,
+                            imageGif['relateds'],
                           );
                         },
                       ),

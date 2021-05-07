@@ -6,6 +6,7 @@ Widget builListTileOpenedWidget(
   BuildContext context,
   Function editImageTitleDialog,
   moveToBlakiList(Map imageMap),
+  List<Map> listRelatedImagesMap,
 ) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -45,64 +46,20 @@ Widget builListTileOpenedWidget(
         height: 120,
         child: ListView(
           scrollDirection: Axis.horizontal,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Container(
+          children: listRelatedImagesMap.map(
+            (image) {
+              return Container(
                 height: 100,
                 width: 100,
-                color: Colors.black45,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Container(
-                height: 100,
-                width: 100,
-                color: Colors.black45,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Container(
-                height: 100,
-                width: 100,
-                color: Colors.black45,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Container(
-                height: 100,
-                width: 100,
-                color: Colors.black45,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Container(
-                height: 100,
-                width: 100,
-                color: Colors.black45,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Container(
-                height: 100,
-                width: 100,
-                color: Colors.black45,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Container(
-                height: 100,
-                width: 100,
-                color: Colors.black45,
-              ),
-            ),
-          ],
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  image: DecorationImage(
+                    image: NetworkImage(image['url']),
+                  ),
+                ),
+              );
+            },
+          ).toList(),
         ),
       )
     ],

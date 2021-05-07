@@ -55,9 +55,7 @@ class GifSavedPage extends StatelessWidget {
                           Expanded(
                             child: buildImageListView(
                               context: context,
-                              getMoreImages: () async {
-                                print('ok');
-                              },
+                              getMoreImages: () async {},
                               imageList: presenter.imageListSearchedMapOut,
                               isSearch: false,
                               searchName: '',

@@ -30,6 +30,8 @@ class GetXHomePresenter extends GetxController {
   var _navigateTo = RxString('/');
   var _jumpTo = RxString('/');
   var _imageList = <ImageModel>[].obs;
+  var _imageListRelated = <ImageModel>[].obs;
+  var _imageMapRelated = <Map>[];
   var _imageListMap = <Map>[].obs;
   var _imageListSearchedMap = <Map>[].obs;
   var _imageListSearched = <ImageModel>[].obs;
@@ -44,6 +46,7 @@ class GetXHomePresenter extends GetxController {
   var _offsetPage = 1.obs;
   var _searchName = RxString('');
   var _imageDetailsMap = {}.obs;
+  var isGettingRelateds = false.obs;
 
   List<ImageModel> get imageListStream => _imageList.toList();
   List<ImageModel> get imageListSearchedOut => _imageListSearched.toList();
@@ -69,8 +72,16 @@ class GetXHomePresenter extends GetxController {
     clearValues();
     _imageList.value = await result.repository
         .getAll(limit: _defaultLimit.value, offset: _offsetPage.value);
-    _imageList.forEach((element) {
-      _imageListMap.add(element.toMap());
+    _imageList.forEach((element) async {
+      _imageListRelated.value =
+          await result.repository.getImagesByName(element.slug.split('_')[0]);
+      _imageListRelated.forEach((element) {
+        _imageMapRelated.add(element.toMap());
+      });
+      _imageListMap.add({
+        'image': element.toMap(),
+        'relateds': _imageMapRelated,
+      });
     });
     _isLoading.value = false;
     super.onInit();
@@ -93,20 +104,18 @@ class GetXHomePresenter extends GetxController {
   void showGifDetails(Map imageMap) async {
     _imageDetails.value = ImageModel.fromMap(imageMap);
     _imageDetailsMap.value = _imageDetails.value.toMap();
+    await getRelatedImages(imageMap['slug'.split('_')[0]]);
   }
 
   Future<void> saveImage({@required Map imageMap}) async {
-    print(imageMap);
     List<Map> _flag = [];
     _imageListSaved.clear();
     _imageListSaved.value = await result.cache.readData('saved');
     _imageListSaved.forEach((element) {
-      print(element.toMap());
       _flag.add(element.toMap());
     });
     _flag.add(imageMap);
     await result.cache.writeData(jsonEncode(_flag), path: 'saved');
-    print('save');
   }
 
   Future<void> deleteImage({
@@ -114,16 +123,15 @@ class GetXHomePresenter extends GetxController {
   }) async {
     _imageListDeleted.add(ImageModel.fromMap(imageMap));
     await result.cache.writeData(jsonEncode({}), path: 'deleted');
-    print('deleted');
   }
 
-  validateDialogName(String value) {
+  void validateDialogName(String value) {
     final validationResult = commons.validateName(value);
     _isValidName.value = validationResult['isValidName'];
     _errorTextDialog.value = validationResult['errorTextDialog'];
   }
 
-  validateSearchName(String value) {
+  void validateSearchName(String value) {
     _isLoading.value = true;
     final validationResult = commons.validateName(value);
     _isValidName.value = validationResult['isValidName'];
@@ -169,6 +177,8 @@ class GetXHomePresenter extends GetxController {
     _imageList.clear();
     _imageListSearched.clear();
     _imageListSearchedMap.clear();
+    _imageListRelated.clear();
+    _imageMapRelated.clear();
   }
 
   void closeSearch() {
@@ -178,5 +188,18 @@ class GetXHomePresenter extends GetxController {
 
   void showEditDialog() {
     _showEditImageDialog.value = !_showEditImageDialog.value;
+  }
+
+  Future<void> getRelatedImages(String name) async {
+    isGettingRelateds.value = true;
+    _imageListRelated.value = await result.repository.getImagesByName(name);
+    _imageListRelated.forEach((element) {
+      _imageMapRelated.add(element.toMap());
+    });
+  }
+
+  void clearRelatedList() {
+    _imageListRelated.clear();
+    _imageMapRelated.clear();
   }
 }

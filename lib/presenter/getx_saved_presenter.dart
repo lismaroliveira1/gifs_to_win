@@ -68,7 +68,7 @@ class GetXSavedPresenter extends GetxController {
     _imageListSaved.clear();
     _imageListSaved.value = await result.cache.readData('saved');
   }
-  
+
   void changeWayViewMode(int value) async {
     _wayViewMode.value = value;
   }
@@ -89,7 +89,6 @@ class GetXSavedPresenter extends GetxController {
   }
 
   void showGifDetails(Map imageMap) async {
-    print('ok');
     _imageDetails.value = ImageModel.fromMap(imageMap);
     _imageDetailsMap.value = _imageDetails.value.toMap();
   }

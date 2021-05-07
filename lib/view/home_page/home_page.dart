@@ -71,7 +71,8 @@ class HomePage extends StatelessWidget {
                         presenter.wayViewModeOut == 1
                             ? presenter.imageListSearchedMapOut.length > 0
                                 ? Expanded(
-                                    child: buildImageListView(
+                                    child: Obx(
+                                    () => buildImageListView(
                                       context: context,
                                       getMoreImages: presenter.getMoreImages,
                                       imageList:
@@ -85,8 +86,10 @@ class HomePage extends StatelessWidget {
                                           presenter.moveToBlakiList,
                                       editImageTitleDialog:
                                           presenter.showEditDialog,
+                                      getRelatedImages: (name) =>
+                                          presenter.getRelatedImages(name),
                                     ),
-                                  )
+                                  ))
                                 : Expanded(
                                     child: buildImageListView(
                                       context: context,
@@ -101,6 +104,8 @@ class HomePage extends StatelessWidget {
                                           presenter.moveToBlakiList,
                                       editImageTitleDialog:
                                           presenter.showEditDialog,
+                                      getRelatedImages: (name) =>
+                                          presenter.getRelatedImages(name),
                                     ),
                                   )
                             : presenter.imageListSearchedMapOut.length > 0
