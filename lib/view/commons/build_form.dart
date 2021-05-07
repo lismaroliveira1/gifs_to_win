@@ -7,6 +7,7 @@ Widget buildForm({
   @required Function(String) onSubmited,
   @required String labelText,
   @required String hintText,
+  @required IconData icon,
 }) {
   return Container(
     child: Padding(
@@ -16,7 +17,7 @@ Widget buildForm({
         textInputAction: TextInputAction.search,
         decoration: InputDecoration(
           suffixIcon: IconButton(
-            icon: Icon(Icons.search),
+            icon: Icon(icon),
             onPressed: () {
               onSubmited(controller.text);
               controller.clear();
@@ -28,60 +29,13 @@ Widget buildForm({
           labelStyle: TextStyle(
             fontSize: 16,
           ),
-          border: OutlineInputBorder(),
         ),
         onChanged: onChanged,
         onFieldSubmitted: (value) {
+          onSubmited(controller.text);
           controller.clear();
         },
       ),
     ),
   );
-}
-
-class BuildForm extends StatelessWidget {
-  final Function(String) onChanged;
-  final String errorText;
-  final TextEditingController controller;
-  final Function(String) onSubmited;
-  BuildForm({
-    @required this.onChanged,
-    @required this.errorText,
-    @required this.controller,
-    @required this.onSubmited,
-  });
-  @override
-  Widget build(BuildContext context) {
-    FocusScopeNode currentFocus = FocusScope.of(context);
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: TextFormField(
-          controller: controller,
-          textInputAction: TextInputAction.search,
-          decoration: InputDecoration(
-            suffixIcon: IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                onSubmited(controller.text);
-                controller.clear();
-                currentFocus.unfocus();
-              },
-            ),
-            labelText: 'Pesquisar',
-            errorText: errorText,
-            labelStyle: TextStyle(
-              fontSize: 16,
-            ),
-          ),
-          onChanged: onChanged,
-          onFieldSubmitted: (value) {
-            onSubmited(controller.text);
-            controller.clear();
-            currentFocus.unfocus();
-          },
-        ),
-      ),
-    );
-  }
 }

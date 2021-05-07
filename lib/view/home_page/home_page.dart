@@ -45,99 +45,91 @@ class HomePage extends StatelessWidget {
                 errorText: presenter.errorTextDialogOut,
                 onChanged: (value) => presenter.validateDialogName,
                 onSubmited: (value) => presenter.onSubmited(value),
+                icon: Icons.edit,
+                saveImage: (imageToSave) =>
+                    presenter.saveImage(imageMap: imageToSave),
               );
             });
-            return GestureDetector(
-                onTap: () {
-                  hideKeyboard(context: context);
-                },
-                child: Obx(
-                  () => presenter.isLoadingStream
-                      ? Container(
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        )
-                      : Column(
-                          children: [
-                            BuildForm(
-                              onChanged: presenter.validateSearchName,
-                              errorText: presenter.errorTextDialogOut,
-                              controller: _controller,
-                              onSubmited: presenter.onSubmited,
-                            ),
-                            presenter.wayViewModeOut == 1
-                                ? presenter.imageListSearchedMapOut.length > 0
-                                    ? Expanded(
-                                        child: buildImageListView(
-                                          context: context,
-                                          getMoreImages:
-                                              presenter.getMoreImages,
-                                          showGifDetails:
-                                              presenter.showGifDetails,
-                                          imageList:
-                                              presenter.imageListSearchedMapOut,
-                                          isSearch: presenter
-                                                  .imageListSearchedMapOut
-                                                  .length >
-                                              0,
-                                          searchName: presenter.searchNameOut,
-                                          closeCallback: presenter.closeSearch,
-                                          moveToBlakiList:
-                                              presenter.moveToBlakiList,
-                                          editImageTitleDialog:
-                                              presenter.showEditDialog,
-                                        ),
-                                      )
-                                    : Expanded(
-                                        child: buildImageListView(
-                                          context: context,
-                                          getMoreImages:
-                                              presenter.getMoreImages,
-                                          showGifDetails:
-                                              presenter.showGifDetails,
-                                          imageList: presenter.imageListMapOut,
-                                          isSearch: presenter
-                                                  .imageListSearchedMapOut
-                                                  .length >
-                                              0,
-                                          searchName: presenter.searchNameOut,
-                                          closeCallback: presenter.closeSearch,
-                                          moveToBlakiList:
-                                              presenter.moveToBlakiList,
-                                          editImageTitleDialog:
-                                              presenter.showEditDialog,
-                                        ),
-                                      )
-                                : presenter.imageListSearchedMapOut.length > 0
-                                    ? buildGridImages(
-                                        showGifDetails:
-                                            presenter.showGifDetails,
-                                        imageList:
-                                            presenter.imageListSearchedMapOut,
-                                        getMoreImages: presenter.getMoreImages,
-                                        isSearch: presenter
-                                                .imageListSearchedMapOut
-                                                .length >
-                                            0,
-                                        searchName: presenter.searchNameOut,
-                                        closeCallback: presenter.closeSearch,
-                                      )
-                                    : buildGridImages(
-                                        showGifDetails:
-                                            presenter.showGifDetails,
-                                        imageList: presenter.imageListMapOut,
-                                        getMoreImages: presenter.getMoreImages,
-                                        isSearch: presenter
-                                                .imageListSearchedMapOut
-                                                .length >
-                                            0,
-                                        searchName: presenter.searchNameOut,
-                                        closeCallback: presenter.closeSearch,
-                                      ),
-                          ],
+            return Obx(
+              () => presenter.isLoadingStream
+                  ? Container(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  : Column(
+                      children: [
+                        buildForm(
+                          onChanged: presenter.validateSearchName,
+                          errorText: presenter.errorTextDialogOut,
+                          controller: _controller,
+                          onSubmited: presenter.onSubmited,
+                          icon: Icons.search,
+                          hintText: 'Cachorros',
+                          labelText: 'Pesquisar',
                         ),
-                ));
+                        presenter.wayViewModeOut == 1
+                            ? presenter.imageListSearchedMapOut.length > 0
+                                ? Expanded(
+                                    child: buildImageListView(
+                                      context: context,
+                                      getMoreImages: presenter.getMoreImages,
+                                      imageList:
+                                          presenter.imageListSearchedMapOut,
+                                      isSearch: presenter
+                                              .imageListSearchedMapOut.length >
+                                          0,
+                                      searchName: presenter.searchNameOut,
+                                      closeCallback: presenter.closeSearch,
+                                      moveToBlakiList:
+                                          presenter.moveToBlakiList,
+                                      editImageTitleDialog:
+                                          presenter.showEditDialog,
+                                    ),
+                                  )
+                                : Expanded(
+                                    child: buildImageListView(
+                                      context: context,
+                                      getMoreImages: presenter.getMoreImages,
+                                      imageList: presenter.imageListMapOut,
+                                      isSearch: presenter
+                                              .imageListSearchedMapOut.length >
+                                          0,
+                                      searchName: presenter.searchNameOut,
+                                      closeCallback: presenter.closeSearch,
+                                      moveToBlakiList:
+                                          presenter.moveToBlakiList,
+                                      editImageTitleDialog:
+                                          presenter.showEditDialog,
+                                    ),
+                                  )
+                            : presenter.imageListSearchedMapOut.length > 0
+                                ? buildGridImages(
+                                    showGifDetails: (imageMap) =>
+                                        presenter.showGifDetails(imageMap),
+                                    imageList:
+                                        presenter.imageListSearchedMapOut,
+                                    getMoreImages: presenter.getMoreImages,
+                                    isSearch: presenter
+                                            .imageListSearchedMapOut.length >
+                                        0,
+                                    searchName: presenter.searchNameOut,
+                                    closeCallback: presenter.closeSearch,
+                                  )
+                                : buildGridImages(
+                                    showGifDetails: (imageMap) =>
+                                        presenter.showGifDetails(imageMap),
+                                    imageList: presenter.imageListMapOut,
+                                    getMoreImages: presenter.getMoreImages,
+                                    isSearch: presenter
+                                            .imageListSearchedMapOut.length >
+                                        0,
+                                    searchName: presenter.searchNameOut,
+                                    closeCallback: presenter.closeSearch,
+                                  ),
+                      ],
+                    ),
+            );
           },
         ),
       ),

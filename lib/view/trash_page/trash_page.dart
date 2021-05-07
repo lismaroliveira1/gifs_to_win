@@ -41,6 +41,7 @@ class TrashPage extends StatelessWidget {
                     onSubmited: presenter.onSubmited,
                     labelText: 'Pesquisar',
                     hintText: '',
+                    icon: Icons.search,
                   ),
                 ],
               ),

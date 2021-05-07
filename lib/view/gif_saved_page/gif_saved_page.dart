@@ -14,59 +14,63 @@ class GifSavedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: buildAppBar(
-        context: context,
-        scaffoldKey: _scaffoldKey,
-        initialValue: 1,
-        buttonCallback: presenter.changeViewMode,
-        title: 'GifsSalvos',
-      ),
-      drawer: CurstomDrawer(presenter.jumpToPage),
-      body: GestureDetector(
-        onTap: () => hideKeyboard(context: context),
-        child: Builder(
-          builder: (context) {
-            presenter.jumpToStream.listen((page) {
-              if (page?.isNotEmpty == true) {
-                Get.offAllNamed(page);
-              }
-            });
-            return Obx(
-              () => presenter.isLoadingOut
-                  ? Container(
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    )
-                  : Column(
-                      children: [
-                        buildForm(
-                          onChanged: presenter.validateSearchName,
-                          errorText: presenter.errorTextDialogStream,
-                          controller: _controller,
-                          onSubmited: presenter.onSubmited,
-                          labelText: 'Pesquisar',
-                          hintText: '',
+    return Obx(
+      () => Scaffold(
+        key: _scaffoldKey,
+        appBar: buildAppBar(
+          context: context,
+          scaffoldKey: _scaffoldKey,
+          initialValue: presenter.wayViewModeOut,
+          buttonCallback: presenter.changeWayViewMode,
+          title: 'GifsSalvos',
+        ),
+        drawer: CurstomDrawer(presenter.jumpToPage),
+        body: GestureDetector(
+          onTap: () => hideKeyboard(context: context),
+          child: Builder(
+            builder: (context) {
+              presenter.jumpToStream.listen((page) {
+                if (page?.isNotEmpty == true) {
+                  Get.offAllNamed(page);
+                }
+              });
+              return Obx(
+                () => presenter.isLoadingOut
+                    ? Container(
+                        child: Center(
+                          child: CircularProgressIndicator(),
                         ),
-                        Expanded(
-                          child: buildImageListView(
-                            context: context,
-                            getMoreImages: () async {},
-                            showGifDetails: (map) {},
-                            imageList: presenter.imageListSearchedMapOut,
-                            isSearch: false,
-                            searchName: '',
-                            closeCallback: () {},
-                            moveToBlakiList: null,
-                            editImageTitleDialog: null,
+                      )
+                    : Column(
+                        children: [
+                          buildForm(
+                            onChanged: presenter.validateSearchName,
+                            errorText: presenter.errorTextDialogStream,
+                            controller: _controller,
+                            onSubmited: presenter.onSubmited,
+                            labelText: 'Pesquisar',
+                            hintText: '',
+                            icon: Icons.search,
                           ),
-                        ),
-                      ],
-                    ),
-            );
-          },
+                          Expanded(
+                            child: buildImageListView(
+                              context: context,
+                              getMoreImages: () async {
+                                print('ok');
+                              },
+                              imageList: presenter.imageListSearchedMapOut,
+                              isSearch: false,
+                              searchName: '',
+                              closeCallback: () {},
+                              moveToBlakiList: presenter.moveToBlakiList,
+                              editImageTitleDialog: presenter.showEditDialog,
+                            ),
+                          ),
+                        ],
+                      ),
+              );
+            },
+          ),
         ),
       ),
     );

@@ -41,6 +41,7 @@ class GetXHomePresenter extends GetxController {
   var _errorTextDialog = RxString(null);
   var _isLoading = true.obs;
   var _showEditImageDialog = false.obs;
+  var _offsetPage = 1.obs;
   var _searchName = RxString('');
   var _imageDetailsMap = {}.obs;
 
@@ -66,8 +67,8 @@ class GetXHomePresenter extends GetxController {
   @override
   void onInit() async {
     clearValues();
-    _imageList.value =
-        await result.repository.getAll(limit: _defaultLimit.value, offset: 1);
+    _imageList.value = await result.repository
+        .getAll(limit: _defaultLimit.value, offset: _offsetPage.value);
     _imageList.forEach((element) {
       _imageListMap.add(element.toMap());
     });
@@ -80,18 +81,12 @@ class GetXHomePresenter extends GetxController {
   }
 
   Future<void> getMoreImages() async {
-    var newList = await result.repository.getRandom();
+    _offsetPage.value++;
+    var newList =
+        await result.repository.getAll(limit: 50, offset: _offsetPage.value);
     newList.forEach((element) {
       _imageList.add(element);
       _imageListMap.add(element.toMap());
-    });
-  }
-
-  void editImage({@required String id, @required String title}) {
-    _imageList.forEach((image) {
-      if (image.id == id) {
-        image.title = title;
-      }
     });
   }
 
@@ -100,40 +95,26 @@ class GetXHomePresenter extends GetxController {
     _imageDetailsMap.value = _imageDetails.value.toMap();
   }
 
-  Future<void> saveImage({
-    @required String id,
-    @required String title,
-    @required String url,
-  }) async {
+  Future<void> saveImage({@required Map imageMap}) async {
+    print(imageMap);
     List<Map> _flag = [];
     _imageListSaved.clear();
     _imageListSaved.value = await result.cache.readData('saved');
     _imageListSaved.forEach((element) {
-      _flag.add({
-        'id': element.id,
-        'title': element.title,
-        'url': element.url,
-      });
+      print(element.toMap());
+      _flag.add(element.toMap());
     });
-    _flag.add({
-      'id': id,
-      'title': title,
-      'url': url,
-    });
+    _flag.add(imageMap);
     await result.cache.writeData(jsonEncode(_flag), path: 'saved');
+    print('save');
   }
 
   Future<void> deleteImage({
-    @required String id,
-    @required String title,
-    @required String url,
+    @required Map imageMap,
   }) async {
-    _imageListDeleted.add(ImageModel.fromMap({
-      'id': id,
-      'title': title,
-      'url': url,
-    }));
+    _imageListDeleted.add(ImageModel.fromMap(imageMap));
     await result.cache.writeData(jsonEncode({}), path: 'deleted');
+    print('deleted');
   }
 
   validateDialogName(String value) {
@@ -165,17 +146,9 @@ class GetXHomePresenter extends GetxController {
     _imageListDeleted.clear();
     _imageListSaved.value = await result.cache.readData('deleted');
     _imageListSaved.forEach((element) {
-      _flag.add({
-        'id': element.id,
-        'title': element.title,
-        'url': element.url,
-      });
+      _flag.add(element.toMap());
     });
-    _flag.add({
-      'id': imageGif['id'],
-      'title': imageGif['title'],
-      'url': imageGif['url'],
-    });
+    _flag.add(imageGif);
     await result.cache.writeData(jsonEncode(_flag), path: 'deleted');
     _navigateTo.value = '/';
   }

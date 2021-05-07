@@ -9,6 +9,8 @@ Future buildShowModalDialog({
   @required String errorText,
   @required TextEditingController controller,
   @required Function(String value) onSubmited,
+  @required IconData icon,
+  @required Function(Map imageToSave) saveImage,
 }) {
   return showModal(
     configuration: FadeScaleTransitionConfiguration(
@@ -16,7 +18,7 @@ Future buildShowModalDialog({
       reverseTransitionDuration: Duration(milliseconds: 350),
     ),
     context: context,
-    builder: (contextDialog) => AlertDialog(
+    builder: (contex) => AlertDialog(
       content: Container(
         width: MediaQuery.of(context).size.width * 0.8,
         child: buildForm(
@@ -26,11 +28,21 @@ Future buildShowModalDialog({
           errorText: errorText,
           controller: controller,
           onSubmited: (value) => onSubmited(value),
+          icon: icon,
         ),
       ),
       actions: [
         TextButton(
-          onPressed: () => Navigator.of(contextDialog).pop(),
+          onPressed: () {
+            Navigator.of(context).pop();
+            saveImage(imageMap);
+          },
+          child: Text('Salvar'),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
           child: Text('Cancelar'),
         )
       ],

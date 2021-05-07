@@ -11,8 +11,10 @@ class ImageRepository {
   final Client client;
   ImageRepository({@required this.client});
   List<ImageModel> _gifList;
-  Future<List<ImageModel>> getAll(
-      {@required int limit, @required int offset}) async {
+  Future<List<ImageModel>> getAll({
+    @required int limit,
+    @required int offset,
+  }) async {
     try {
       String url = "$baseUrl$api_key&limit=$limit&rating=g&offset=$offset";
       final response = await client.get(Uri.parse(url));
@@ -51,7 +53,7 @@ class ImageRepository {
       _gifList.add(
         ImageModel(
           id: gif['id'],
-          url: gif['images']['original']['webp'],
+          url: gif['images']['fixed_height_small']['webp'],
           title: gif['title'],
           slug: gif['slug'],
           username: gif['username'],
