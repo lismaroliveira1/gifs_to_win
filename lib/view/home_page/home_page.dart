@@ -17,13 +17,11 @@ class HomePage extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => buildCustomDrawer(
-        routePageCallBack: presenter.jumpToPage,
-        context: context,
-        key: _innerDrawerKey,
-        scaffold: buildScaffold(context),
-      ),
+    return buildCustomDrawer(
+      routePageCallBack: presenter.jumpToPage,
+      context: context,
+      key: _innerDrawerKey,
+      scaffold: buildScaffold(context),
     );
   }
 
@@ -46,7 +44,7 @@ class HomePage extends StatelessWidget {
           });
           presenter.jumpToStream.listen((page) {
             if (page != null) {
-              Get.offAllNamed(page);
+              Get.offNamed(page);
             }
           });
           presenter.showEditDialogStream.listen((showEditDialog) {

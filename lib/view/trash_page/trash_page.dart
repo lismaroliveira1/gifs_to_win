@@ -13,6 +13,15 @@ class TrashPage extends StatelessWidget {
       GlobalKey<InnerDrawerState>();
   @override
   Widget build(BuildContext context) {
+    return buildCustomDrawer(
+      routePageCallBack: presenter.jumpToPage,
+      context: context,
+      key: _innerDrawerKey,
+      scaffold: buildScaffold(context),
+    );
+  }
+
+  Scaffold buildScaffold(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(
         context: context,
@@ -27,8 +36,9 @@ class TrashPage extends StatelessWidget {
         child: Builder(
           builder: (context) {
             presenter.jumpToStream.listen((page) {
+              print("ok");
               if (page?.isNotEmpty == true) {
-                Get.offAllNamed(page);
+                Get.offNamed(page);
               }
             });
             return Obx(

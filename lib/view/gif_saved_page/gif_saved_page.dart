@@ -15,13 +15,11 @@ class GifSavedPage extends StatelessWidget {
       GlobalKey<InnerDrawerState>();
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => buildCustomDrawer(
-        routePageCallBack: presenter.jumpToPage,
-        context: context,
-        key: _innerDrawerKey,
-        scaffold: buildScaffold(context),
-      ),
+    return buildCustomDrawer(
+      routePageCallBack: presenter.jumpToPage,
+      context: context,
+      key: _innerDrawerKey,
+      scaffold: buildScaffold(context),
     );
   }
 
@@ -41,7 +39,7 @@ class GifSavedPage extends StatelessWidget {
           builder: (context) {
             presenter.jumpToStream.listen((page) {
               if (page?.isNotEmpty == true) {
-                Get.offAllNamed(page);
+                Get.offNamed(page);
               }
             });
             return Obx(
