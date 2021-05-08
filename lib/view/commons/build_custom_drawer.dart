@@ -4,10 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 Widget buildCustomDrawer({
   @required BuildContext context,
-  @required Function(int page) routePageCallBack,
+  @required Function(String page) routePageCallBack,
   @required Scaffold scaffold,
   @required GlobalKey key,
-  @required PageController pageController,
 }) {
   double _edge = MediaQuery.of(context).size.width;
 
@@ -25,26 +24,27 @@ Widget buildCustomDrawer({
     onDragUpdate: (double val, InnerDrawerDirection direction) {},
     innerDrawerCallback: (a) {},
     leftChild: buildLeftChildDrawer(
-      pageController: pageController,
       edge: _edge,
       routePageCallBack: routePageCallBack,
       context: context,
+      reverse: true,
     ),
-    rightChild: Material(
-      child: Container(
-        decoration: backgroundDecoration(),
-      ),
+    rightChild: buildRIghtChildDrawer(
+      edge: _edge,
+      routePageCallBack: routePageCallBack,
+      context: context,
+      reverse: false,
     ),
     backgroundDecoration: backgroundDecoration(),
     scaffold: scaffold,
   );
 }
 
-Widget buildLeftChildDrawer({
+Material buildRIghtChildDrawer({
   @required double edge,
-  @required Function(int page) routePageCallBack,
+  @required Function(String page) routePageCallBack,
   @required BuildContext context,
-  @required PageController pageController,
+  @required bool reverse,
 }) {
   return Material(
     child: Container(
@@ -72,21 +72,21 @@ Widget buildLeftChildDrawer({
                 ),
                 Divider(),
                 buildDrawerButtonItem(
+                  reverse: reverse,
                   item: 'Home',
                   callback: (page) => routePageCallBack(page),
                   context: context,
                   icon: Icons.home,
-                  pageController: pageController,
-                  page: 0,
+                  page: 'home',
                 ),
                 Divider(),
                 buildDrawerButtonItem(
+                  reverse: reverse,
                   item: 'Salvos',
                   callback: (page) => routePageCallBack(page),
                   context: context,
                   icon: Icons.save,
-                  page: 1,
-                  pageController: pageController,
+                  page: 'saved',
                 ),
                 Divider(),
                 buildDrawerButtonItem(
@@ -94,8 +94,8 @@ Widget buildLeftChildDrawer({
                   callback: (page) => routePageCallBack(page),
                   context: context,
                   icon: Icons.delete,
-                  pageController: pageController,
-                  page: 2,
+                  page: '/setup',
+                  reverse: reverse,
                 ),
                 Divider(),
                 buildDrawerButtonItem(
@@ -103,8 +103,83 @@ Widget buildLeftChildDrawer({
                   callback: (page) => routePageCallBack(page),
                   context: context,
                   icon: Icons.delete,
-                  pageController: pageController,
-                  page: 3,
+                  page: 'deleted',
+                  reverse: reverse,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget buildLeftChildDrawer({
+  @required double edge,
+  @required Function(String page) routePageCallBack,
+  @required BuildContext context,
+  @required bool reverse,
+}) {
+  return Material(
+    child: Container(
+      decoration: backgroundDecoration(),
+      child: Stack(
+        children: <Widget>[
+          SafeArea(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  child: Center(
+                    child: Container(
+                      height: edge * 0.3,
+                      width: edge * 0.3,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/eagle_image.gif'),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 100,
+                ),
+                Divider(),
+                buildDrawerButtonItem(
+                  reverse: true,
+                  item: 'Home',
+                  callback: (page) => routePageCallBack(page),
+                  context: context,
+                  icon: Icons.home,
+                  page: '/',
+                ),
+                Divider(),
+                buildDrawerButtonItem(
+                  reverse: true,
+                  item: 'Salvos',
+                  callback: (page) => routePageCallBack(page),
+                  context: context,
+                  icon: Icons.save,
+                  page: '/saved',
+                ),
+                Divider(),
+                buildDrawerButtonItem(
+                  reverse: true,
+                  item: 'Configurações',
+                  callback: (page) => routePageCallBack(page),
+                  context: context,
+                  icon: Icons.delete,
+                  page: '/setup',
+                ),
+                Divider(),
+                buildDrawerButtonItem(
+                  reverse: true,
+                  item: 'Lixeira',
+                  callback: (page) => routePageCallBack(page),
+                  context: context,
+                  icon: Icons.delete,
+                  page: '/trash',
                 ),
               ],
             ),
@@ -131,37 +206,51 @@ BoxDecoration backgroundDecoration() {
 Widget buildDrawerButtonItem({
   @required String item,
   @required BuildContext context,
-  @required Function(int page) callback,
+  @required Function(String page) callback,
   @required IconData icon,
-  @required PageController pageController,
-  @required int page,
+  @required String page,
+  @required bool reverse,
 }) {
-  return GestureDetector(
+  return InkWell(
     onTap: () {
       Navigator.of(context).pop();
       Future.delayed(
         Duration(milliseconds: 500),
         callback(page),
       );
+      print('ok');
     },
     child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Expanded(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              child: Text(
-                item,
-                style: GoogleFonts.itim(
-                  fontSize: 14,
+      padding: const EdgeInsets.all(14.0),
+      child: reverse
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  child: Text(
+                    item,
+                    style: GoogleFonts.itim(
+                      fontSize: 14,
+                    ),
+                  ),
                 ),
-              ),
+                Icon(icon)
+              ],
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Icon(icon),
+                Container(
+                  child: Text(
+                    item,
+                    style: GoogleFonts.itim(
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            Icon(icon)
-          ],
-        ),
-      ),
     ),
   );
 }

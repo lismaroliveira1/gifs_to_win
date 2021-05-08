@@ -53,7 +53,7 @@ class ImageRepository {
       _gifList.add(
         ImageModel(
           id: gif['id'],
-          url: gif['images']['fixed_height_small']['webp'],
+          url: gif['images']['fixed_height_small']['url'],
           title: gif['title'],
           slug: gif['slug'],
           username: gif['username'],

@@ -7,24 +7,27 @@ import '../view.dart';
 class SetupPage extends StatelessWidget {
   final GetXSetupPresenter presenter;
   SetupPage({@required this.presenter});
-  @override
-  final GlobalKey<InnerDrawerState> _innerDrawerKey =
+  final GlobalKey<InnerDrawerState> innerDrawerKey =
       GlobalKey<InnerDrawerState>();
+  final PageController pageController = PageController();
+  @override
   Widget build(BuildContext context) {
     return buildCustomDrawer(
-      key: _innerDrawerKey,
+      key: innerDrawerKey,
       scaffold: Scaffold(
         body: Container(),
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.list),
             onPressed: () {
-              _innerDrawerKey.currentState
+              innerDrawerKey.currentState
                   .toggle(direction: InnerDrawerDirection.start);
             },
           ),
         ),
       ),
+      context: context,
+      routePageCallBack: (String page) {},
     );
   }
 }
