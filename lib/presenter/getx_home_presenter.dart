@@ -28,7 +28,7 @@ class GetXHomePresenter extends GetxController {
   ).obs;
 
   var _navigateTo = RxString('/');
-  var _jumpTo = RxString('/');
+  var _jumpTo = RxInt(1);
   var _imageList = <ImageModel>[].obs;
   var _imageListRelated = <ImageModel>[];
   var _imageMapRelated = <Map>[];
@@ -58,7 +58,7 @@ class GetXHomePresenter extends GetxController {
   Map get imageDetailsMapOut => _imageDetailsMap;
   List<ImageModel> get imageListRelatedStream => [];
   Stream<String> get navigateToStream => _navigateTo.stream;
-  Stream<String> get jumpToStream => _jumpTo.stream;
+  Stream<int> get jumpToStream => _jumpTo.stream;
   Stream<bool> get showEditDialogStream => _showEditImageDialog.stream;
   String get errorTextDialogOut => _errorTextDialog.value;
   int get limitImageView => _defaultLimit.toInt();
@@ -75,7 +75,7 @@ class GetXHomePresenter extends GetxController {
     _imageList.forEach((element) async {
       List<Map> flag = [];
       List<ImageModel> images =
-          await result.repository.getImagesByName(element.title.split(' ')[2]);
+          await result.repository.getImagesByName(element.title.split(' ')[1]);
       images.forEach((element) {
         flag.add(element.toMap());
       });
@@ -149,7 +149,7 @@ class GetXHomePresenter extends GetxController {
     _isValidName.value = false;
   }
 
-  void jumpToPage(String page) {
+  void jumpToPage(int page) {
     _jumpTo.value = page;
   }
 

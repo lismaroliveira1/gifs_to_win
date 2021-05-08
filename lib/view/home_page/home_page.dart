@@ -11,6 +11,7 @@ class HomePage extends StatelessWidget {
   final GlobalKey<InnerDrawerState> _innerDrawerKey =
       GlobalKey<InnerDrawerState>();
   final TextEditingController _controller = TextEditingController();
+  final PageController _pageController = PageController();
 
   HomePage({
     @required this.presenter,
@@ -19,7 +20,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => buildCustomDrawer(
+        routePageCallBack: presenter.jumpToPage,
+        context: context,
         key: _innerDrawerKey,
+        pageController: _pageController,
         scaffold: Scaffold(
           key: _scaffoldKey,
           appBar: buildAppBar(
@@ -29,7 +33,6 @@ class HomePage extends StatelessWidget {
             buttonCallback: (value) => presenter.changeWayViewMode(value),
             title: 'Home',
           ),
-          drawer: CurstomDrawer(presenter.jumpToPage),
           body: Builder(
             builder: (context) {
               presenter.navigateToStream.listen((page) {
@@ -38,8 +41,8 @@ class HomePage extends StatelessWidget {
                 }
               });
               presenter.jumpToStream.listen((page) {
-                if (page?.isNotEmpty == true) {
-                  Get.offAllNamed(page);
+                if (page != null) {
+                  _pageController.jumpToPage(page);
                 }
               });
               presenter.showEditDialogStream.listen((showEditDialog) {
