@@ -10,3 +10,4 @@ export './build_custom_drawer.dart';
 export '../home_page/components/build_right_child_home_drawer.dart';
 export './build_left_child_drawer.dart';
 export './background_decoration.dart';
+export './build_right_drawer_button_item.dart';

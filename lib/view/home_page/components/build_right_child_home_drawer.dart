@@ -33,7 +33,7 @@ Material buildRightChildHomeDrawer({
                   height: 100,
                 ),
                 Divider(),
-                buildDrawerButtonItem(
+                buildRightDrawerButtonItem(
                   reverse: reverse,
                   item: R.translations.animals,
                   callback: (page) => routePageCallBack(page),
@@ -42,7 +42,7 @@ Material buildRightChildHomeDrawer({
                   page: 'home',
                 ),
                 Divider(),
-                buildDrawerButtonItem(
+                buildRightDrawerButtonItem(
                   reverse: reverse,
                   item: R.translations.stickers,
                   callback: (page) => routePageCallBack(page),
@@ -51,7 +51,7 @@ Material buildRightChildHomeDrawer({
                   page: 'saved',
                 ),
                 Divider(),
-                buildDrawerButtonItem(
+                buildRightDrawerButtonItem(
                   item: 'Configurações',
                   callback: (page) => routePageCallBack(page),
                   context: context,
@@ -60,7 +60,7 @@ Material buildRightChildHomeDrawer({
                   reverse: reverse,
                 ),
                 Divider(),
-                buildDrawerButtonItem(
+                buildRightDrawerButtonItem(
                   item: 'Lixeira',
                   callback: (page) => routePageCallBack(page),
                   context: context,

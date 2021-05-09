@@ -34,7 +34,7 @@ Widget buildLeftChildDrawer({
                   height: 100,
                 ),
                 Divider(),
-                buildDrawerButtonItem(
+                buildRightDrawerButtonItem(
                   reverse: true,
                   item: R.translations.home,
                   callback: (page) => routePageCallBack(page),
@@ -43,7 +43,7 @@ Widget buildLeftChildDrawer({
                   page: '/',
                 ),
                 Divider(),
-                buildDrawerButtonItem(
+                buildRightDrawerButtonItem(
                   reverse: true,
                   item: R.translations.favorites,
                   callback: (page) => routePageCallBack(page),
@@ -52,7 +52,7 @@ Widget buildLeftChildDrawer({
                   page: '/saved',
                 ),
                 Divider(),
-                buildDrawerButtonItem(
+                buildRightDrawerButtonItem(
                   reverse: true,
                   item: R.translations.setup,
                   callback: (page) => routePageCallBack(page),
@@ -61,7 +61,7 @@ Widget buildLeftChildDrawer({
                   page: '/setup',
                 ),
                 Divider(),
-                buildDrawerButtonItem(
+                buildRightDrawerButtonItem(
                   reverse: true,
                   item: R.translations.trash,
                   callback: (page) => routePageCallBack(page),
