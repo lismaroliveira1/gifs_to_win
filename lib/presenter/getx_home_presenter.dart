@@ -99,7 +99,7 @@ class GetXHomePresenter extends GetxController {
     newList.forEach((element) async {
       List<Map> flag = [];
       List<ImageModel> images =
-          await result.repository.getImagesByName(element.title.split(' ')[2]);
+          await result.repository.getImagesByName(element.title.split(' ')[1]);
       images.forEach((element) {
         flag.add(element.toMap());
       });
@@ -153,7 +153,11 @@ class GetXHomePresenter extends GetxController {
     _jumpTo.value = page;
   }
 
-  void filterCallback(String name) async {}
+  void filterCallback(String name) async {
+    _isLoading.value = true;
+    await onSubmited(name);
+    _isLoading.value = false;
+  }
 
   void moveToBlakiList(
     Map imageGif,
@@ -169,16 +173,23 @@ class GetXHomePresenter extends GetxController {
     _navigateTo.value = '/';
   }
 
-  void onSubmited(String value) async {
-    _isLoading.value = true;
+  Future<void> onSubmited(String value) async {
     _searchName.value = value;
     _errorTextDialog.value = null;
     _imageListSearched.value = await result.repository.getImagesByName(value);
     _imageListSearchedMap.clear();
-    _imageListSearched.forEach((element) {
-      _imageListSearchedMap.add(element.toMap());
+    _imageListSearched.forEach((element) async {
+      List<Map> flag = [];
+      List<ImageModel> images =
+          await result.repository.getImagesByName(element.title.split(' ')[1]);
+      images.forEach((element) {
+        flag.add(element.toMap());
+      });
+      _imageListSearchedMap.add({
+        'image': element.toMap(),
+        'relateds': flag,
+      });
     });
-    _isLoading.value = false;
   }
 
   void clearValues() {

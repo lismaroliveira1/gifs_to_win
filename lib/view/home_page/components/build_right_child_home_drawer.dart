@@ -8,7 +8,6 @@ Material buildRightChildHomeDrawer({
   @required BuildContext context,
   @required bool reverse,
 }) {
-  int dividerTom = 200;
   return Material(
     type: MaterialType.transparency,
     child: Stack(
@@ -32,9 +31,7 @@ Material buildRightChildHomeDrawer({
               Expanded(
                 child: ListView(
                   children: [
-                    Divider(
-                      color: Colors.blueGrey[dividerTom],
-                    ),
+                    Divider(),
                     buildRightDrawerButtonItem(
                       reverse: reverse,
                       item: R.translations.animals,
@@ -42,9 +39,7 @@ Material buildRightChildHomeDrawer({
                       context: context,
                       icon: Icons.home,
                     ),
-                    Divider(
-                      color: Colors.blueGrey[dividerTom],
-                    ),
+                    Divider(),
                     buildRightDrawerButtonItem(
                       reverse: reverse,
                       item: R.translations.stickers,
@@ -52,9 +47,7 @@ Material buildRightChildHomeDrawer({
                       context: context,
                       icon: Icons.emoji_emotions,
                     ),
-                    Divider(
-                      color: Colors.blueGrey[dividerTom],
-                    ),
+                    Divider(),
                     buildRightDrawerButtonItem(
                       item: R.translations.funny,
                       callback: (name) => callback(name),
@@ -62,9 +55,7 @@ Material buildRightChildHomeDrawer({
                       icon: Icons.emoji_emotions_outlined,
                       reverse: reverse,
                     ),
-                    Divider(
-                      color: Colors.blueGrey[dividerTom],
-                    ),
+                    Divider(),
                     buildRightDrawerButtonItem(
                       item: R.translations.games,
                       callback: (page) => callback(page),
@@ -72,9 +63,7 @@ Material buildRightChildHomeDrawer({
                       icon: Icons.gamepad,
                       reverse: reverse,
                     ),
-                    Divider(
-                      color: Colors.blueGrey[dividerTom],
-                    ),
+                    Divider(),
                     buildRightDrawerButtonItem(
                       item: R.translations.animes,
                       callback: (page) => callback(page),
@@ -82,9 +71,7 @@ Material buildRightChildHomeDrawer({
                       icon: Icons.person,
                       reverse: reverse,
                     ),
-                    Divider(
-                      color: Colors.blueGrey[dividerTom],
-                    ),
+                    Divider(),
                     buildRightDrawerButtonItem(
                       item: R.translations.moveSeriesAndTV,
                       callback: (page) => callback(page),
@@ -92,9 +79,7 @@ Material buildRightChildHomeDrawer({
                       icon: Icons.movie,
                       reverse: reverse,
                     ),
-                    Divider(
-                      color: Colors.blueGrey[dividerTom],
-                    ),
+                    Divider(),
                     buildRightDrawerButtonItem(
                       item: R.translations.sports,
                       callback: (page) => callback(page),
@@ -102,9 +87,7 @@ Material buildRightChildHomeDrawer({
                       icon: Icons.sports_baseball,
                       reverse: reverse,
                     ),
-                    Divider(
-                      color: Colors.blueGrey[dividerTom],
-                    ),
+                    Divider(),
                     buildRightDrawerButtonItem(
                       item: R.translations.science,
                       callback: (page) => callback(page),
@@ -112,9 +95,7 @@ Material buildRightChildHomeDrawer({
                       icon: Icons.science,
                       reverse: reverse,
                     ),
-                    Divider(
-                      color: Colors.blueGrey[dividerTom],
-                    ),
+                    Divider(),
                     buildRightDrawerButtonItem(
                       item: R.translations.politics,
                       callback: (page) => callback(page),
@@ -122,9 +103,7 @@ Material buildRightChildHomeDrawer({
                       icon: Icons.ac_unit_outlined,
                       reverse: reverse,
                     ),
-                    Divider(
-                      color: Colors.blueGrey[dividerTom],
-                    ),
+                    Divider(),
                     buildRightDrawerButtonItem(
                       item: R.translations.nature,
                       callback: (page) => callback(page),
@@ -132,9 +111,7 @@ Material buildRightChildHomeDrawer({
                       icon: Icons.delete,
                       reverse: reverse,
                     ),
-                    Divider(
-                      color: Colors.blueGrey[dividerTom],
-                    ),
+                    Divider(),
                     buildRightDrawerButtonItem(
                       item: R.translations.religion,
                       callback: (page) => callback(page),
@@ -142,9 +119,7 @@ Material buildRightChildHomeDrawer({
                       icon: Icons.accessibility_sharp,
                       reverse: reverse,
                     ),
-                    Divider(
-                      color: Colors.blueGrey[dividerTom],
-                    ),
+                    Divider(),
                     buildRightDrawerButtonItem(
                       item: R.translations.variety,
                       callback: (page) => callback(page),

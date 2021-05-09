@@ -25,7 +25,6 @@ Widget buildImageListView({
     child: LazyLoadScrollView(
       onEndOfPage: () async => getMoreImages(),
       child: ListView(
-        //children: presenter.imageSavedListStream
         children: <Widget>[
           isSearch
               ? builResultInformationSearch(searchName, closeCallback)

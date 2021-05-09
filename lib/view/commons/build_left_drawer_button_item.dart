@@ -28,10 +28,14 @@ Widget buildLeftDrawerButtonItem({
                     item,
                     style: GoogleFonts.itim(
                       fontSize: 14,
+                      color: Colors.blueGrey[100],
                     ),
                   ),
                 ),
-                Icon(icon)
+                Icon(
+                  icon,
+                  color: Colors.blueGrey[100],
+                )
               ],
             )
           : Row(
@@ -43,6 +47,7 @@ Widget buildLeftDrawerButtonItem({
                     item,
                     style: GoogleFonts.itim(
                       fontSize: 14,
+                      color: Colors.blueGrey[100],
                     ),
                   ),
                 ),
