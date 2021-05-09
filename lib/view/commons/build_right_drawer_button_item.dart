@@ -4,9 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 Widget buildRightDrawerButtonItem({
   @required String item,
   @required BuildContext context,
-  @required Function(String page) callback,
+  @required Function(String name) callback,
   @required IconData icon,
-  @required String page,
   @required bool reverse,
 }) {
   return InkWell(
@@ -14,7 +13,7 @@ Widget buildRightDrawerButtonItem({
       Navigator.of(context).pop();
       Future.delayed(
         Duration(milliseconds: 500),
-        callback(page),
+        callback(item),
       );
     },
     child: Padding(
@@ -27,22 +26,30 @@ Widget buildRightDrawerButtonItem({
                   child: Text(
                     item,
                     style: GoogleFonts.itim(
-                      fontSize: 14,
+                      fontSize: 20,
+                      color: Colors.blueGrey[100],
                     ),
                   ),
                 ),
-                Icon(icon)
+                Icon(
+                  icon,
+                  color: Colors.blueGrey[100],
+                )
               ],
             )
           : Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(icon),
+                Icon(
+                  icon,
+                  color: Colors.blueGrey[100],
+                ),
                 Container(
                   child: Text(
                     item,
                     style: GoogleFonts.itim(
                       fontSize: 14,
+                      color: Colors.blueGrey[100],
                     ),
                   ),
                 ),

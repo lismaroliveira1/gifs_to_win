@@ -4,75 +4,161 @@ import '../../commons/commons.dart';
 
 Material buildRightChildHomeDrawer({
   @required double edge,
-  @required Function(String page) routePageCallBack,
+  @required Function(String value) callback,
   @required BuildContext context,
   @required bool reverse,
 }) {
+  int dividerTom = 200;
   return Material(
-    child: Container(
-      decoration: backgroundDecoration(),
-      child: Stack(
-        children: <Widget>[
-          SafeArea(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  child: Center(
-                    child: Container(
-                      height: edge * 0.3,
-                      width: edge * 0.3,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/eagle_image.gif'),
-                        ),
+    type: MaterialType.transparency,
+    child: Stack(
+      children: <Widget>[
+        SafeArea(
+          child: Column(
+            children: <Widget>[
+              Container(
+                child: Center(
+                  child: Container(
+                    height: edge * 0.3,
+                    width: edge * 0.3,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/eagle_image.gif'),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 100,
+              ),
+              Expanded(
+                child: ListView(
+                  children: [
+                    Divider(
+                      color: Colors.blueGrey[dividerTom],
+                    ),
+                    buildRightDrawerButtonItem(
+                      reverse: reverse,
+                      item: R.translations.animals,
+                      callback: (name) => callback(name),
+                      context: context,
+                      icon: Icons.home,
+                    ),
+                    Divider(
+                      color: Colors.blueGrey[dividerTom],
+                    ),
+                    buildRightDrawerButtonItem(
+                      reverse: reverse,
+                      item: R.translations.stickers,
+                      callback: (name) => callback(name),
+                      context: context,
+                      icon: Icons.emoji_emotions,
+                    ),
+                    Divider(
+                      color: Colors.blueGrey[dividerTom],
+                    ),
+                    buildRightDrawerButtonItem(
+                      item: R.translations.funny,
+                      callback: (name) => callback(name),
+                      context: context,
+                      icon: Icons.emoji_emotions_outlined,
+                      reverse: reverse,
+                    ),
+                    Divider(
+                      color: Colors.blueGrey[dividerTom],
+                    ),
+                    buildRightDrawerButtonItem(
+                      item: R.translations.games,
+                      callback: (page) => callback(page),
+                      context: context,
+                      icon: Icons.gamepad,
+                      reverse: reverse,
+                    ),
+                    Divider(
+                      color: Colors.blueGrey[dividerTom],
+                    ),
+                    buildRightDrawerButtonItem(
+                      item: R.translations.animes,
+                      callback: (page) => callback(page),
+                      context: context,
+                      icon: Icons.person,
+                      reverse: reverse,
+                    ),
+                    Divider(
+                      color: Colors.blueGrey[dividerTom],
+                    ),
+                    buildRightDrawerButtonItem(
+                      item: R.translations.moveSeriesAndTV,
+                      callback: (page) => callback(page),
+                      context: context,
+                      icon: Icons.movie,
+                      reverse: reverse,
+                    ),
+                    Divider(
+                      color: Colors.blueGrey[dividerTom],
+                    ),
+                    buildRightDrawerButtonItem(
+                      item: R.translations.sports,
+                      callback: (page) => callback(page),
+                      context: context,
+                      icon: Icons.sports_baseball,
+                      reverse: reverse,
+                    ),
+                    Divider(
+                      color: Colors.blueGrey[dividerTom],
+                    ),
+                    buildRightDrawerButtonItem(
+                      item: R.translations.science,
+                      callback: (page) => callback(page),
+                      context: context,
+                      icon: Icons.science,
+                      reverse: reverse,
+                    ),
+                    Divider(
+                      color: Colors.blueGrey[dividerTom],
+                    ),
+                    buildRightDrawerButtonItem(
+                      item: R.translations.politics,
+                      callback: (page) => callback(page),
+                      context: context,
+                      icon: Icons.ac_unit_outlined,
+                      reverse: reverse,
+                    ),
+                    Divider(
+                      color: Colors.blueGrey[dividerTom],
+                    ),
+                    buildRightDrawerButtonItem(
+                      item: R.translations.nature,
+                      callback: (page) => callback(page),
+                      context: context,
+                      icon: Icons.delete,
+                      reverse: reverse,
+                    ),
+                    Divider(
+                      color: Colors.blueGrey[dividerTom],
+                    ),
+                    buildRightDrawerButtonItem(
+                      item: R.translations.religion,
+                      callback: (page) => callback(page),
+                      context: context,
+                      icon: Icons.accessibility_sharp,
+                      reverse: reverse,
+                    ),
+                    Divider(
+                      color: Colors.blueGrey[dividerTom],
+                    ),
+                    buildRightDrawerButtonItem(
+                      item: R.translations.variety,
+                      callback: (page) => callback(page),
+                      context: context,
+                      icon: Icons.view_agenda,
+                      reverse: reverse,
+                    ),
+                  ],
                 ),
-                Divider(),
-                buildRightDrawerButtonItem(
-                  reverse: reverse,
-                  item: R.translations.animals,
-                  callback: (page) => routePageCallBack(page),
-                  context: context,
-                  icon: Icons.home,
-                  page: 'home',
-                ),
-                Divider(),
-                buildRightDrawerButtonItem(
-                  reverse: reverse,
-                  item: R.translations.stickers,
-                  callback: (page) => routePageCallBack(page),
-                  context: context,
-                  icon: Icons.save,
-                  page: 'saved',
-                ),
-                Divider(),
-                buildRightDrawerButtonItem(
-                  item: 'Configurações',
-                  callback: (page) => routePageCallBack(page),
-                  context: context,
-                  icon: Icons.delete,
-                  page: '/setup',
-                  reverse: reverse,
-                ),
-                Divider(),
-                buildRightDrawerButtonItem(
-                  item: 'Lixeira',
-                  callback: (page) => routePageCallBack(page),
-                  context: context,
-                  icon: Icons.delete,
-                  page: 'deleted',
-                  reverse: reverse,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     ),
   );
 }

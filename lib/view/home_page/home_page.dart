@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
       key: _innerDrawerKey,
       scaffold: buildScaffold(context),
       rightChild: buildRightChildHomeDrawer(
-        routePageCallBack: presenter.jumpToPage,
+        callback: presenter.filterCallback,
         context: context,
         reverse: false,
         edge: _edge,

@@ -153,6 +153,8 @@ class GetXHomePresenter extends GetxController {
     _jumpTo.value = page;
   }
 
+  void filterCallback(String name) async {}
+
   void moveToBlakiList(
     Map imageGif,
   ) async {
