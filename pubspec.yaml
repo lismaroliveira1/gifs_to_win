@@ -22,6 +22,9 @@ dependencies:
   google_fonts:
   animations:
   flutter_inner_drawer:
+  social_share:
+  image_picker:
+  image_downloader:
 
 dev_dependencies:
   flutter_test:

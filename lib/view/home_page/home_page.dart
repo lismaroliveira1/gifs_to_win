@@ -83,6 +83,8 @@ class HomePage extends StatelessWidget {
                               ? Expanded(
                                   child: Obx(
                                   () => buildImageListView(
+                                    appsInstalleds:
+                                        presenter.appInstalledMapOut,
                                     context: context,
                                     getMoreImages: presenter.getMoreImages,
                                     imageList:
@@ -101,10 +103,19 @@ class HomePage extends StatelessWidget {
                                         presenter.saveImage(imageMap),
                                     shareImage:
                                         (Map<dynamic, dynamic> imageMap) {},
+                                    shareByFacebook: (imageMap) =>
+                                        presenter.shareByFacebook(imageMap),
+                                    shareByInstagram: (imageMap) =>
+                                        presenter.shareByInstagram(imageMap),
+                                    shareByMessenger: (imageMap) => {},
+                                    shareByTwitter: (imageMap) => {},
+                                    shareByWhatsApp: (imageMap) => {},
                                   ),
                                 ))
                               : Expanded(
                                   child: buildImageListView(
+                                    appsInstalleds:
+                                        presenter.appInstalledMapOut,
                                     context: context,
                                     getMoreImages: presenter.getMoreImages,
                                     imageList: presenter.imageListMapOut,
@@ -122,6 +133,13 @@ class HomePage extends StatelessWidget {
                                         presenter.saveImage(imageMap),
                                     shareImage:
                                         (Map<dynamic, dynamic> imageMap) {},
+                                    shareByFacebook: (imageMap) =>
+                                        presenter.shareByFacebook(imageMap),
+                                    shareByInstagram: (imageMap) =>
+                                        presenter.shareByInstagram(imageMap),
+                                    shareByMessenger: (imageMap) => {},
+                                    shareByTwitter: (imageMap) => {},
+                                    shareByWhatsApp: (imageMap) => {},
                                   ),
                                 )
                           : presenter.imageListSearchedMapOut.length > 0

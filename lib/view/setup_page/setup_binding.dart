@@ -10,6 +10,7 @@ class SetupBinding implements Bindings {
     Get.put(ImageResults(
       repository: Get.find(),
       cache: Get.find(),
+      socialGifShare: Get.find(),
     ));
     Get.lazyPut(() => ImageRepository(client: Get.find()));
     Get.lazyPut(

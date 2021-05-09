@@ -12,6 +12,12 @@ Widget builListTileOpenedWidget({
   @required Function(Map imageMap) saveImage,
   @required Function(Map imageMap) deleteImage,
   @required Function(Map imageMap) shareImage,
+  @required Function(Map imageMap) shareByFacebook,
+  @required Function(Map imageMap) shareByInstagram,
+  @required Function(Map imageMap) shareByWhatsApp,
+  @required Function(Map imageMap) shareByTwitter,
+  @required Function(Map imageMap) shareByMessenger,
+  @required Map appsInstalleds,
 }) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -71,6 +77,34 @@ Widget builListTileOpenedWidget({
               .toList(),
         ),
       ),
+      Row(
+        children: <Widget>[
+          ElevatedButton(
+            onPressed: () {
+              shareByFacebook(imageGif['image']);
+            },
+            child: Text('Facebook'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              shareByInstagram(imageGif['image']);
+            },
+            child: Text('Instagram'),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text('Wahtsapp'),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text('Twitter'),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text('Messenger'),
+          ),
+        ],
+      ),
       Padding(
         padding: const EdgeInsets.only(top: 18.0),
         child: Row(
@@ -78,7 +112,7 @@ Widget builListTileOpenedWidget({
           children: <Widget>[
             TextButton(
               onPressed: () {
-                saveImage(imageGif);
+                saveImage(imageGif['image']);
               },
               child: Text(R.translations.save),
             ),

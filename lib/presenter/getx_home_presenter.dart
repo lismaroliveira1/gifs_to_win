@@ -32,6 +32,7 @@ class GetXHomePresenter extends GetxController {
   var _imageList = <ImageModel>[].obs;
   var _imageListRelated = <ImageModel>[];
   var _imageMapRelated = <Map>[];
+  var _appInstalledsMap = {}.obs;
   var _imageListMap = <Map>[].obs;
   var _imageListSearchedMap = <Map>[].obs;
   var _imageListSearched = <ImageModel>[].obs;
@@ -51,6 +52,7 @@ class GetXHomePresenter extends GetxController {
   List<ImageModel> get imageListStream => _imageList.toList();
   List<ImageModel> get imageListSearchedOut => _imageListSearched.toList();
   List<Map> get imageListMapOut => _imageListMap.toList();
+  Map get appInstalledMapOut => _appInstalledsMap;
   List<ImageModel> get imageListModelOut => _imageList.toList();
   List<Map> get imageListSearchedMapOut => _imageListSearchedMap.toList();
   List<ImageModel> get imageListSearchedModelOut => _imageListSearched.toList();
@@ -85,6 +87,7 @@ class GetXHomePresenter extends GetxController {
       });
     });
     _isLoading.value = false;
+    _appInstalledsMap.value = await result.socialGifShare.checkSocialApps();
     super.onInit();
   }
 
@@ -221,4 +224,16 @@ class GetXHomePresenter extends GetxController {
     _imageListRelated.clear();
     _imageMapRelated.clear();
   }
+
+  void shareByFacebook(Map imageMap) {
+    print(imageMap);
+  }
+
+  void shareByInstagram(Map imageMap) {
+    result.socialGifShare.shareByInstagram(imageMap);
+  }
+
+  void shareByWhatsApp(Map imageMap) {}
+  void shareByTwitter(Map imageMap) {}
+  void shareByMessenger(Map imageMap) {}
 }

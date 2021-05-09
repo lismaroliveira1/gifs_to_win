@@ -11,6 +11,7 @@ class TrashBinding implements Bindings {
     Get.lazyPut(() => ImageRepository(client: Get.find()));
     Get.put(ImageResults(
       repository: Get.find(),
+      socialGifShare: Get.find(),
       cache: Get.find(),
     ));
     Get.lazyPut(

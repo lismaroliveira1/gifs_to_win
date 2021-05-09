@@ -18,6 +18,12 @@ Widget buildImageListView({
   @required Function(Map imageMap) saveImage,
   @required Function(Map imageMap) deleteImage,
   @required Function(Map imageMap) shareImage,
+  @required Function shareByFacebook,
+  @required Function shareByInstagram,
+  @required Function shareByWhatsApp,
+  @required Function shareByTwitter,
+  @required Function shareByMessenger,
+  @required Map appsInstalleds,
 }) {
   return Container(
     height: MediaQuery.of(context).size.height,
@@ -55,6 +61,14 @@ Widget buildImageListView({
                             deleteImage: (imageMap) => deleteImage(imageMap),
                             saveImage: (imageMap) => saveImage(imageMap),
                             shareImage: (imageMap) => shareImage(imageMap),
+                            appsInstalleds: appsInstalleds,
+                            shareByFacebook: (imageMap) =>
+                                shareByFacebook(imageMap),
+                            shareByInstagram: (imageMap) =>
+                                shareByInstagram(imageMap),
+                            shareByWhatsApp: shareByWhatsApp,
+                            shareByTwitter: shareByTwitter,
+                            shareByMessenger: shareByMessenger,
                           );
                         },
                       ),
