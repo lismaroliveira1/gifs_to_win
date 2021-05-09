@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
-import 'package:gifs_to_win/model/social_share.dart';
 import 'package:gifs_to_win/presenter/getx_saved_presenter.dart';
 import 'package:http/http.dart';
-import 'package:social_share/social_share.dart';
 
 import './../../model/model.dart';
 

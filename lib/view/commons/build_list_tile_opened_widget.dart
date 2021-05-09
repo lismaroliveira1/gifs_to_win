@@ -92,15 +92,21 @@ Widget builListTileOpenedWidget({
             child: Text('Instagram'),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              shareByWhatsApp(imageGif['image']);
+            },
             child: Text('Wahtsapp'),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              shareByTwitter(imageGif['image']);
+            },
             child: Text('Twitter'),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              shareByMessenger(imageGif['image']);
+            },
             child: Text('Messenger'),
           ),
         ],

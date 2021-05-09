@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:image_downloader/image_downloader.dart';
 import 'package:social_share/social_share.dart';
 
@@ -12,10 +11,8 @@ class SocialGifShare {
     try {
       var imageId = await ImageDownloader.downloadImage(imageMap['url']);
       if (imageId == null) {
-        print(imageId);
         return;
       }
-      print(imageId);
       var path = await ImageDownloader.findPath(imageId);
       SocialShare.shareInstagramStory(
         path,
@@ -26,7 +23,19 @@ class SocialGifShare {
     } catch (error) {}
   }
 
-  Future loadAsset(String assetPath) async {
-    return await rootBundle.loadString(assetPath);
+  Future<void> shareTwitter(Map imageMap) async {
+    SocialShare.shareTwitter('Caption Text',
+        url: imageMap['url'], trailingText: 'trailing text');
+  }
+
+  Future<void> shareByWhatsApp(Map imageMap) async {
+    SocialShare.shareWhatsapp(imageMap['url']);
+    print(imageMap);
+  }
+
+  Future<void> shareByMessenger(Map imageMap) async {
+    SocialShare.shareSms('Message',
+        url: imageMap['url'], trailingText: 'trailing');
+    print(imageMap);
   }
 }

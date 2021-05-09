@@ -66,9 +66,12 @@ Widget buildImageListView({
                                 shareByFacebook(imageMap),
                             shareByInstagram: (imageMap) =>
                                 shareByInstagram(imageMap),
-                            shareByWhatsApp: shareByWhatsApp,
-                            shareByTwitter: shareByTwitter,
-                            shareByMessenger: shareByMessenger,
+                            shareByWhatsApp: (imageMap) =>
+                                shareByWhatsApp(imageMap),
+                            shareByTwitter: (imageMap) =>
+                                shareByTwitter(imageMap),
+                            shareByMessenger: (imageMap) =>
+                                shareByMessenger(imageMap),
                           );
                         },
                       ),

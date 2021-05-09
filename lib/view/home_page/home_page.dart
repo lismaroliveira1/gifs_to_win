@@ -107,9 +107,12 @@ class HomePage extends StatelessWidget {
                                         presenter.shareByFacebook(imageMap),
                                     shareByInstagram: (imageMap) =>
                                         presenter.shareByInstagram(imageMap),
-                                    shareByMessenger: (imageMap) => {},
-                                    shareByTwitter: (imageMap) => {},
-                                    shareByWhatsApp: (imageMap) => {},
+                                    shareByMessenger: (imageMap) =>
+                                        presenter.shareByMessenger(imageMap),
+                                    shareByTwitter: (imageMap) =>
+                                        presenter.shareByTwitter(imageMap),
+                                    shareByWhatsApp: (imageMap) =>
+                                        presenter.shareByWhatsApp(imageMap),
                                   ),
                                 ))
                               : Expanded(
@@ -137,9 +140,12 @@ class HomePage extends StatelessWidget {
                                         presenter.shareByFacebook(imageMap),
                                     shareByInstagram: (imageMap) =>
                                         presenter.shareByInstagram(imageMap),
-                                    shareByMessenger: (imageMap) => {},
-                                    shareByTwitter: (imageMap) => {},
-                                    shareByWhatsApp: (imageMap) => {},
+                                    shareByMessenger: (imageMap) =>
+                                        presenter.shareByMessenger(imageMap),
+                                    shareByTwitter: (imageMap) =>
+                                        presenter.shareByTwitter(imageMap),
+                                    shareByWhatsApp: (imageMap) =>
+                                        presenter.shareByWhatsApp(imageMap),
                                   ),
                                 )
                           : presenter.imageListSearchedMapOut.length > 0
