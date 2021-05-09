@@ -120,6 +120,7 @@ class GetXHomePresenter extends GetxController {
   }
 
   Future<void> saveImage(Map imageMap) async {
+    print(imageMap);
     List<Map> _flag = [];
     _flag = await result.cache.readData('saved');
     _flag.add(imageMap);
