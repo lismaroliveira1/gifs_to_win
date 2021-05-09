@@ -77,39 +77,93 @@ Widget builListTileOpenedWidget({
               .toList(),
         ),
       ),
-      Row(
-        children: <Widget>[
-          ElevatedButton(
-            onPressed: () {
-              shareByFacebook(imageGif['image']);
-            },
-            child: Text('Facebook'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              shareByInstagram(imageGif['image']);
-            },
-            child: Text('Instagram'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              shareByWhatsApp(imageGif['image']);
-            },
-            child: Text('Wahtsapp'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              shareByTwitter(imageGif['image']);
-            },
-            child: Text('Twitter'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              shareByMessenger(imageGif['image']);
-            },
-            child: Text('Messenger'),
-          ),
-        ],
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Card(
+              child: TextButton(
+                onPressed: () {
+                  shareByFacebook(imageGif['image']);
+                },
+                child: Container(
+                  height: 45,
+                  width: 45,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/facebook_icon.png'),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              child: TextButton(
+                onPressed: () {
+                  shareByInstagram(imageGif['image']);
+                },
+                child: Container(
+                  height: 45,
+                  width: 45,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/instagram_icon.png'),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              child: TextButton(
+                onPressed: () {
+                  shareByWhatsApp(imageGif['image']);
+                },
+                child: Container(
+                  height: 45,
+                  width: 45,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/whatsapp_icon.png'),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              child: TextButton(
+                onPressed: () {
+                  shareByTwitter(imageGif['image']);
+                },
+                child: Container(
+                  height: 45,
+                  width: 45,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/twitter_icon.png'),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              child: TextButton(
+                onPressed: () {
+                  shareByMessenger(imageGif['image']);
+                },
+                child: Container(
+                  height: 45,
+                  width: 45,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/messenger_icon.png'),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       Padding(
         padding: const EdgeInsets.only(top: 18.0),
