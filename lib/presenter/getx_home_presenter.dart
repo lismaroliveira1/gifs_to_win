@@ -238,7 +238,7 @@ class GetXHomePresenter extends GetxController {
   }
 
   void shareByTwitter(Map imageMap) {
-    print(imageMap);
+    result.socialGifShare.shareTwitter(imageMap);
   }
 
   void shareByMessenger(Map imageMap) {
