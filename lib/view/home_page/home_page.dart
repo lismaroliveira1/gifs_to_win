@@ -18,11 +18,22 @@ class HomePage extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    double _edge = MediaQuery.of(context).size.width;
     return buildCustomDrawer(
-      routePageCallBack: presenter.jumpToPage,
-      context: context,
       key: _innerDrawerKey,
       scaffold: buildScaffold(context),
+      rightChild: buildRightChildHomeDrawer(
+        routePageCallBack: presenter.jumpToPage,
+        context: context,
+        reverse: false,
+        edge: _edge,
+      ),
+      leftChild: buildLeftChildDrawer(
+        edge: _edge,
+        routePageCallBack: presenter.jumpToPage,
+        context: context,
+        reverse: true,
+      ),
     );
   }
 

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inner_drawer/inner_drawer.dart';
-import 'package:gifs_to_win/presenter/presenter.dart';
+import 'package:get/get.dart';
 
+import '../../presenter/presenter.dart';
 import '../view.dart';
 
 class SetupPage extends StatelessWidget {
@@ -12,10 +13,22 @@ class SetupPage extends StatelessWidget {
   final PageController pageController = PageController();
   @override
   Widget build(BuildContext context) {
+    double _edge = MediaQuery.of(context).size.width;
     return buildCustomDrawer(
       key: innerDrawerKey,
-      scaffold: Scaffold(
-        body: Container(),
+      rightChild: Container(),
+      leftChild: buildLeftChildDrawer(
+        edge: _edge,
+        routePageCallBack: presenter.jumpToPage,
+        context: context,
+        reverse: false,
+      ),
+      scaffold: buildScaffold(),
+    );
+  }
+
+  Scaffold buildScaffold() {
+    return Scaffold(
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.list),
@@ -25,9 +38,15 @@ class SetupPage extends StatelessWidget {
             },
           ),
         ),
-      ),
-      context: context,
-      routePageCallBack: (String page) {},
-    );
+        body: Builder(
+          builder: (context) {
+            presenter.jumpToStream.listen((page) {
+              if (page != null) {
+                Get.offNamed(page);
+              }
+            });
+            return Container();
+          },
+        ));
   }
 }

@@ -5,13 +5,11 @@ import 'package:google_fonts/google_fonts.dart';
 import './commons.dart';
 
 Widget buildCustomDrawer({
-  @required BuildContext context,
-  @required Function(String page) routePageCallBack,
   @required Scaffold scaffold,
   @required GlobalKey key,
+  @required Widget rightChild,
+  @required Widget leftChild,
 }) {
-  double _edge = MediaQuery.of(context).size.width;
-
   return InnerDrawer(
     key: key,
     onTapClose: true,
@@ -25,18 +23,8 @@ Widget buildCustomDrawer({
     rightAnimationType: InnerDrawerAnimation.quadratic,
     onDragUpdate: (double val, InnerDrawerDirection direction) {},
     innerDrawerCallback: (a) {},
-    leftChild: buildLeftChildDrawer(
-      edge: _edge,
-      routePageCallBack: routePageCallBack,
-      context: context,
-      reverse: true,
-    ),
-    rightChild: buildRIghtChildDrawer(
-      edge: _edge,
-      routePageCallBack: routePageCallBack,
-      context: context,
-      reverse: false,
-    ),
+    leftChild: leftChild,
+    rightChild: rightChild,
     backgroundDecoration: backgroundDecoration(),
     scaffold: scaffold,
   );

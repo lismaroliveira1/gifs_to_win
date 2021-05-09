@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gifs_to_win/i18n/resources.dart';
-import './commons.dart';
+import '../../commons/commons.dart';
 
-Material buildRIghtChildDrawer({
+Material buildRightChildHomeDrawer({
   @required double edge,
   @required Function(String page) routePageCallBack,
   @required BuildContext context,

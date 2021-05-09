@@ -17,11 +17,18 @@ class GifSavedPage extends StatelessWidget {
       GlobalKey<InnerDrawerState>();
   @override
   Widget build(BuildContext context) {
+    double _edge = MediaQuery.of(context).size.width;
+
     return buildCustomDrawer(
-      routePageCallBack: presenter.jumpToPage,
-      context: context,
       key: _innerDrawerKey,
       scaffold: buildScaffold(context),
+      rightChild: Container(),
+      leftChild: buildLeftChildDrawer(
+        edge: _edge,
+        routePageCallBack: presenter.jumpToPage,
+        context: context,
+        reverse: false,
+      ),
     );
   }
 
