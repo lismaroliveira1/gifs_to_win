@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gifs_to_win/i18n/i18n.dart';
 
 import './commons.dart';
 
@@ -35,7 +36,7 @@ Widget buildLeftChildDrawer({
                 Divider(),
                 buildDrawerButtonItem(
                   reverse: true,
-                  item: 'Home',
+                  item: R.translations.home,
                   callback: (page) => routePageCallBack(page),
                   context: context,
                   icon: Icons.home,
@@ -44,7 +45,7 @@ Widget buildLeftChildDrawer({
                 Divider(),
                 buildDrawerButtonItem(
                   reverse: true,
-                  item: 'Salvos',
+                  item: R.translations.favorites,
                   callback: (page) => routePageCallBack(page),
                   context: context,
                   icon: Icons.save,
@@ -53,7 +54,7 @@ Widget buildLeftChildDrawer({
                 Divider(),
                 buildDrawerButtonItem(
                   reverse: true,
-                  item: 'Configurações',
+                  item: R.translations.setup,
                   callback: (page) => routePageCallBack(page),
                   context: context,
                   icon: Icons.delete,
@@ -62,7 +63,7 @@ Widget buildLeftChildDrawer({
                 Divider(),
                 buildDrawerButtonItem(
                   reverse: true,
-                  item: 'Lixeira',
+                  item: R.translations.trash,
                   callback: (page) => routePageCallBack(page),
                   context: context,
                   icon: Icons.delete,

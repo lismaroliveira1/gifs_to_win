@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gifs_to_win/i18n/resources.dart';
 import './commons.dart';
 
 Material buildRIghtChildDrawer({
@@ -34,7 +35,7 @@ Material buildRIghtChildDrawer({
                 Divider(),
                 buildDrawerButtonItem(
                   reverse: reverse,
-                  item: 'Animais',
+                  item: R.translations.animals,
                   callback: (page) => routePageCallBack(page),
                   context: context,
                   icon: Icons.home,
@@ -43,7 +44,7 @@ Material buildRIghtChildDrawer({
                 Divider(),
                 buildDrawerButtonItem(
                   reverse: reverse,
-                  item: 'Salvos',
+                  item: R.translations.stickers,
                   callback: (page) => routePageCallBack(page),
                   context: context,
                   icon: Icons.save,

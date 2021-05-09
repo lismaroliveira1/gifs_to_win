@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inner_drawer/inner_drawer.dart';
-import 'package:get/get.dart';
-import 'package:gifs_to_win/presenter/getx_trash_presenter.dart';
 
+import 'package:get/get.dart';
+import 'package:gifs_to_win/i18n/i18n.dart';
+
+import '../../presenter/presenter.dart';
 import '../view.dart';
 
 class TrashPage extends StatelessWidget {
@@ -28,15 +30,13 @@ class TrashPage extends StatelessWidget {
         innerDrawerKey: _innerDrawerKey,
         initialValue: 1,
         buttonCallback: presenter.changeViewMode,
-        title: 'Lixeira',
+        title: R.translations.trash,
       ),
-      drawer: CurstomDrawer(presenter.jumpToPage),
       body: GestureDetector(
         onTap: () => hideKeyboard(context: context),
         child: Builder(
           builder: (context) {
             presenter.jumpToStream.listen((page) {
-              print("ok");
               if (page?.isNotEmpty == true) {
                 Get.offNamed(page);
               }
@@ -49,7 +49,7 @@ class TrashPage extends StatelessWidget {
                     errorText: presenter.errorTextDialogStream,
                     controller: _controller,
                     onSubmited: presenter.onSubmited,
-                    labelText: 'Pesquisar',
+                    labelText: R.translations.search,
                     hintText: '',
                     icon: Icons.search,
                   ),

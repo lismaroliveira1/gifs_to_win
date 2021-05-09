@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../i18n/i18n.dart';
+
 Widget builListTileOpenedWidget({
   @required Map imageGif,
   @required BuildContext context,
@@ -78,11 +80,11 @@ Widget builListTileOpenedWidget({
               onPressed: () {
                 saveImage(imageGif);
               },
-              child: Text('Salvar'),
+              child: Text(R.translations.save),
             ),
             TextButton(
               onPressed: () {},
-              child: Text('Deletar'),
+              child: Text(R.translations.share),
             ),
           ],
         ),
@@ -91,7 +93,7 @@ Widget builListTileOpenedWidget({
         padding: const EdgeInsets.only(top: 14.0),
         child: TextButton(
           onPressed: () {},
-          child: Text('Share'),
+          child: Text(R.translations.delete),
         ),
       )
     ],

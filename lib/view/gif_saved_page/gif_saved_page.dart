@@ -1,8 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_inner_drawer/inner_drawer.dart';
 import 'package:get/get.dart';
 
-import 'package:gifs_to_win/presenter/getx_saved_presenter.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_inner_drawer/inner_drawer.dart';
+
+import '../../i18n/i18n.dart';
+import '../../presenter/presenter.dart';
 
 import '../view.dart';
 
@@ -30,9 +32,8 @@ class GifSavedPage extends StatelessWidget {
         innerDrawerKey: _innerDrawerKey,
         initialValue: presenter.wayViewModeOut,
         buttonCallback: presenter.changeWayViewMode,
-        title: 'GifsSalvos',
+        title: R.translations.favorites,
       ),
-      drawer: CurstomDrawer(presenter.jumpToPage),
       body: GestureDetector(
         onTap: () => hideKeyboard(context: context),
         child: Builder(
@@ -56,7 +57,7 @@ class GifSavedPage extends StatelessWidget {
                           errorText: presenter.errorTextDialogStream,
                           controller: _controller,
                           onSubmited: presenter.onSubmited,
-                          labelText: 'Pesquisar',
+                          labelText: R.translations.search,
                           hintText: '',
                           icon: Icons.search,
                         ),

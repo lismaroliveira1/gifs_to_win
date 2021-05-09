@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inner_drawer/inner_drawer.dart';
 import 'package:get/get.dart';
+import 'package:gifs_to_win/i18n/resources.dart';
 
 import '../../presenter/presenter.dart';
 import '../view.dart';
@@ -33,7 +34,7 @@ class HomePage extends StatelessWidget {
         innerDrawerKey: _innerDrawerKey,
         initialValue: presenter.wayViewModeOut,
         buttonCallback: (value) => presenter.changeWayViewMode(value),
-        title: 'Home',
+        title: R.translations.home,
       ),
       body: Builder(
         builder: (context) {
@@ -47,18 +48,7 @@ class HomePage extends StatelessWidget {
               Get.offNamed(page);
             }
           });
-          presenter.showEditDialogStream.listen((showEditDialog) {
-            buildShowModalDialog(
-              context: context,
-              imageMap: presenter.imageDetailsMapOut,
-              controller: _controller,
-              errorText: presenter.errorTextDialogOut,
-              onChanged: (value) => presenter.validateDialogName,
-              onSubmited: (value) => presenter.onSubmited(value),
-              icon: Icons.edit,
-              saveImage: (imageToSave) => presenter.saveImage(imageToSave),
-            );
-          });
+
           return Obx(
             () => presenter.isLoadingStream
                 ? Container(
