@@ -16,7 +16,6 @@ Widget buildDrawerButtonItem({
         Duration(milliseconds: 500),
         callback(page),
       );
-      print('ok');
     },
     child: Padding(
       padding: const EdgeInsets.all(14.0),

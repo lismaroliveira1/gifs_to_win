@@ -34,7 +34,7 @@ Material buildRIghtChildDrawer({
                 Divider(),
                 buildDrawerButtonItem(
                   reverse: reverse,
-                  item: 'Home',
+                  item: 'Animais',
                   callback: (page) => routePageCallBack(page),
                   context: context,
                   icon: Icons.home,
