@@ -93,7 +93,6 @@ class ImageRepository {
 
   void initRepositorySetup() async {
     await cache.readData('setup');
-    print('ok');
   }
 
   String changeImageQuality(int value) {

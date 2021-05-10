@@ -104,17 +104,24 @@ class SetupPage extends StatelessWidget {
                         title: Text("Quantidade por página"),
                         subtitle: Text("Altere a qualidade das imagens no app"),
                         trailing: PopupMenuButton(
+                          onSelected: (value) =>
+                              presenter.changeImagesPerPage(value),
                           itemBuilder: (BuildContext context) {
                             return [
                               CheckedPopupMenuItem(
-                                value: 1,
-                                checked: true,
-                                child: Text('Lista'),
+                                value: 10,
+                                checked: presenter.imagePerPageOut == 10,
+                                child: Text('10'),
                               ),
                               CheckedPopupMenuItem(
-                                value: 2,
-                                checked: false,
-                                child: Text('Grade'),
+                                value: 30,
+                                checked: presenter.imagePerPageOut == 30,
+                                child: Text('30'),
+                              ),
+                              CheckedPopupMenuItem(
+                                value: 50,
+                                checked: presenter.imagePerPageOut == 50,
+                                child: Text('50'),
                               ),
                             ];
                           },

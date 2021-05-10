@@ -74,6 +74,7 @@ class GetXHomePresenter extends GetxController {
   void onInit() async {
     final setup = await result.cache.readData('setup');
     _imageQuality.value = setup[0]['imageQuality'];
+    _defaultLimit.value = setup[0]['imagePerPage'];
     clearValues();
     _imageList.value = await result.repository.getAll(
       limit: _defaultLimit.value,
