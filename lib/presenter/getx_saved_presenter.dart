@@ -33,6 +33,7 @@ class GetXSavedPresenter extends GetxController {
   var _imageDetailsMap = {}.obs;
   var _navigateTo = RxString('/');
   var _showEditImageDialog = false.obs;
+  var _imageQuality = 1.obs;
 
   List<Map> get imageSavedLisMapOut => _imageListSaved.toList();
   String get errorTextDialogStream => _errorTextDialog.value;
@@ -42,6 +43,7 @@ class GetXSavedPresenter extends GetxController {
   ImageModel get imageDetailsOut => _imageDetails.value;
   Stream<String> get navigateToStream => _navigateTo.stream;
   Stream<bool> get showEditDialogStream => _showEditImageDialog.stream;
+  int get imageQualityOut => _imageQuality.toInt();
 
   bool get isLoadingOut => _isLoading.value;
 
@@ -49,6 +51,8 @@ class GetXSavedPresenter extends GetxController {
   @override
   void onInit() async {
     _isLoading.value = true;
+    final setup = await result.cache.readData('setup');
+    _imageQuality.value = setup[0]['imageQuality'];
     Map _image;
     List<Map> _relateds;
     var _flag = await result.cache.readData('saved');
@@ -88,7 +92,10 @@ class GetXSavedPresenter extends GetxController {
   }
 
   void onSubmited(String value) {
-    result.repository.getImagesByName(value);
+    result.repository.getImagesByName(
+      value: value,
+      imageQuality: _imageQuality.value,
+    );
   }
 
   void clearValues() {

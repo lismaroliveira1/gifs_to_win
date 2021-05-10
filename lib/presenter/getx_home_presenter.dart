@@ -48,6 +48,7 @@ class GetXHomePresenter extends GetxController {
   var _searchName = RxString('');
   var _imageDetailsMap = {}.obs;
   var isGettingRelateds = false.obs;
+  var _imageQuality = RxInt(1);
 
   List<ImageModel> get imageListStream => _imageList.toList();
   List<ImageModel> get imageListSearchedOut => _imageListSearched.toList();
@@ -71,13 +72,20 @@ class GetXHomePresenter extends GetxController {
 
   @override
   void onInit() async {
+    final setup = await result.cache.readData('setup');
+    _imageQuality.value = setup[0]['imageQuality'];
     clearValues();
-    _imageList.value = await result.repository
-        .getAll(limit: _defaultLimit.value, offset: _offsetPage.value);
+    _imageList.value = await result.repository.getAll(
+      limit: _defaultLimit.value,
+      offset: _offsetPage.value,
+      imageQuality: _imageQuality.value,
+    );
     _imageList.forEach((element) async {
       List<Map> flag = [];
-      List<ImageModel> images =
-          await result.repository.getImagesByName(element.title.split(' ')[1]);
+      List<ImageModel> images = await result.repository.getImagesByName(
+        value: element.title.split(' ')[1],
+        imageQuality: _imageQuality.value,
+      );
       images.forEach((element) {
         flag.add(element.toMap());
       });
@@ -97,12 +105,17 @@ class GetXHomePresenter extends GetxController {
 
   Future<void> getMoreImages() async {
     _offsetPage.value++;
-    var newList =
-        await result.repository.getAll(limit: 50, offset: _offsetPage.value);
+    var newList = await result.repository.getAll(
+      limit: 50,
+      offset: _offsetPage.value,
+      imageQuality: _imageQuality.value,
+    );
     newList.forEach((element) async {
       List<Map> flag = [];
-      List<ImageModel> images =
-          await result.repository.getImagesByName(element.title.split(' ')[1]);
+      List<ImageModel> images = await result.repository.getImagesByName(
+        value: element.title.split(' ')[1],
+        imageQuality: _imageQuality.value,
+      );
       images.forEach((element) {
         flag.add(element.toMap());
       });
@@ -168,7 +181,6 @@ class GetXHomePresenter extends GetxController {
   ) async {
     List<Map> _flag = [];
     _imageListDeleted.clear();
-    //_imageListSaved.value = await result.cache.readData('deleted');
     _imageListSaved.forEach((element) {
       _flag.add(element.toMap());
     });
@@ -180,12 +192,17 @@ class GetXHomePresenter extends GetxController {
   Future<void> onSubmited(String value) async {
     _searchName.value = value;
     _errorTextDialog.value = null;
-    _imageListSearched.value = await result.repository.getImagesByName(value);
+    _imageListSearched.value = await result.repository.getImagesByName(
+      value: value,
+      imageQuality: _imageQuality.value,
+    );
     _imageListSearchedMap.clear();
     _imageListSearched.forEach((element) async {
       List<Map> flag = [];
-      List<ImageModel> images =
-          await result.repository.getImagesByName(element.title.split(' ')[1]);
+      List<ImageModel> images = await result.repository.getImagesByName(
+        value: element.title.split(' ')[1],
+        imageQuality: _imageQuality.value,
+      );
       images.forEach((element) {
         flag.add(element.toMap());
       });
@@ -215,7 +232,10 @@ class GetXHomePresenter extends GetxController {
 
   Future<void> getRelatedImages(String name) async {
     isGettingRelateds.value = true;
-    _imageListRelated = await result.repository.getImagesByName(name);
+    _imageListRelated = await result.repository.getImagesByName(
+      value: name,
+      imageQuality: _imageQuality.value,
+    );
     _imageListRelated.forEach((element) {
       _imageMapRelated.add(element.toMap());
     });

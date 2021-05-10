@@ -15,6 +15,7 @@ class GetXTrashPresenter extends GetxController {
   var _blackList = <Map>[].obs;
   var _jumpTo = RxString('/');
   var _errorTextDialog = RxString(null);
+  var _imageQuality = 1.obs;
 
   List<Map> get imageDeletedListStream => _blackList.toList();
   bool get isValidNameStream => _isValidName.value;
@@ -23,6 +24,8 @@ class GetXTrashPresenter extends GetxController {
 
   @override
   void onInit() async {
+    final setup = await result.cache.readData('setup');
+    _imageQuality = setup[0]['imageQuality'];
     _blackList.clear();
     _blackList.value = await result.cache.readData('deleted');
     super.onInit();
@@ -41,6 +44,9 @@ class GetXTrashPresenter extends GetxController {
   }
 
   void onSubmited(String value) {
-    result.repository.getImagesByName(value);
+    result.repository.getImagesByName(
+      value: value,
+      imageQuality: _imageQuality.value,
+    );
   }
 }

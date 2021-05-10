@@ -15,7 +15,7 @@ class GifSavedBindings extends Bindings {
       socialGifShare: Get.find(),
       cache: Get.find(),
     ));
-    Get.lazyPut(() => ImageRepository(client: Get.find()));
+    Get.lazyPut(() => ImageRepository(client: Get.find(), cache: Get.find()));
     Get.lazyPut(
         () => GetXSavedPresenter(result: Get.find(), commons: Get.find()));
   }

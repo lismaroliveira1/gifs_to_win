@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 
@@ -15,13 +17,17 @@ class GetXSetupPresenter extends GetxController {
   var _navigateTo = RxString('/');
   var _jumpTo = RxString('/');
   var _wayViewMode = 1.obs;
+  var _imageQuality = RxInt(1);
 
   Stream<String> get jumpToStream => _jumpTo.stream;
   int get wayViewModeOut => _wayViewMode.toInt();
   Stream<String> get navigateToStream => _navigateTo.stream;
+  int get imageQualityOut => _imageQuality.toInt();
 
   @override
   void onInit() async {
+    final setup = await result.cache.readData('setup');
+    _imageQuality.value = setup[0]['imageQuality'];
     super.onInit();
   }
 
@@ -31,5 +37,15 @@ class GetXSetupPresenter extends GetxController {
 
   void changeWayViewMode(int value) async {
     _wayViewMode.value = value;
+  }
+
+  void changeImageQuality(int value) async {
+    final setupMap = [
+      {
+        'imageQuality': value,
+      }
+    ];
+    result.cache.writeData(jsonEncode(setupMap), path: 'setup');
+    print(value);
   }
 }
