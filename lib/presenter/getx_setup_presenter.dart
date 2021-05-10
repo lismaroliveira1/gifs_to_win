@@ -12,11 +12,13 @@ class GetXSetupPresenter extends GetxController {
     @required this.commons,
   });
 
+  var _navigateTo = RxString('/');
   var _jumpTo = RxString('/');
   var _wayViewMode = 1.obs;
 
   Stream<String> get jumpToStream => _jumpTo.stream;
   int get wayViewModeOut => _wayViewMode.toInt();
+  Stream<String> get navigateToStream => _navigateTo.stream;
 
   @override
   void onInit() async {

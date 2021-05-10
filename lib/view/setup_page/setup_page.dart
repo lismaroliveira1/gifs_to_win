@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inner_drawer/inner_drawer.dart';
+import 'package:get/get.dart';
 import 'package:gifs_to_win/i18n/i18n.dart';
 
 import '../../presenter/presenter.dart';
@@ -38,6 +39,16 @@ class SetupPage extends StatelessWidget {
       ),
       body: Builder(
         builder: (context) {
+          presenter.navigateToStream.listen((page) {
+            if (page?.isNotEmpty == true) {
+              Get.toNamed(page);
+            }
+          });
+          presenter.jumpToStream.listen((page) {
+            if (page != null) {
+              Get.offNamed(page);
+            }
+          });
           return SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
