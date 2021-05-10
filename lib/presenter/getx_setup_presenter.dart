@@ -13,8 +13,10 @@ class GetXSetupPresenter extends GetxController {
   });
 
   var _jumpTo = RxString('/');
+  var _wayViewMode = 1.obs;
 
   Stream<String> get jumpToStream => _jumpTo.stream;
+  int get wayViewModeOut => _wayViewMode.toInt();
 
   @override
   void onInit() async {
@@ -23,5 +25,9 @@ class GetXSetupPresenter extends GetxController {
 
   void jumpToPage(String page) {
     _jumpTo.value = page;
+  }
+
+  void changeWayViewMode(int value) async {
+    _wayViewMode.value = value;
   }
 }
