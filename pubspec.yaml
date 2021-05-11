@@ -25,6 +25,7 @@ dependencies:
   social_share:
   image_picker:
   image_downloader:
+  adaptive_theme:
 
 dev_dependencies:
   flutter_test:

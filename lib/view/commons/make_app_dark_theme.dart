@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-ThemeData makeAppTheme() {
+ThemeData makeAppDarkTheme() {
   final _primaryColor = Color.fromRGBO(35, 45, 72, 1);
   final _primaryColorDark = Color.fromRGBO(96, 0, 39, 1);
   final _primaryColorLight = Color.fromRGBO(188, 71, 123, 1);
@@ -8,6 +8,7 @@ ThemeData makeAppTheme() {
     primaryColor: _primaryColor,
     primaryColorDark: _primaryColorDark,
     primaryColorLight: _primaryColorLight,
+    brightness: Brightness.dark,
     accentColor: _primaryColor,
     backgroundColor: Colors.white,
     textTheme: TextTheme(

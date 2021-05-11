@@ -137,24 +137,28 @@ class SetupPage extends StatelessWidget {
                       SwitchListTile(
                         title: Text("Tema escuro"),
                         subtitle: Text("Utilize o tema escuro no aplicativo"),
-                        value: true,
-                        onChanged: (bool value) {},
+                        value: presenter.themeModeOUt == 1,
+                        onChanged: (bool value) {
+                          presenter.changeAppTheme(mode: 1, context: context);
+                        },
                       ),
                       SwitchListTile(
                         title: Text("Tema claro"),
                         subtitle: Text("Utilize o tema escuro no aplicativo"),
-                        value: true,
+                        value: presenter.themeModeOUt == 2,
                         onChanged: (bool value) {
                           if (value) {
+                            presenter.changeAppTheme(mode: 2, context: context);
                           } else {}
                         },
                       ),
                       SwitchListTile(
                         title: Text("Tema do sistema"),
                         subtitle: Text("Utilize o mesmo tema que o sistema"),
-                        value: true,
+                        value: presenter.themeModeOUt == 3,
                         onChanged: (bool value) {
                           if (value) {
+                            presenter.changeAppTheme(mode: 3, context: context);
                           } else {}
                         },
                       ),
