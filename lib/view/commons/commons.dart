@@ -15,3 +15,4 @@ export './build_left_drawer_button_item.dart';
 export './build_opened_container_button.dart';
 export './make_app_light_theme.dart';
 export './make_app_dark_theme.dart';
+export './build_closed_image_grid_tile.dart';
