@@ -72,6 +72,7 @@ class GetXHomePresenter extends GetxController {
 
   @override
   void onInit() async {
+    await result.cache.verifyCache();
     final setup = await result.cache.readData('setup');
     _imageQuality.value = setup[0]['imageQuality'];
     _defaultLimit.value = setup[0]['imagePerPage'];

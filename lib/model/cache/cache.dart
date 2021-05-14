@@ -34,4 +34,18 @@ class Cache {
       return [];
     }
   }
+
+  Future<void> verifyCache() async {
+    final List<Map> setupData = await readData('setup');
+    if (setupData.length == 0) {
+      final defaultSetupMap = [
+        {
+          'imagePerPage': 30,
+          'imageQuality': 2,
+          'theme': 3,
+        }
+      ];
+      writeData(jsonEncode(defaultSetupMap), path: 'setup');
+    }
+  }
 }
