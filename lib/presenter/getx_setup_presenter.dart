@@ -50,7 +50,6 @@ class GetXSetupPresenter extends GetxController {
     var setup = await result.cache.readData('setup');
     setup[0]['imageQuality'] = value;
     result.cache.writeData(jsonEncode(setup), path: 'setup');
-    print(value);
   }
 
   void changeImagesPerPage(int value) async {
@@ -73,5 +72,9 @@ class GetXSetupPresenter extends GetxController {
         AdaptiveTheme.of(context).setSystem();
         break;
     }
+  }
+
+  void writeSetupStorage(Map map) {
+    
   }
 }

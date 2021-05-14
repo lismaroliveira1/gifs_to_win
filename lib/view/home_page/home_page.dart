@@ -159,6 +159,26 @@ class HomePage extends StatelessWidget {
                                           0,
                                   searchName: presenter.searchNameOut,
                                   closeCallback: presenter.closeSearch,
+                                  appsInstalleds: presenter.appInstalledMapOut,
+                                  deleteImage:
+                                      (Map<dynamic, dynamic> imageMap) {},
+                                  saveImage: (imageMap) =>
+                                      presenter.saveImage(imageMap),
+                                  shareImage:
+                                      (Map<dynamic, dynamic> imageMap) {},
+                                  shareByFacebook: (imageMap) =>
+                                      presenter.shareByFacebook(imageMap),
+                                  shareByInstagram: (imageMap) =>
+                                      presenter.shareByInstagram(imageMap),
+                                  shareByMessenger: (imageMap) =>
+                                      presenter.shareByMessenger(imageMap),
+                                  shareByTwitter: (imageMap) =>
+                                      presenter.shareByTwitter(imageMap),
+                                  shareByWhatsApp: (imageMap) =>
+                                      presenter.shareByWhatsApp(imageMap),
+                                  moveToBlakiList: presenter.moveToBlakiList,
+                                  editImageTitleDialog:
+                                      presenter.showEditDialog,
                                 )
                               : buildGridImages(
                                   showGifDetails: (imageMap) =>
@@ -170,6 +190,26 @@ class HomePage extends StatelessWidget {
                                           0,
                                   searchName: presenter.searchNameOut,
                                   closeCallback: presenter.closeSearch,
+                                  appsInstalleds: presenter.appInstalledMapOut,
+                                  deleteImage:
+                                      (Map<dynamic, dynamic> imageMap) {},
+                                  saveImage: (imageMap) =>
+                                      presenter.saveImage(imageMap),
+                                  shareImage:
+                                      (Map<dynamic, dynamic> imageMap) {},
+                                  shareByFacebook: (imageMap) =>
+                                      presenter.shareByFacebook(imageMap),
+                                  shareByInstagram: (imageMap) =>
+                                      presenter.shareByInstagram(imageMap),
+                                  shareByMessenger: (imageMap) =>
+                                      presenter.shareByMessenger(imageMap),
+                                  shareByTwitter: (imageMap) =>
+                                      presenter.shareByTwitter(imageMap),
+                                  shareByWhatsApp: (imageMap) =>
+                                      presenter.shareByWhatsApp(imageMap),
+                                  moveToBlakiList: presenter.moveToBlakiList,
+                                  editImageTitleDialog:
+                                      presenter.showEditDialog,
                                 ),
                     ],
                   ),

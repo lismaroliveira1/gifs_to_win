@@ -1,5 +1,5 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
 import '../view.dart';
@@ -11,6 +11,17 @@ Widget buildGridImages({
   @required bool isSearch,
   @required String searchName,
   @required Function closeCallback,
+  @required Function editImageTitleDialog,
+  @required Function(Map imageMap) moveToBlakiList,
+  @required Function(Map imageMap) saveImage,
+  @required Function(Map imageMap) deleteImage,
+  @required Function(Map imageMap) shareImage,
+  @required Map appsInstalleds,
+  @required Function shareByFacebook,
+  @required Function shareByInstagram,
+  @required Function shareByWhatsApp,
+  @required Function shareByTwitter,
+  @required Function shareByMessenger,
 }) =>
     Expanded(
       child: LazyLoadScrollView(
@@ -30,53 +41,45 @@ Widget buildGridImages({
                 ),
                 itemCount: imageList.length,
                 itemBuilder: (context, index) {
+                  print(imageList[index]);
                   double edge = MediaQuery.of(context).size.width * 0.4;
                   ScaffoldMessengerState _snackBarContext =
                       ScaffoldMessenger.of(context);
                   return InkWell(
-                    onTap: () {
-                      hideKeyboard(context: context);
-                      _snackBarContext.hideCurrentSnackBar();
-                      showGifDetails(imageList[index]);
-                    },
-                    child: Card(
-                      elevation: 12,
-                      child: Center(
-                        child: Expanded(
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 4),
-                                child: Container(
-                                  height: edge * 0.85,
-                                  width: edge * 0.85,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image:
-                                          NetworkImage(imageList[index]['url']),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                imageList[index]['title'],
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.itim(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black54,
-                                ),
-                                overflow: TextOverflow.fade,
-                                softWrap: true,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
+                      onTap: () {
+                        hideKeyboard(context: context);
+                        _snackBarContext.hideCurrentSnackBar();
+                        showGifDetails(imageList[index]);
+                      },
+                      child: OpenContainer(
+                        closedBuilder: (context, action) =>
+                            buildClosedImageGridTile(edge, imageList, index),
+                        openBuilder: (context, action) {
+                          List<Map<dynamic, dynamic>> _flag =
+                              imageList[index]['relateds'];
+                          return builListTileOpenedWidget(
+                            imageGif: imageList[index],
+                            context: context,
+                            editImageTitleDialog: editImageTitleDialog,
+                            moveToBlakiList: moveToBlakiList,
+                            listRelatedImagesMap: _flag,
+                            deleteImage: (imageMap) => deleteImage(imageMap),
+                            saveImage: (imageMap) => saveImage(imageMap),
+                            shareImage: (imageMap) => shareImage(imageMap),
+                            appsInstalleds: appsInstalleds,
+                            shareByFacebook: (imageMap) =>
+                                shareByFacebook(imageMap),
+                            shareByInstagram: (imageMap) =>
+                                shareByInstagram(imageMap),
+                            shareByWhatsApp: (imageMap) =>
+                                shareByWhatsApp(imageMap),
+                            shareByTwitter: (imageMap) =>
+                                shareByTwitter(imageMap),
+                            shareByMessenger: (imageMap) =>
+                                shareByMessenger(imageMap),
+                          );
+                        },
+                      ));
                 },
               ),
             ),
@@ -84,3 +87,34 @@ Widget buildGridImages({
         ),
       ),
     );
+
+Widget buildClosedImageGridTile(double edge, List<Map> imageList, int index) {
+  return ClipRRect(
+    borderRadius: BorderRadius.all(Radius.circular(8)),
+    child: Card(
+      elevation: 12,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: Container(
+                height: edge,
+                width: edge,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(imageList[index]['image']['url']),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}

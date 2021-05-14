@@ -1,26 +1,44 @@
 PODS:
   - Flutter (1.0.0)
+  - image_downloader (0.0.1):
+    - Flutter
+  - image_picker (0.0.1):
+    - Flutter
   - path_provider (0.0.1):
+    - Flutter
+  - shared_preferences (0.0.1):
     - Flutter
   - social_share (0.0.1):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - image_downloader (from `.symlinks/plugins/image_downloader/ios`)
+  - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - social_share (from `.symlinks/plugins/social_share/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  image_downloader:
+    :path: ".symlinks/plugins/image_downloader/ios"
+  image_picker:
+    :path: ".symlinks/plugins/image_picker/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
+  shared_preferences:
+    :path: ".symlinks/plugins/shared_preferences/ios"
   social_share:
     :path: ".symlinks/plugins/social_share/ios"
 
 SPEC CHECKSUMS:
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  image_downloader: 73e190d6c9f286f2649554051348d9cb319cd4b3
+  image_picker: 50e7c7ff960e5f58faa4d1f4af84a771c671bc4a
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   social_share: 702a5e3842addd22db515aa9e1e00a4b80a0296d
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
