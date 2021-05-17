@@ -22,6 +22,7 @@ class GetXSetupPresenter extends GetxController {
   var _imageQuality = RxInt(1);
   var _imagePerPage = RxInt(30);
   var _themeMode = 1.obs;
+  var _notificationMode = 1.obs;
 
   Stream<String> get jumpToStream => _jumpTo.stream;
   int get wayViewModeOut => _wayViewMode.toInt();
@@ -29,6 +30,7 @@ class GetXSetupPresenter extends GetxController {
   int get imageQualityOut => _imageQuality.toInt();
   int get imagePerPageOut => _imagePerPage.toInt();
   int get themeModeOUt => _themeMode.toInt();
+  int get notificationModeOut => _notificationMode.toInt();
 
   @override
   void onInit() async {
@@ -48,16 +50,13 @@ class GetXSetupPresenter extends GetxController {
   }
 
   void changeImageQuality(int value) async {
-    var setup = await result.cache.readData('setup');
-    setup[0]['imageQuality'] = value;
-    result.cache.writeData(jsonEncode(setup), path: 'setup');
+    await writeFileStorage('imageQuality', value);
+    _imageQuality.value = value;
   }
 
   void changeImagesPerPage(int value) async {
-    var setup = await result.cache.readData('setup');
-    setup[0]['imagePerPage'] = value;
+    await writeFileStorage('imagePerPage', value);
     _imagePerPage.value = value;
-    await result.cache.writeData(jsonEncode(setup), path: 'setup');
   }
 
   void changeAppTheme(
@@ -74,11 +73,18 @@ class GetXSetupPresenter extends GetxController {
         AdaptiveTheme.of(context).setSystem();
         break;
     }
-    var setup = await result.cache.readData('setup');
-    setup[0]['themeMode'] = mode;
+    await writeFileStorage('themeMode', mode);
     _themeMode.value = mode;
-    await result.cache.writeData(jsonEncode(setup), path: 'setup');
   }
 
-  void writeSetupStorage(Map map) {}
+  void changeNotificationMode(int mode) async {
+    await writeFileStorage('notificationMode', mode);
+    _notificationMode.value = mode;
+  }
+
+  Future<void> writeFileStorage(String key, dynamic value) async {
+    var setup = await result.cache.readData('setup');
+    setup[0][key] = value;
+    await result.cache.writeData(jsonEncode(setup), path: 'setup');
+  }
 }

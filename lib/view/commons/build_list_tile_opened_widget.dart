@@ -24,6 +24,19 @@ Widget builListTileOpenedWidget({
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Padding(
+          padding: const EdgeInsets.only(right: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                  icon: Icon(Icons.close),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+            ],
+          ),
+        ),
+        Padding(
           padding: const EdgeInsets.symmetric(
             vertical: 18.0,
             horizontal: 18,
@@ -66,7 +79,7 @@ Widget builListTileOpenedWidget({
           ),
         ),
         Container(
-          height: 150,
+          height: 100,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: listRelatedImagesMap

@@ -45,6 +45,7 @@ Widget buildImageListView({
                         hideKeyboard(context: context);
                       },
                       child: OpenContainer(
+                        transitionDuration: Duration(milliseconds: 300),
                         transitionType: ContainerTransitionType.fadeThrough,
                         closedBuilder: (context, action) {
                           return builListTileClosedWidget(imageGif['image']);

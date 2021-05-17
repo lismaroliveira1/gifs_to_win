@@ -13,7 +13,6 @@ import './view/view.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final setupMap = await readData('setup');
-  print(setupMap);
   runApp(Gipher(setupMap));
 }
 
@@ -91,4 +90,5 @@ Future<List<Map>> readData(String path) async {
   } catch (e) {
     return [];
   }
+  
 }
