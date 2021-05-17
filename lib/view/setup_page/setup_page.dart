@@ -50,8 +50,8 @@ class SetupPage extends StatelessWidget {
               Get.offNamed(page);
             }
           });
-          return SafeArea(
-            child: Padding(
+          return Obx(
+            () => Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [

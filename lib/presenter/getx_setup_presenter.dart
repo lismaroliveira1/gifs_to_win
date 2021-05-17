@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 
 import '../model/model.dart';
-import 'presenter.dart';
+import './presenter.dart';
 
 class GetXSetupPresenter extends GetxController {
   final ImageResults result;
@@ -21,7 +21,7 @@ class GetXSetupPresenter extends GetxController {
   var _wayViewMode = 1.obs;
   var _imageQuality = RxInt(1);
   var _imagePerPage = RxInt(30);
-  var _themeMode = 3.obs;
+  var _themeMode = 1.obs;
 
   Stream<String> get jumpToStream => _jumpTo.stream;
   int get wayViewModeOut => _wayViewMode.toInt();
@@ -35,6 +35,7 @@ class GetXSetupPresenter extends GetxController {
     final setup = await result.cache.readData('setup');
     _imageQuality.value = setup[0]['imageQuality'];
     _imagePerPage.value = setup[0]['imagePerPage'];
+    _themeMode.value = setup[0]['themeMode'];
     super.onInit();
   }
 
@@ -59,7 +60,8 @@ class GetXSetupPresenter extends GetxController {
     await result.cache.writeData(jsonEncode(setup), path: 'setup');
   }
 
-  void changeAppTheme({@required int mode, @required BuildContext context}) {
+  void changeAppTheme(
+      {@required int mode, @required BuildContext context}) async {
     _themeMode.value = mode;
     switch (mode) {
       case 1:
@@ -72,9 +74,11 @@ class GetXSetupPresenter extends GetxController {
         AdaptiveTheme.of(context).setSystem();
         break;
     }
+    var setup = await result.cache.readData('setup');
+    setup[0]['themeMode'] = mode;
+    _themeMode.value = mode;
+    await result.cache.writeData(jsonEncode(setup), path: 'setup');
   }
 
-  void writeSetupStorage(Map map) {
-    
-  }
+  void writeSetupStorage(Map map) {}
 }
