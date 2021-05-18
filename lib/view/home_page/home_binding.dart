@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 
-import '../../model/model.dart';
 import '../../presenter/presenter.dart';
 
 class HomeBinding implements Bindings {
