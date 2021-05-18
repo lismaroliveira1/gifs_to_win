@@ -72,4 +72,12 @@ void main() {
       expect(response, throwsA(HttpError.serverError));
     });
   });
+  group('tests for getAll method', () {
+    test('Should returns a valid data if client returns 200 status code',
+        () async {
+      final response = await sut.getRandom(imageQuality);
+      expect(response.length, validData['data'].length);
+    });
+    
+  });
 }
