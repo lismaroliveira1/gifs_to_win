@@ -63,5 +63,13 @@ void main() {
           sut.getAll(limit: limit, offset: offset, imageQuality: imageQuality);
       expect(response, throwsA(HttpError.unexpected));
     });
+    test('Should throws ServerError if client returns 500 status code',
+        () async {
+      mockRequest()
+          .thenAnswer((_) async => Response(jsonEncode(validData), 500));
+      final response =
+          sut.getAll(limit: limit, offset: offset, imageQuality: imageQuality);
+      expect(response, throwsA(HttpError.serverError));
+    });
   });
 }
