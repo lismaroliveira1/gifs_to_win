@@ -14,11 +14,18 @@ class CacheSpy extends Mock implements Cache {}
 
 void main() {
   Future<Response> validaData() async => Response(jsonEncode(validData), 200);
+
   ClientSpy client;
   CacheSpy cache;
   String url;
   ImageRepository sut;
   int limit, offset, imageQuality;
+
+  PostExpectation mockRequest() => when(client.get(any));
+  void mockValidData() {
+    mockRequest().thenAnswer((_) async => validaData());
+  }
+
   setUp(() {
     client = ClientSpy();
     cache = CacheSpy();
@@ -31,12 +38,19 @@ void main() {
     limit = faker.randomGenerator.integer(50, min: 1);
     offset = faker.randomGenerator.integer(5, min: 1);
     imageQuality = faker.randomGenerator.integer(7, min: 1);
+    mockValidData();
   });
   test('Should returns a valid data if client returns 200 status code',
       () async {
-    when(client.get(any)).thenAnswer((_) async => validaData());
     final response = await sut.getAll(
         limit: limit, offset: offset, imageQuality: imageQuality);
     expect(response.length, validData['data'].length);
+  });
+  test('Should throws UnexpectedError if client returns 400 status code',
+      () async {
+    mockRequest().thenAnswer((_) async => Response(jsonEncode(validData), 400));
+    final response =
+        sut.getAll(limit: limit, offset: offset, imageQuality: imageQuality);
+    expect(response, throwsA(HttpError.unexpected));
   });
 }

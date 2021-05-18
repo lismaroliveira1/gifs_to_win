@@ -16,17 +16,18 @@ class ImageRepository {
     @required this.cache,
     @required this.baseUrl,
   });
- 
+
   Future<List<ImageModel>> getAll({
     @required int limit,
     @required int offset,
     @required int imageQuality,
   }) async {
     String url = "$baseUrl$api_key&limit=$limit&rating=g&offset=$offset";
-    print(url);
     final response = await client.get(
       Uri.parse(url),
     );
+    if (response.statusCode == 400 || response.statusCode == 401)
+      throw HttpError.unexpected;
     return mapToGifList(
       response: jsonDecode(response.body),
       imageQuality: imageQuality,
@@ -50,16 +51,12 @@ class ImageRepository {
     @required String value,
     @required int imageQuality,
   }) async {
-    try {
-      String url = "$baseUrlSearch$api_key&q=$value&limit=50&lang=pt-br";
-      final response = await client.get(Uri.parse(url));
-      return mapToGifList(
-        response: jsonDecode(response.body),
-        imageQuality: imageQuality,
-      );
-    } on HttpError {
-      throw HttpError.unexpected;
-    }
+    String url = "$baseUrlSearch$api_key&q=$value&limit=50&lang=pt-br";
+    final response = await client.get(Uri.parse(url));
+    return mapToGifList(
+      response: jsonDecode(response.body),
+      imageQuality: imageQuality,
+    );
   }
 
   List<ImageModel> mapToGifList({
