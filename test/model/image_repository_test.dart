@@ -72,12 +72,18 @@ void main() {
       expect(response, throwsA(HttpError.serverError));
     });
   });
-  group('tests for getAll method', () {
+  group('tests for getRandom method', () {
     test('Should returns a valid data if client returns 200 status code',
         () async {
       final response = await sut.getRandom(imageQuality);
       expect(response.length, validData['data'].length);
     });
-    
+    test('Should throws UnexpectedError if client returns 400 status code',
+        () async {
+      mockRequest()
+          .thenAnswer((_) async => Response(jsonEncode(validData), 400));
+      final response = sut.getRandom(imageQuality);
+      expect(response, throwsA(HttpError.unexpected));
+    });
   });
 }

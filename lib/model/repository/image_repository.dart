@@ -40,17 +40,13 @@ class ImageRepository {
   }
 
   Future<List<ImageModel>> getRandom(int imageQuality) async {
-    try {
-      String url = "$baseUrl$api_key&tag=&rating=g";
-      final response = await client.get(Uri.parse(url));
-      verifyResponse(response);
-      return mapToGifList(
-        response: jsonDecode(response.body),
-        imageQuality: imageQuality,
-      );
-    } on HttpError {
-      throw HttpError.unexpected;
-    }
+    String url = "$baseUrl$api_key&tag=&rating=g";
+    final response = await client.get(Uri.parse(url));
+    verifyResponse(response);
+    return mapToGifList(
+      response: jsonDecode(response.body),
+      imageQuality: imageQuality,
+    );
   }
 
   Future<List<ImageModel>> getImagesByName({
