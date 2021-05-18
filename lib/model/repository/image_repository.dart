@@ -10,28 +10,27 @@ import 'api_key.dart';
 class ImageRepository {
   final Client client;
   final Cache cache;
+  final String baseUrl;
   ImageRepository({
     @required this.client,
     @required this.cache,
+    @required this.baseUrl,
   });
-  List<ImageModel> _gifList;
+ 
   Future<List<ImageModel>> getAll({
     @required int limit,
     @required int offset,
     @required int imageQuality,
   }) async {
-    try {
-      String url = "$baseUrl$api_key&limit=$limit&rating=g&offset=$offset";
-      final response = await client.get(
-        Uri.parse(url),
-      );
-      return mapToGifList(
-        response: jsonDecode(response.body),
-        imageQuality: imageQuality,
-      );
-    } on HttpError {
-      throw HttpError.unexpected;
-    }
+    String url = "$baseUrl$api_key&limit=$limit&rating=g&offset=$offset";
+    print(url);
+    final response = await client.get(
+      Uri.parse(url),
+    );
+    return mapToGifList(
+      response: jsonDecode(response.body),
+      imageQuality: imageQuality,
+    );
   }
 
   Future<List<ImageModel>> getRandom(int imageQuality) async {
@@ -67,7 +66,7 @@ class ImageRepository {
     @required Map response,
     @required int imageQuality,
   }) {
-    _gifList = [];
+    List<ImageModel> _gifList = [];
     if (response == null || !response.containsKey('data'))
       throw HttpError.invalidData;
     List<dynamic> gifsMap = response['data'];

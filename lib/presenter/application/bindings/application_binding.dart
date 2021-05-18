@@ -11,7 +11,11 @@ class ApplicationBinding extends Bindings {
     Get.lazyPut(() => Client());
     Get.put(Cache());
     Get.put(SocialGifShare());
-    Get.put(ImageRepository(client: Get.find(), cache: Get.find()));
+    Get.put(ImageRepository(
+      client: Get.find(),
+      cache: Get.find(),
+      baseUrl: baseUrl,
+    ));
     Get.put(CommonController());
     Get.put(ImageResults(
       repository: Get.find(),
