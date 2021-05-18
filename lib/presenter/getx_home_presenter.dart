@@ -49,6 +49,8 @@ class GetXHomePresenter extends GetxController {
   var _imageDetailsMap = {}.obs;
   var isGettingRelateds = false.obs;
   var _imageQuality = RxInt(1);
+  var _repositoryError = false.obs;
+  var _cacheEmpityError = false.obs;
 
   List<ImageModel> get imageListStream => _imageList.toList();
   List<ImageModel> get imageListSearchedOut => _imageListSearched.toList();
@@ -68,6 +70,8 @@ class GetXHomePresenter extends GetxController {
   int get wayViewModeOut => _wayViewMode.toInt();
   bool get isValidNameOut => _isValidName.value;
   bool get isLoadingStream => _isLoading.value;
+  bool get repositoryErrorOut => _repositoryError.value;
+  bool get cacheEmpityErrorOut => _cacheEmpityError.value;
   String get searchNameOut => _searchName.value;
 
   @override
@@ -77,25 +81,35 @@ class GetXHomePresenter extends GetxController {
     _imageQuality.value = setup[0]['imageQuality'];
     _defaultLimit.value = setup[0]['imagePerPage'];
     clearValues();
-    _imageList.value = await result.repository.getAll(
-      limit: _defaultLimit.value,
-      offset: _offsetPage.value,
-      imageQuality: _imageQuality.value,
-    );
-    _imageList.forEach((element) async {
-      List<Map> flag = [];
-      List<ImageModel> images = await result.repository.getImagesByName(
-        value: element.title.split(' ')[1],
+    await result.cache.writeData(jsonEncode({}), path: 'off_images');
+    try {
+      _imageList.value = await result.repository.getAll(
+        limit: _defaultLimit.value,
+        offset: _offsetPage.value,
         imageQuality: _imageQuality.value,
       );
-      images.forEach((element) {
-        flag.add(element.toMap());
+      _imageList.forEach((element) async {
+        List<Map> flag = [];
+        List<ImageModel> images = await result.repository.getImagesByName(
+          value: element.title.split(' ')[1],
+          imageQuality: _imageQuality.value,
+        );
+        images.forEach((element) {
+          flag.add(element.toMap());
+        });
+        _imageListMap.add({
+          'image': element.toMap(),
+          'relateds': flag,
+        });
+        await result.cache
+            .writeData(jsonEncode(_imageListMap), path: 'off_images');
       });
-      _imageListMap.add({
-        'image': element.toMap(),
-        'relateds': flag,
-      });
-    });
+    } on HttpError {
+      _imageListMap = await result.cache.readData('off_images');
+      _repositoryError.value = true;
+      if (_imageListMap == null || _imageListMap.isEmpty)
+        _cacheEmpityError.value = true;
+    }
     _isLoading.value = false;
     _appInstalledsMap.value = await result.socialGifShare.checkSocialApps();
     super.onInit();

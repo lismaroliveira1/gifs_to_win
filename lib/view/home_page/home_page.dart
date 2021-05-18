@@ -59,7 +59,6 @@ class HomePage extends StatelessWidget {
               Get.offNamed(page);
             }
           });
-
           return Obx(
             () => presenter.isLoadingStream
                 ? Container(
@@ -78,6 +77,14 @@ class HomePage extends StatelessWidget {
                         hintText: 'Cachorros',
                         labelText: 'Pesquisar',
                       ),
+                      presenter.repositoryErrorOut
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text('Modo Offline'),
+                              ],
+                            )
+                          : Container(),
                       presenter.wayViewModeOut == 1
                           ? presenter.imageListSearchedMapOut.length > 0
                               ? Expanded(

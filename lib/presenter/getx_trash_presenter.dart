@@ -25,7 +25,7 @@ class GetXTrashPresenter extends GetxController {
   @override
   void onInit() async {
     final setup = await result.cache.readData('setup');
-    _imageQuality = setup[0]['imageQuality'];
+    _imageQuality.value = setup[0]['imageQuality'];
     _blackList.clear();
     _blackList.value = await result.cache.readData('deleted');
     super.onInit();
