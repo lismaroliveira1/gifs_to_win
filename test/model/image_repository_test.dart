@@ -85,5 +85,12 @@ void main() {
       final response = sut.getRandom(imageQuality);
       expect(response, throwsA(HttpError.unexpected));
     });
+    test('Should throws UnexpectedError if client returns 404 status code',
+        () async {
+      mockRequest()
+          .thenAnswer((_) async => Response(jsonEncode(validData), 404));
+      final response = sut.getRandom(imageQuality);
+      expect(response, throwsA(HttpError.unexpected));
+    });
   });
 }
