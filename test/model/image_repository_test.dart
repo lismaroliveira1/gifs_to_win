@@ -108,5 +108,13 @@ void main() {
           await sut.getImagesByName(value: name, imageQuality: imageQuality);
       expect(response.length, validData['data'].length);
     });
+    test('Should throws UnexpectedError if client returns 400 status code',
+        () async {
+      mockRequest()
+          .thenAnswer((_) async => Response(jsonEncode(validData), 400));
+      final response =
+          sut.getImagesByName(value: name, imageQuality: imageQuality);
+      expect(response, throwsA(HttpError.unexpected));
+    });
   });
 }

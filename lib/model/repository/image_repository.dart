@@ -55,6 +55,7 @@ class ImageRepository {
   }) async {
     String url = "$baseUrlSearch$api_key&q=$value&limit=50&lang=pt-br";
     final response = await client.get(Uri.parse(url));
+    verifyResponse(response);
     return mapToGifList(
       response: jsonDecode(response.body),
       imageQuality: imageQuality,
