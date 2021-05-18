@@ -40,17 +40,28 @@ void main() {
     imageQuality = faker.randomGenerator.integer(7, min: 1);
     mockValidData();
   });
-  test('Should returns a valid data if client returns 200 status code',
-      () async {
-    final response = await sut.getAll(
-        limit: limit, offset: offset, imageQuality: imageQuality);
-    expect(response.length, validData['data'].length);
-  });
-  test('Should throws UnexpectedError if client returns 400 status code',
-      () async {
-    mockRequest().thenAnswer((_) async => Response(jsonEncode(validData), 400));
-    final response =
-        sut.getAll(limit: limit, offset: offset, imageQuality: imageQuality);
-    expect(response, throwsA(HttpError.unexpected));
+  group('tests for getAll method', () {
+    test('Should returns a valid data if client returns 200 status code',
+        () async {
+      final response = await sut.getAll(
+          limit: limit, offset: offset, imageQuality: imageQuality);
+      expect(response.length, validData['data'].length);
+    });
+    test('Should throws UnexpectedError if client returns 400 status code',
+        () async {
+      mockRequest()
+          .thenAnswer((_) async => Response(jsonEncode(validData), 400));
+      final response =
+          sut.getAll(limit: limit, offset: offset, imageQuality: imageQuality);
+      expect(response, throwsA(HttpError.unexpected));
+    });
+    test('Should throws UnexpectedError if client returns 404 status code',
+        () async {
+      mockRequest()
+          .thenAnswer((_) async => Response(jsonEncode(validData), 404));
+      final response =
+          sut.getAll(limit: limit, offset: offset, imageQuality: imageQuality);
+      expect(response, throwsA(HttpError.unexpected));
+    });
   });
 }

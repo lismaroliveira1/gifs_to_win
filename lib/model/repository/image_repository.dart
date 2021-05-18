@@ -26,18 +26,24 @@ class ImageRepository {
     final response = await client.get(
       Uri.parse(url),
     );
-    if (response.statusCode == 400 || response.statusCode == 401)
-      throw HttpError.unexpected;
+    verifyResponse(response);
     return mapToGifList(
       response: jsonDecode(response.body),
       imageQuality: imageQuality,
     );
   }
 
+  void verifyResponse(Response response) {
+    if (response.statusCode == 400 || response.statusCode == 404)
+      throw HttpError.unexpected;
+    if (response.statusCode == 500) throw HttpError.serverError;
+  }
+
   Future<List<ImageModel>> getRandom(int imageQuality) async {
     try {
       String url = "$baseUrl$api_key&tag=&rating=g";
       final response = await client.get(Uri.parse(url));
+      verifyResponse(response);
       return mapToGifList(
         response: jsonDecode(response.body),
         imageQuality: imageQuality,
