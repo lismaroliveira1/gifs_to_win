@@ -17,7 +17,7 @@ void main() {
 
   ClientSpy client;
   CacheSpy cache;
-  String url;
+  String url, name;
   ImageRepository sut;
   int limit, offset, imageQuality;
 
@@ -36,6 +36,7 @@ void main() {
       baseUrl: url,
     );
     limit = faker.randomGenerator.integer(50, min: 1);
+    name = faker.person.name();
     offset = faker.randomGenerator.integer(5, min: 1);
     imageQuality = faker.randomGenerator.integer(7, min: 1);
     mockValidData();
@@ -98,6 +99,14 @@ void main() {
           .thenAnswer((_) async => Response(jsonEncode(validData), 500));
       final response = sut.getRandom(imageQuality);
       expect(response, throwsA(HttpError.serverError));
+    });
+  });
+  group('tests for getImagesByName method', () {
+    test('Should returns a valid data if client returns 200 status code',
+        () async {
+      final response =
+          await sut.getImagesByName(value: name, imageQuality: imageQuality);
+      expect(response.length, validData['data'].length);
     });
   });
 }
