@@ -92,5 +92,12 @@ void main() {
       final response = sut.getRandom(imageQuality);
       expect(response, throwsA(HttpError.unexpected));
     });
+    test('Should throws ServerError if client returns 500 status code',
+        () async {
+      mockRequest()
+          .thenAnswer((_) async => Response(jsonEncode(validData), 500));
+      final response = sut.getRandom(imageQuality);
+      expect(response, throwsA(HttpError.serverError));
+    });
   });
 }
