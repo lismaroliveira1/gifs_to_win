@@ -3,3 +3,4 @@ export './commons/commons.dart';
 export './gif_saved_page/gif_saved.dart';
 export './trash_page/trash.dart';
 export './setup_page/setup.dart';
+export './splash_page/splash.dart';

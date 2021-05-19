@@ -26,6 +26,7 @@ dependencies:
   image_picker:
   image_downloader:
   adaptive_theme:
+  animated_text_kit:
 
 dev_dependencies:
   flutter_test:

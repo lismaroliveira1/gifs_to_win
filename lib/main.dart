@@ -31,8 +31,13 @@ class Gipher extends StatelessWidget {
         darkTheme: darkTheme,
         debugShowCheckedModeBanner: false,
         initialBinding: ApplicationBinding(),
-        initialRoute: '/',
+        initialRoute: '/splash',
         getPages: [
+          GetPage(
+            name: '/splash',
+            binding: SplashBinding(),
+            page: () => SplashPage(presenter: Get.find()),
+          ),
           GetPage(
             name: '/',
             binding: HomeBinding(),
@@ -90,5 +95,4 @@ Future<List<Map>> readData(String path) async {
   } catch (e) {
     return [];
   }
-  
 }
