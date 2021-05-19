@@ -13,20 +13,7 @@ AppBar buildAppBar({
   return AppBar(
     centerTitle: true,
     elevation: 8,
-    title: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          height: 60,
-          width: 60,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-            image: AssetImage('assets/eagle_image.gif'),
-          )),
-        ),
-        Text(title),
-      ],
-    ),
+    title: Text(title),
     actions: [
       buildPopupMenuButton(
         callback: buttonCallback,
