@@ -11,9 +11,16 @@ class GetXSplashPresenter extends GetxController {
     @required this.result,
     @required this.commons,
   });
+  var _navigateTo = RxString('/');
+
+  Stream<String> get navigateToStream => _navigateTo.stream;
 
   @override
   void onInit() async {
     super.onInit();
+  }
+
+  void navigateToPage(String page) {
+    _navigateTo.value = page;
   }
 }

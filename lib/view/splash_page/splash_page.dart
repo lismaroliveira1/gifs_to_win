@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gifs_to_win/presenter/presenter.dart';
 
 class SplashPage extends StatelessWidget {
@@ -10,15 +11,20 @@ class SplashPage extends StatelessWidget {
     return Scaffold(
       body: Builder(
         builder: (context) {
+          presenter.navigateToStream.listen((page) {
+            if (page?.isNotEmpty == true) {
+              Get.offAllNamed(page);
+            }
+          });
           return Center(
             child: Container(
               child: AnimatedTextKit(
+                onFinished: () => presenter.navigateToPage('/'),
                 animatedTexts: [
-                  FadeAnimatedText(
-                    'Choose',
-                    textStyle:
-                        TextStyle(fontSize: 38.0, fontWeight: FontWeight.bold),
-                  ),
+                  FadeAnimatedText('Choose',
+                      textStyle: TextStyle(
+                          fontSize: 38.0, fontWeight: FontWeight.bold),
+                      duration: Duration(milliseconds: 1200)),
                   FadeAnimatedText(
                     'and send by',
                     textStyle:
@@ -30,7 +36,7 @@ class SplashPage extends StatelessWidget {
                       fontSize: 32.0,
                       fontWeight: FontWeight.bold,
                     ),
-                    speed: const Duration(milliseconds: 300),
+                    speed: const Duration(milliseconds: 100),
                   ),
                 ],
                 totalRepeatCount: 1,
