@@ -19,25 +19,27 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double _edge = MediaQuery.of(context).size.width;
-    return buildCustomDrawer(
-      key: _innerDrawerKey,
-      scaffold: buildScaffold(context),
-      rightChild: buildRightChildHomeDrawer(
-        callback: presenter.filterCallback,
-        context: context,
-        reverse: false,
-        edge: _edge,
-      ),
-      leftChild: buildLeftChildDrawer(
-        edge: _edge,
-        routePageCallBack: presenter.jumpToPage,
-        context: context,
-        reverse: true,
+    return Obx(
+      () => buildCustomDrawer(
+        key: _innerDrawerKey,
+        scaffold: buildScaffold(context),
+        rightChild: buildRightChildHomeDrawer(
+          callback: presenter.filterCallback,
+          context: context,
+          reverse: false,
+          edge: _edge,
+        ),
+        leftChild: buildLeftChildDrawer(
+          edge: _edge,
+          routePageCallBack: presenter.jumpToPage,
+          context: context,
+          reverse: true,
+        ),
       ),
     );
   }
 
-  Scaffold buildScaffold(BuildContext context) {
+  Widget buildScaffold(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       appBar: buildAppBar(

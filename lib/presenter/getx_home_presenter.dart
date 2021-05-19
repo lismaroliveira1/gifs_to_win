@@ -78,6 +78,7 @@ class GetXHomePresenter extends GetxController {
     final setup = await result.cache.readData('setup');
     _imageQuality.value = setup[0]['imageQuality'];
     _defaultLimit.value = setup[0]['imagePerPage'];
+    _wayViewMode.value = setup[0]['wayViewMode'];
     clearValues();
     await result.cache.writeData(jsonEncode({}), path: 'off_images');
     try {
