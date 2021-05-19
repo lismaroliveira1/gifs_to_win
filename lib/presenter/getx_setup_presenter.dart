@@ -50,12 +50,12 @@ class GetXSetupPresenter extends GetxController {
   }
 
   void changeImageQuality(int value) async {
-    await writeFileStorage('imageQuality', value);
+    await writeFileStorage(key: 'imageQuality', value: value, path: 'setup');
     _imageQuality.value = value;
   }
 
   void changeImagesPerPage(int value) async {
-    await writeFileStorage('imagePerPage', value);
+    await writeFileStorage(key: 'imagePerPage', value: value, path: 'setup');
     _imagePerPage.value = value;
   }
 
@@ -73,18 +73,22 @@ class GetXSetupPresenter extends GetxController {
         AdaptiveTheme.of(context).setSystem();
         break;
     }
-    await writeFileStorage('themeMode', mode);
+    await writeFileStorage(key: 'themeMode', value: mode, path: 'setup');
     _themeMode.value = mode;
   }
 
   void changeNotificationMode(int mode) async {
-    await writeFileStorage('notificationMode', mode);
+    await writeFileStorage(key: 'notificationMode', value: mode, path: 'setup');
     _notificationMode.value = mode;
   }
 
-  Future<void> writeFileStorage(String key, dynamic value) async {
-    var setup = await result.cache.readData('setup');
+  Future<void> writeFileStorage({
+    @required String key,
+    @required dynamic value,
+    @required String path,
+  }) async {
+    var setup = await result.cache.readData(path);
     setup[0][key] = value;
-    await result.cache.writeData(jsonEncode(setup), path: 'setup');
+    await result.cache.writeData(jsonEncode(setup), path: path);
   }
 }

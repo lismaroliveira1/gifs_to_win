@@ -113,8 +113,9 @@ class GetXHomePresenter extends GetxController {
     super.onInit();
   }
 
-  void changeWayViewMode(int value) async {
+  Future<void> changeWayViewMode(int value) async {
     _wayViewMode.value = value;
+    await writeFileStorage(key: 'wayViewMode', value: value, path: 'setup');
   }
 
   Future<void> getMoreImages() async {
@@ -147,7 +148,6 @@ class GetXHomePresenter extends GetxController {
   }
 
   Future<void> saveImage(Map imageMap) async {
-    print(imageMap);
     List<Map> _flag = [];
     _flag = await result.cache.readData('saved');
     _flag.add(imageMap);
@@ -265,5 +265,15 @@ class GetXHomePresenter extends GetxController {
 
   void shareByMessenger(Map imageMap) {
     result.socialGifShare.shareByMessenger(imageMap);
+  }
+
+  Future<void> writeFileStorage({
+    @required String key,
+    @required dynamic value,
+    @required String path,
+  }) async {
+    var setup = await result.cache.readData(path);
+    setup[0][key] = value;
+    await result.cache.writeData(jsonEncode(setup), path: path);
   }
 }
