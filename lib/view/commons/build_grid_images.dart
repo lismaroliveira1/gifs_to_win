@@ -1,3 +1,4 @@
+
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
@@ -87,5 +88,3 @@ Widget buildGridImages({
         ),
       ),
     );
-
-

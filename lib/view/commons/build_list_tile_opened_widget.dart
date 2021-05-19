@@ -145,7 +145,7 @@ Widget builListTileOpenedWidget({
                 iconAsset: 'assets/diskette_icon.png',
               ),
               buildOpenedContainerButton(
-                callback: (imageMap) => {},
+                callback: (imageMap) => deleteImage(imageMap),
                 imageGif: imageGif,
                 iconAsset: 'assets/delete_icon.png',
               ),

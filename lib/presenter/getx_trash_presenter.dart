@@ -17,7 +17,7 @@ class GetXTrashPresenter extends GetxController {
   var _errorTextDialog = RxString(null);
   var _imageQuality = 1.obs;
 
-  List<Map> get imageDeletedListStream => _blackList.toList();
+  List<Map> get imageDeletedListOut => _blackList.toList();
   bool get isValidNameStream => _isValidName.value;
   Stream<String> get jumpToStream => _jumpTo.stream;
   String get errorTextDialogStream => _errorTextDialog.value;

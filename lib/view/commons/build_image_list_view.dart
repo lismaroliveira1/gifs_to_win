@@ -47,9 +47,8 @@ Widget buildImageListView({
                       child: OpenContainer(
                         transitionDuration: Duration(milliseconds: 300),
                         transitionType: ContainerTransitionType.fadeThrough,
-                        closedBuilder: (context, action) {
-                          return builListTileClosedWidget(imageGif['image']);
-                        },
+                        closedBuilder: (context, action) =>
+                            builListTileClosedWidget(imageGif['image']),
                         openBuilder: (context, action) {
                           List<Map<dynamic, dynamic>> _flag =
                               imageGif['relateds'];
@@ -57,7 +56,8 @@ Widget buildImageListView({
                             imageGif: imageGif,
                             context: context,
                             editImageTitleDialog: editImageTitleDialog,
-                            moveToBlakiList: moveToBlakiList,
+                            moveToBlakiList: (imageGif) =>
+                                moveToBlakiList(imageGif),
                             listRelatedImagesMap: _flag,
                             deleteImage: (imageMap) => deleteImage(imageMap),
                             saveImage: (imageMap) => saveImage(imageMap),

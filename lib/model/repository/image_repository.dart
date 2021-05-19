@@ -74,17 +74,17 @@ class ImageRepository {
     for (LinkedHashMap gif in gifsMap) {
       _gifList.add(
         ImageModel(
-          id: gif['id'],
-          url: gif['images'][imageQualityString]['url'],
-          title: gif['title'],
-          slug: gif['slug'],
-          username: gif['username'],
-          rating: gif['rating'],
-          importDateTime: gif['import_datetime'],
-          width: gif['images']['original']['width'],
-          height: gif['images']['original']['height'],
-          size: gif['images']['original']['size'],
-        ),
+            id: gif['id'],
+            url: gif['images'][imageQualityString]['url'],
+            title: gif['title'],
+            slug: gif['slug'],
+            username: gif['username'],
+            rating: gif['rating'],
+            importDateTime: gif['import_datetime'],
+            width: gif['images']['original']['width'],
+            height: gif['images']['original']['height'],
+            size: gif['images']['original']['size'],
+            hash: gif['images']['original']['hash']),
       );
     }
     return _gifList;

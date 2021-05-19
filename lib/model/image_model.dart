@@ -9,6 +9,7 @@ class ImageModel {
   String height;
   String width;
   String size;
+  String hash;
 
   ImageModel({
     this.id,
@@ -21,6 +22,7 @@ class ImageModel {
     this.height,
     this.width,
     this.size,
+    this.hash,
   });
 
   Map<String, dynamic> toMap() {
@@ -35,6 +37,7 @@ class ImageModel {
       'height': height,
       'width': width,
       'size': size,
+      'hash': hash,
     };
   }
 
@@ -50,6 +53,7 @@ class ImageModel {
       height: map['height'],
       width: map['width'],
       size: map['size'],
+      hash: map['hash'],
     );
     return imageMapModel;
   }
@@ -65,6 +69,7 @@ class ImageModel {
       height: map['height'],
       width: map['width'],
       size: map['size'],
+      hash: map['hash'],
     );
   }
   factory ImageModel.fromDynamic(dynamic map) {
@@ -79,6 +84,7 @@ class ImageModel {
       height: map['height'],
       width: map['width'],
       size: map['size'],
+      hash: map['hash'],
     );
   }
 }

@@ -36,8 +36,6 @@ class GetXHomePresenter extends GetxController {
   var _imageListMap = <Map>[].obs;
   var _imageListSearchedMap = <Map>[].obs;
   var _imageListSearched = <ImageModel>[].obs;
-  var _imageListSaved = <ImageModel>[].obs;
-  var _imageListDeleted = <ImageModel>[].obs;
   var _defaultLimit = 30.obs;
   var _wayViewMode = 1.obs;
   var _isValidName = false.obs;
@@ -154,14 +152,6 @@ class GetXHomePresenter extends GetxController {
     _flag = await result.cache.readData('saved');
     _flag.add(imageMap);
     await result.cache.writeData(jsonEncode(_flag), path: 'saved');
-    print(_flag);
-  }
-
-  Future<void> deleteImage({
-    @required Map imageMap,
-  }) async {
-    _imageListDeleted.add(ImageModel.fromMap(imageMap));
-    await result.cache.writeData(jsonEncode({}), path: 'deleted');
   }
 
   void validateDialogName(String value) {
@@ -195,14 +185,9 @@ class GetXHomePresenter extends GetxController {
   void moveToBlakiList(
     Map imageGif,
   ) async {
-    List<Map> _flag = [];
-    _imageListDeleted.clear();
-    _imageListSaved.forEach((element) {
-      _flag.add(element.toMap());
-    });
+    var _flag = await result.cache.readData('deleted');
     _flag.add(imageGif);
     await result.cache.writeData(jsonEncode(_flag), path: 'deleted');
-    _navigateTo.value = '/';
   }
 
   Future<void> onSubmited(String value) async {

@@ -27,6 +27,7 @@ dependencies:
   image_downloader:
   adaptive_theme:
   animated_text_kit:
+  flutter_blurhash:
 
 dev_dependencies:
   flutter_test:

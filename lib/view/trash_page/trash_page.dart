@@ -43,6 +43,8 @@ class TrashPage extends StatelessWidget {
         onTap: () => hideKeyboard(context: context),
         child: Builder(
           builder: (context) {
+            final _imageGridSize =
+                (MediaQuery.of(context).size.width / 3) * 0.8;
             presenter.jumpToStream.listen((page) {
               if (page?.isNotEmpty == true) {
                 Get.offNamed(page);
@@ -60,6 +62,29 @@ class TrashPage extends StatelessWidget {
                     hintText: '',
                     icon: Icons.search,
                   ),
+                  Expanded(
+                      child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GridView.count(
+                        crossAxisCount: 3,
+                        mainAxisSpacing: 8,
+                        crossAxisSpacing: 8,
+                        children: presenter.imageDeletedListOut
+                            .map(
+                              (image) => Container(
+                                height: _imageGridSize,
+                                width: _imageGridSize,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: NetworkImage(image['image']['url']),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList()),
+                  ))
                 ],
               ),
             );

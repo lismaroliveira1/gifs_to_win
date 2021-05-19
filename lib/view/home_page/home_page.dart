@@ -88,40 +88,44 @@ class HomePage extends StatelessWidget {
                       presenter.wayViewModeOut == 1
                           ? presenter.imageListSearchedMapOut.length > 0
                               ? Expanded(
-                                  child: Obx(
-                                  () => buildImageListView(
-                                    appsInstalleds:
-                                        presenter.appInstalledMapOut,
-                                    context: context,
-                                    getMoreImages: presenter.getMoreImages,
-                                    imageList:
-                                        presenter.imageListSearchedMapOut,
-                                    isSearch: presenter
-                                            .imageListSearchedMapOut.length >
-                                        0,
-                                    searchName: presenter.searchNameOut,
-                                    closeCallback: presenter.closeSearch,
-                                    moveToBlakiList: presenter.moveToBlakiList,
-                                    editImageTitleDialog:
-                                        presenter.showEditDialog,
-                                    deleteImage:
-                                        (Map<dynamic, dynamic> imageMap) {},
-                                    saveImage: (imageMap) =>
-                                        presenter.saveImage(imageMap),
-                                    shareImage:
-                                        (Map<dynamic, dynamic> imageMap) {},
-                                    shareByFacebook: (imageMap) =>
-                                        presenter.shareByFacebook(imageMap),
-                                    shareByInstagram: (imageMap) =>
-                                        presenter.shareByInstagram(imageMap),
-                                    shareByMessenger: (imageMap) =>
-                                        presenter.shareByMessenger(imageMap),
-                                    shareByTwitter: (imageMap) =>
-                                        presenter.shareByTwitter(imageMap),
-                                    shareByWhatsApp: (imageMap) =>
-                                        presenter.shareByWhatsApp(imageMap),
-                                  ),
-                                ))
+                                  child: Obx(() => buildImageListView(
+                                        appsInstalleds:
+                                            presenter.appInstalledMapOut,
+                                        context: context,
+                                        getMoreImages: presenter.getMoreImages,
+                                        imageList:
+                                            presenter.imageListSearchedMapOut,
+                                        isSearch: presenter
+                                                .imageListSearchedMapOut
+                                                .length >
+                                            0,
+                                        searchName: presenter.searchNameOut,
+                                        closeCallback: presenter.closeSearch,
+                                        moveToBlakiList:
+                                            presenter.moveToBlakiList,
+                                        editImageTitleDialog:
+                                            presenter.showEditDialog,
+                                        deleteImage:
+                                            (Map<dynamic, dynamic> imageMap) =>
+                                                presenter
+                                                    .moveToBlakiList(imageMap),
+                                        saveImage: (imageMap) =>
+                                            presenter.saveImage(imageMap),
+                                        shareImage:
+                                            (Map<dynamic, dynamic> imageMap) {},
+                                        shareByFacebook: (imageMap) =>
+                                            presenter.shareByFacebook(imageMap),
+                                        shareByInstagram: (imageMap) =>
+                                            presenter
+                                                .shareByInstagram(imageMap),
+                                        shareByMessenger: (imageMap) =>
+                                            presenter
+                                                .shareByMessenger(imageMap),
+                                        shareByTwitter: (imageMap) =>
+                                            presenter.shareByTwitter(imageMap),
+                                        shareByWhatsApp: (imageMap) =>
+                                            presenter.shareByWhatsApp(imageMap),
+                                      )))
                               : Expanded(
                                   child: buildImageListView(
                                     appsInstalleds:
@@ -138,7 +142,8 @@ class HomePage extends StatelessWidget {
                                     editImageTitleDialog:
                                         presenter.showEditDialog,
                                     deleteImage:
-                                        (Map<dynamic, dynamic> imageMap) {},
+                                        (Map<dynamic, dynamic> imageMap) =>
+                                            presenter.moveToBlakiList(imageMap),
                                     saveImage: (imageMap) =>
                                         presenter.saveImage(imageMap),
                                     shareImage:
