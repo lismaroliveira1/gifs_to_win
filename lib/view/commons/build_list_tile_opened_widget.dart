@@ -44,11 +44,7 @@ Widget builListTileOpenedWidget({
           child: Text(
             imageGif['image']['title'],
             textAlign: TextAlign.center,
-            style: GoogleFonts.itim(
-              fontSize: 28,
-              fontWeight: FontWeight.w700,
-              color: Colors.blueGrey[700],
-            ),
+            style: Theme.of(context).textTheme.headline1,
           ),
         ),
         Padding(
@@ -74,6 +70,7 @@ Widget builListTileOpenedWidget({
               Text(
                 'Voce pode tambem gostar de: ',
                 textAlign: TextAlign.start,
+                style: Theme.of(context).textTheme.headline2,
               ),
             ],
           ),
