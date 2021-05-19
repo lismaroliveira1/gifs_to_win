@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ThemeData makeAppLightTheme() {
   final _primaryColor = Color.fromRGBO(35, 45, 72, 1);
@@ -12,10 +13,13 @@ ThemeData makeAppLightTheme() {
     accentColor: _accentColor,
     backgroundColor: Colors.white,
     textTheme: TextTheme(
-      headline1: TextStyle(
-        fontSize: 30,
-        fontWeight: FontWeight.bold,
-        color: _primaryColorDark,
+      headline1: GoogleFonts.itim(
+        fontSize: 28,
+        fontWeight: FontWeight.w700,
+      ),
+      headline2: GoogleFonts.itim(
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(

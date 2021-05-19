@@ -164,33 +164,6 @@ class SetupPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  buildGroupSetupStack(
-                    groupTitle: 'Notificações',
-                    tiles: <Widget>[
-                      SwitchListTile(
-                        title: Text("Ativar todas as notificatificações"),
-                        subtitle:
-                            Text("Receba notificações em todos os eventos"),
-                        value: true,
-                        onChanged: (bool value) {},
-                      ),
-                      SwitchListTile(
-                        title: Text("Ativar notificações parcialmente"),
-                        subtitle: Text(
-                            "Receber notificações apenas nos ultimos eventos"),
-                        value: true,
-                        onChanged: (bool value) {
-                          if (value) {}
-                        },
-                      ),
-                      SwitchListTile(
-                        title: Text("Desativar notificações"),
-                        subtitle: Text("Não receber notificações"),
-                        value: true,
-                        onChanged: (bool value) {},
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),

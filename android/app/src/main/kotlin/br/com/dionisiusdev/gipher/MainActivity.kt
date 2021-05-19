@@ -1,4 +1,4 @@
-package com.example.gifs_to_win
+package br.com.dionisiusdev.gipher
 
 import io.flutter.embedding.android.FlutterActivity
 

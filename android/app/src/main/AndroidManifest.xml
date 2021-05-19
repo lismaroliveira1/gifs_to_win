@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="com.example.gifs_to_win">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="br.com.dionisiusdev.gipher">
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
   <application android:label="gifs_to_win" android:icon="@mipmap/ic_launcher" android:requestLegacyExternalStorage="true">

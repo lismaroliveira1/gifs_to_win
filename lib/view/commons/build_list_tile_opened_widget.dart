@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import './commons.dart';
 
@@ -81,15 +80,18 @@ Widget builListTileOpenedWidget({
             scrollDirection: Axis.horizontal,
             children: listRelatedImagesMap
                 .map(
-                  (image) => Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Container(
-                      width: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                        image: DecorationImage(
-                          image: NetworkImage(image['url']),
-                          fit: BoxFit.cover,
+                  (image) => Container(
+                    height: 100,
+                    width: 100,
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          image: DecorationImage(
+                            image: NetworkImage(image['url']),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
