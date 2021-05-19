@@ -4,11 +4,12 @@ ThemeData makeAppLightTheme() {
   final _primaryColor = Color.fromRGBO(35, 45, 72, 1);
   final _primaryColorDark = Color.fromRGBO(96, 0, 39, 1);
   final _primaryColorLight = Color.fromRGBO(188, 71, 123, 1);
+  final _accentColor = Colors.white;
   return ThemeData(
     primaryColor: _primaryColor,
     primaryColorDark: _primaryColorDark,
     primaryColorLight: _primaryColorLight,
-    accentColor: _primaryColor,
+    accentColor: _accentColor,
     backgroundColor: Colors.white,
     textTheme: TextTheme(
       headline1: TextStyle(

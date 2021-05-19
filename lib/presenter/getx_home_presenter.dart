@@ -248,9 +248,7 @@ class GetXHomePresenter extends GetxController {
     _imageMapRelated.clear();
   }
 
-  void shareByFacebook(Map imageMap) {
-    print(imageMap);
-  }
+  void shareByFacebook(Map imageMap) {}
 
   void shareByInstagram(Map imageMap) {
     result.socialGifShare.shareByInstagram(imageMap);

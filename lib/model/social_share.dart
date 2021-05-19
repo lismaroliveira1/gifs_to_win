@@ -30,12 +30,10 @@ class SocialGifShare {
 
   Future<void> shareByWhatsApp(Map imageMap) async {
     SocialShare.shareWhatsapp(imageMap['url']);
-    print(imageMap);
   }
 
   Future<void> shareByMessenger(Map imageMap) async {
     SocialShare.shareSms('Message',
         url: imageMap['url'], trailingText: 'trailing');
-    print(imageMap);
   }
 }

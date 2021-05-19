@@ -1,4 +1,3 @@
-
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
@@ -42,8 +41,7 @@ Widget buildGridImages({
                 ),
                 itemCount: imageList.length,
                 itemBuilder: (context, index) {
-                  print(imageList[index]);
-                  double edge = MediaQuery.of(context).size.width * 0.4;
+                  double edge = MediaQuery.of(context).size.width * 0.42;
                   ScaffoldMessengerState _snackBarContext =
                       ScaffoldMessenger.of(context);
                   return InkWell(
@@ -53,8 +51,14 @@ Widget buildGridImages({
                         showGifDetails(imageList[index]);
                       },
                       child: OpenContainer(
+                        closedColor: Theme.of(context).accentColor,
+                        openColor: Theme.of(context).accentColor,
                         closedBuilder: (context, action) =>
-                            buildClosedImageGridTile(edge, imageList, index),
+                            buildClosedImageGridTile(
+                          edge,
+                          imageList,
+                          index,
+                        ),
                         openBuilder: (context, action) {
                           List<Map<dynamic, dynamic>> _flag =
                               imageList[index]['relateds'];
