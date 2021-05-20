@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inner_drawer/inner_drawer.dart';
 
 import 'package:get/get.dart';
-import 'package:gifs_to_win/i18n/i18n.dart';
+import 'package:gipher/i18n/i18n.dart';
 
 import '../../presenter/presenter.dart';
 import '../view.dart';

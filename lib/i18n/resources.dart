@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:gifs_to_win/i18n/i18n.dart';
+import 'package:gipher/i18n/i18n.dart';
 
 class R {
   static Translations translations = PtBr();

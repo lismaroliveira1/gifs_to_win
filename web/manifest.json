@@ -1,6 +1,6 @@
 {
-    "name": "gifs_to_win",
-    "short_name": "gifs_to_win",
+    "name": "Gipher",
+    "short_name": "Gipher",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

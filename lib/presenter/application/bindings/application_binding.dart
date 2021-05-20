@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:gifs_to_win/model/social_share.dart';
+import 'package:gipher/model/social_share.dart';
 import 'package:http/http.dart';
 
 import '../../../model/model.dart';

@@ -1,4 +1,4 @@
-import 'package:gifs_to_win/model/social_share.dart';
+import 'package:gipher/model/social_share.dart';
 import 'package:meta/meta.dart';
 import './model.dart';
 

@@ -105,11 +105,11 @@ Widget builListTileOpenedWidget({
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              buildOpenedContainerButton(
+              /* buildOpenedContainerButton(
                 callback: (imageMap) => shareByFacebook(imageMap),
                 imageGif: imageGif['image'],
                 iconAsset: 'assets/facebook_icon.png',
-              ),
+              ),*/
               buildOpenedContainerButton(
                 callback: (imageMap) => shareByInstagram(imageMap),
                 imageGif: imageGif['image'],

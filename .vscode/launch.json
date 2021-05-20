@@ -12,7 +12,7 @@
         },
         
         {
-            "name": "gifs_to_win",
+            "name": "Gipher",
             "request": "launch",
             "type": "dart"
         }

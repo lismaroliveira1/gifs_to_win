@@ -5,6 +5,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:gipher/model/cache/cache.dart';
 import 'package:path_provider/path_provider.dart';
 
 import './presenter/presenter.dart';
@@ -12,6 +13,8 @@ import './view/view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final cache = Cache();
+  await cache.verifyCache();
   final setupMap = await readData('setup');
   runApp(Gipher(setupMap));
 }

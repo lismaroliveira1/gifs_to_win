@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gifs_to_win/i18n/resources.dart';
+import 'package:gipher/i18n/resources.dart';
 import '../../commons/commons.dart';
 
 Material buildRightChildHomeDrawer({

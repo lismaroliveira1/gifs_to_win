@@ -43,6 +43,7 @@ class Cache {
           'imagePerPage': 30,
           'imageQuality': 2,
           'themeMode': 3,
+          'wayViewMode': 2,
         }
       ];
       writeData(jsonEncode(defaultSetupMap), path: 'setup');
